@@ -1,21 +1,17 @@
 // Tensura (Raphael) - Native Windows Desktop Overlay
-// True Transparency, Frameless, Always-on-top, System Tray Background App
+// True Transparency, Frameless, Always-on-top, System Tray & Taskbar App
 
-const { app, BrowserWindow, screen, Tray, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, screen, Tray, Menu, globalShortcut } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
-
-// Cho phép cửa sổ trong suốt và tăng tốc GPU
-app.commandLine.appendSwitch('enable-transparent-visuals');
-app.commandLine.appendSwitch('high-dpi-support', '1');
 
 let mainWindow = null;
 let tray = null;
 let staticServer = null;
 let isQuitting = false;
 
-// Đảm bảo chỉ có 1 instance chạy ngầm duy nhất
+// Single-instance lock
 const gotTheLock = app.requestSingleInstanceLock();
 if (!gotTheLock) {
   app.quit();
@@ -28,7 +24,10 @@ if (!gotTheLock) {
     }
   });
 
-  app.whenReady().then(createDesktopApp);
+  app.whenReady().then(() => {
+    // 300ms delay to let Windows DWM compositor initialize transparency properly
+    setTimeout(createDesktopApp, 300);
+  });
 }
 
 function startStaticServer(outDir) {
@@ -54,7 +53,6 @@ function startStaticServer(outDir) {
 
       fs.readFile(filePath, (err, data) => {
         if (err) {
-          // Fallback to index.html for client-side navigation
           fs.readFile(path.join(outDir, 'index.html'), (errIndex, indexData) => {
             if (errIndex) {
               res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -91,10 +89,12 @@ async function createDesktopApp() {
     y: 0,
     frame: false,
     transparent: true,
+    backgroundColor: '#00000000',
     alwaysOnTop: true,
     hasShadow: false,
     resizable: false,
-    skipTaskbar: true, // Chạy ngầm trong System Tray, không chiếm thanh taskbar
+    skipTaskbar: false, // User can see icon in taskbar, click, switch, or close
+    show: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -102,98 +102,116 @@ async function createDesktopApp() {
     },
   });
 
+  // Set always on top with high priority
+  mainWindow.setAlwaysOnTop(true, 'screen-saver');
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+    mainWindow.focus();
+    console.log('[Electron] Raphael Desktop Overlay is now OPEN on your screen.');
+  });
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+
+  mainWindow.webContents.on('did-fail-load', (e, code, desc) => {
+    console.error('[Electron] Failed to load UI:', code, desc);
+  });
+
+  // Register ESC key to easily exit
+  globalShortcut.register('Escape', () => {
+    console.log('[Electron] User pressed Escape. Closing overlay...');
+    isQuitting = true;
+    app.quit();
+  });
+
   // Nạp giao diện tĩnh đã xuất qua server nội bộ hoặc localhost
   const outDir = path.join(__dirname, '..', 'out');
   if (fs.existsSync(path.join(outDir, 'index.html'))) {
     const { server, port } = await startStaticServer(outDir);
     staticServer = server;
+    console.log(`[Electron] Internal static server running at http://127.0.0.1:${port}`);
     mainWindow.loadURL(`http://127.0.0.1:${port}`);
   } else {
-    // Nếu chưa build export tĩnh thì kết nối localhost dev server
     mainWindow.loadURL('http://localhost:3000');
   }
 
   // Khởi tạo khay hệ thống (System Tray) ở góc đồng hồ Windows
   createSystemTray();
 
-  // Hỗ trợ tự động tắt sau N giây nếu được truyền tham số (ví dụ kiểm thử)
-  const durationArg = process.argv.find((arg) => arg.startsWith('--duration='));
-  const durationSeconds = durationArg
-    ? parseInt(durationArg.split('=')[1], 10)
-    : process.env.AUTO_CLOSE_SECONDS
-    ? parseInt(process.env.AUTO_CLOSE_SECONDS, 10)
-    : 0;
-
-  if (durationSeconds > 0) {
-    setTimeout(() => {
-      isQuitting = true;
-      if (staticServer) {
-        try { staticServer.close(); } catch (_) {}
-      }
-      app.quit();
-    }, durationSeconds * 1000);
-  }
-
-  // Đảm bảo không bị tắt khi đóng cửa sổ
-  mainWindow.on('close', (e) => {
-    if (!isQuitting) {
-      e.preventDefault();
-      mainWindow.hide();
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+    if (staticServer) {
+      try { staticServer.close(); } catch (_) {}
     }
+  });
+
+  mainWindow.on('close', () => {
+    isQuitting = true;
+    if (staticServer) {
+      try { staticServer.close(); } catch (_) {}
+    }
+    app.quit();
   });
 }
 
 function createSystemTray() {
   const iconPath = path.join(__dirname, '..', 'public', 'icon-light-32x32.png');
-  tray = new Tray(iconPath);
-  tray.setToolTip('Tensura Great Sage (Raphael) - AI Assistant');
+  try {
+    tray = new Tray(iconPath);
+    tray.setToolTip('Tensura Great Sage (Raphael) - AI Assistant');
 
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: '🔮 Hiện Raphael (Overlay)',
-      click: () => {
-        if (mainWindow) {
-          mainWindow.show();
+    const contextMenu = Menu.buildFromTemplate([
+      {
+        label: '🔮 Hiện Raphael (Overlay)',
+        click: () => {
+          if (mainWindow) {
+            mainWindow.show();
+            mainWindow.focus();
+          }
+        },
+      },
+      {
+        label: '👁️ Ẩn cửa sổ',
+        click: () => {
+          if (mainWindow) mainWindow.hide();
+        },
+      },
+      { type: 'separator' },
+      {
+        label: '❌ Thoát ứng dụng (Esc)',
+        click: () => {
+          isQuitting = true;
+          app.quit();
+        },
+      },
+    ]);
+
+    tray.setContextMenu(contextMenu);
+
+    tray.on('click', () => {
+      if (mainWindow) {
+        if (mainWindow.isVisible()) {
           mainWindow.focus();
+        } else {
+          mainWindow.show();
         }
-      },
-    },
-    {
-      label: '👁️ Ẩn cửa sổ',
-      click: () => {
-        if (mainWindow) mainWindow.hide();
-      },
-    },
-    { type: 'separator' },
-    {
-      label: '⚙️ Trạng thái: Chạy ngầm Native',
-      enabled: false,
-    },
-    { type: 'separator' },
-    {
-      label: '❌ Thoát ứng dụng',
-      click: () => {
-        isQuitting = true;
-        app.quit();
-      },
-    },
-  ]);
-
-  tray.setContextMenu(contextMenu);
-
-  tray.on('click', () => {
-    if (mainWindow) {
-      if (mainWindow.isVisible()) {
-        mainWindow.focus();
-      } else {
-        mainWindow.show();
       }
-    }
-  });
+    });
+  } catch (err) {
+    console.warn('[Tray] Tray icon warning:', err.message);
+  }
 }
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    // Giữ app chạy ngầm trong tray
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+  if (staticServer) {
+    try { staticServer.close(); } catch (_) {}
   }
+});
+
+app.on('window-all-closed', () => {
+  app.quit();
 });
