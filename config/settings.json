@@ -1,0 +1,64 @@
+{
+  "server": {
+    "url": "http://127.0.0.1:8000/api/chat",
+    "api_type": "generic_stream",
+    "timeout_seconds": 30,
+    "description": "Địa chỉ Server LLM từ xa (có thể đổi thành IP Tailscale như http://100.x.y.z:8000/api/chat)"
+  },
+  "audio": {
+    "sample_rate": 16000,
+    "output_sample_rate": 44100,
+    "channels": 1,
+    "mic_device_index": null,
+    "speaker_device_index": null,
+    "fft_bands": 32
+  },
+  "vad": {
+    "enabled": true,
+    "threshold": 0.5,
+    "min_speech_duration_ms": 250,
+    "min_silence_duration_ms": 600
+  },
+  "wake_word": {
+    "enabled": true,
+    "model": "hey_jarvis",
+    "threshold": 0.5,
+    "custom_model_path": "models/wakeword/raphael.onnx",
+    "description": "Tu khoa danh thuc tro ly (chay CPU ~0% GPU)"
+  },
+  "whisper": {
+    "model_size": "base",
+    "device": "cuda",
+    "compute_type": "int8_float16",
+    "language": "vi"
+  },
+  "vieneu": {
+    "enabled": true,
+    "model_path": "models/vieneu",
+    "device": "cuda"
+  },
+  "rvc": {
+    "enabled": true,
+    "model_path": "models/rvc/raphael.pth",
+    "index_path": "models/rvc/raphael.index",
+    "f0_up_key": 0,
+    "f0_method": "pm",
+    "index_rate": 0.75,
+    "device": "cuda:0"
+  },
+  "neo4j": {
+    "enabled": true,
+    "uri": "bolt://localhost:7687",
+    "user": "neo4j",
+    "password": "password",
+    "database": "neo4j",
+    "max_nodes_render": 150,
+    "description": "Do thi tri thuc Neo4j Cosmos Graph (mạng lưới sao sau Orb Raphael)"
+  },
+  "system": {
+    "hotkey": "ctrl+space",
+    "output_mode": "voice_and_text",
+    "ws_host": "127.0.0.1",
+    "ws_port": 8765
+  }
+}

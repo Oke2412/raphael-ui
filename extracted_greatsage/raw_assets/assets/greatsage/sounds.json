@@ -1,0 +1,8543 @@
+{
+  "ceremony.demon_lord_seed": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:ceremony/demon_lord_seed",
+        "stream": false
+      }
+    ]
+  },
+  "ceremony.harvest_festival": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:ceremony/harvest_festival",
+        "stream": false
+      }
+    ]
+  },
+  "ceremony.hero_egg": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:ceremony/hero_egg",
+        "stream": false
+      }
+    ]
+  },
+  "ceremony.true_demon_lord": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:ceremony/true_demon_lord",
+        "stream": false
+      }
+    ]
+  },
+  "ceremony.true_hero": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:ceremony/true_hero",
+        "stream": false
+      }
+    ]
+  },
+  "chat.dokuso_junkan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/dokuso_junkan",
+        "stream": false
+      }
+    ]
+  },
+  "chat.dougu_hason": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/dougu_hason",
+        "stream": false
+      }
+    ]
+  },
+  "chat.haigo_sekkin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/haigo_sekkin",
+        "stream": false
+      }
+    ]
+  },
+  "chat.handan_shiji": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/handan_shiji",
+        "stream": false
+      }
+    ]
+  },
+  "chat.houkoku_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/houkoku_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "chat.ibukuro_wazuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/ibukuro_wazuka",
+        "stream": false
+      }
+    ]
+  },
+  "chat.katsudou_teishi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/katsudou_teishi",
+        "stream": false
+      }
+    ]
+  },
+  "chat.kishou_kyuuhen": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/kishou_kyuuhen",
+        "stream": false
+      }
+    ]
+  },
+  "chat.koumyaku_kenchi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/koumyaku_kenchi",
+        "stream": false
+      }
+    ]
+  },
+  "chat.kouryou_fusoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/kouryou_fusoku",
+        "stream": false
+      }
+    ]
+  },
+  "chat.kouseki_ura": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/kouseki_ura",
+        "stream": false
+      }
+    ]
+  },
+  "chat.kuudou_chokka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/kuudou_chokka",
+        "stream": false
+      }
+    ]
+  },
+  "chat.kyuusoku_suishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/kyuusoku_suishou",
+        "stream": false
+      }
+    ]
+  },
+  "chat.maso_noudo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/maso_noudo",
+        "stream": false
+      }
+    ]
+  },
+  "chat.michi_ryouiki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/michi_ryouiki",
+        "stream": false
+      }
+    ]
+  },
+  "chat.mikaiseki_sonzai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/mikaiseki_sonzai",
+        "stream": false
+      }
+    ]
+  },
+  "chat.nenshou_kakunin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/nenshou_kakunin",
+        "stream": false
+      }
+    ]
+  },
+  "chat.nichibotsu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/nichibotsu",
+        "stream": false
+      }
+    ]
+  },
+  "chat.rakka_kiken": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/rakka_kiken",
+        "stream": false
+      }
+    ]
+  },
+  "chat.renzoku_katsudou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/renzoku_katsudou",
+        "stream": false
+      }
+    ]
+  },
+  "chat.saikousei": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/saikousei",
+        "stream": false
+      }
+    ]
+  },
+  "chat.sanso_kinshou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/sanso_kinshou",
+        "stream": false
+      }
+    ]
+  },
+  "chat.seimei_teika": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/seimei_teika",
+        "stream": false
+      }
+    ]
+  },
+  "chat.shinka_sekkin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/shinka_sekkin",
+        "stream": false
+      }
+    ]
+  },
+  "chat.shuujuku_jougen": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/shuujuku_jougen",
+        "stream": false
+      }
+    ]
+  },
+  "chat.shuunou_jougen": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/shuunou_jougen",
+        "stream": false
+      }
+    ]
+  },
+  "chat.suigen_haigo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/suigen_haigo",
+        "stream": false
+      }
+    ]
+  },
+  "chat.tekisei_fukusuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/tekisei_fukusuu",
+        "stream": false
+      }
+    ]
+  },
+  "chat.tekishita_dougu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/tekishita_dougu",
+        "stream": false
+      }
+    ]
+  },
+  "chat.yougan_kinsetsu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:chat/yougan_kinsetsu",
+        "stream": false
+      }
+    ]
+  },
+  "num.0": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/0",
+        "stream": false
+      }
+    ]
+  },
+  "num.1": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/1",
+        "stream": false
+      }
+    ]
+  },
+  "num.10": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/10",
+        "stream": false
+      }
+    ]
+  },
+  "num.100": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/100",
+        "stream": false
+      }
+    ]
+  },
+  "num.1000": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/1000",
+        "stream": false
+      }
+    ]
+  },
+  "num.10000": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/10000",
+        "stream": false
+      }
+    ]
+  },
+  "num.100000000": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/100000000",
+        "stream": false
+      }
+    ]
+  },
+  "num.2": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/2",
+        "stream": false
+      }
+    ]
+  },
+  "num.3": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/3",
+        "stream": false
+      }
+    ]
+  },
+  "num.300": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/300",
+        "stream": false
+      }
+    ]
+  },
+  "num.3000": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/3000",
+        "stream": false
+      }
+    ]
+  },
+  "num.4": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/4",
+        "stream": false
+      }
+    ]
+  },
+  "num.5": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/5",
+        "stream": false
+      }
+    ]
+  },
+  "num.6": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/6",
+        "stream": false
+      }
+    ]
+  },
+  "num.600": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/600",
+        "stream": false
+      }
+    ]
+  },
+  "num.7": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/7",
+        "stream": false
+      }
+    ]
+  },
+  "num.8": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/8",
+        "stream": false
+      }
+    ]
+  },
+  "num.800": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/800",
+        "stream": false
+      }
+    ]
+  },
+  "num.8000": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/8000",
+        "stream": false
+      }
+    ]
+  },
+  "num.9": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/9",
+        "stream": false
+      }
+    ]
+  },
+  "num.approx": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/approx",
+        "stream": false
+      }
+    ]
+  },
+  "num.desu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/desu",
+        "stream": false
+      }
+    ]
+  },
+  "num.ijou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/ijou",
+        "stream": false
+      }
+    ]
+  },
+  "num.miman": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/miman",
+        "stream": false
+      }
+    ]
+  },
+  "num.percent": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/percent",
+        "stream": false
+      }
+    ]
+  },
+  "num.point": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:num/point",
+        "stream": false
+      }
+    ]
+  },
+  "race.abyssal_dragonewt": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/abyssal_dragonewt",
+        "stream": false
+      }
+    ]
+  },
+  "race.advanced_grade_dokkaebi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/advanced_grade_dokkaebi",
+        "stream": false
+      }
+    ]
+  },
+  "race.ancient_giant": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/ancient_giant",
+        "stream": false
+      }
+    ]
+  },
+  "race.angel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/angel",
+        "stream": false
+      }
+    ]
+  },
+  "race.arch_daemon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/arch_daemon",
+        "stream": false
+      }
+    ]
+  },
+  "race.archangel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/archangel",
+        "stream": false
+      }
+    ]
+  },
+  "race.ascended_djinn": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/ascended_djinn",
+        "stream": false
+      }
+    ]
+  },
+  "race.beast_lord": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/beast_lord",
+        "stream": false
+      }
+    ]
+  },
+  "race.beastfolk": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/beastfolk",
+        "stream": false
+      }
+    ]
+  },
+  "race.beholder": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/beholder",
+        "stream": false
+      }
+    ]
+  },
+  "race.blood_noble": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/blood_noble",
+        "stream": false
+      }
+    ]
+  },
+  "race.bog_ancient": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/bog_ancient",
+        "stream": false
+      }
+    ]
+  },
+  "race.chaos_dragon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/chaos_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "race.chaotic_deity": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/chaotic_deity",
+        "stream": false
+      }
+    ]
+  },
+  "race.chicken": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/chicken",
+        "stream": false
+      }
+    ]
+  },
+  "race.corrupted_dragon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/corrupted_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "race.corrupted_dragonkin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/corrupted_dragonkin",
+        "stream": false
+      }
+    ]
+  },
+  "race.cosmic_deity": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/cosmic_deity",
+        "stream": false
+      }
+    ]
+  },
+  "race.cursed_dragon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/cursed_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "race.cursed_dreadnaught": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/cursed_dreadnaught",
+        "stream": false
+      }
+    ]
+  },
+  "race.cursed_mariner": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/cursed_mariner",
+        "stream": false
+      }
+    ]
+  },
+  "race.daemon_lord": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/daemon_lord",
+        "stream": false
+      }
+    ]
+  },
+  "race.dark_lord_dullahan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dark_lord_dullahan",
+        "stream": false
+      }
+    ]
+  },
+  "race.davy_jones": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/davy_jones",
+        "stream": false
+      }
+    ]
+  },
+  "race.death_knight": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/death_knight",
+        "stream": false
+      }
+    ]
+  },
+  "race.death_oni": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/death_oni",
+        "stream": false
+      }
+    ]
+  },
+  "race.death_tyrant": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/death_tyrant",
+        "stream": false
+      }
+    ]
+  },
+  "race.demon_dragon_god": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/demon_dragon_god",
+        "stream": false
+      }
+    ]
+  },
+  "race.demon_slime": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/demon_slime",
+        "stream": false
+      }
+    ]
+  },
+  "race.demonic_dragon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/demonic_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "race.devil_lord": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/devil_lord",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_angel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_angel",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_beast": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_beast",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_bird": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_bird",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_boar": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_boar",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_dragon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_dragon",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_dwarf": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_dwarf",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_elf": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_elf",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_fighter": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_fighter",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_fish": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_fish",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_fox": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_fox",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_giant": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_giant",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_human": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_human",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_king": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_king",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_kitsune": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_kitsune",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_kobold": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_kobold",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_oni": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_oni",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_skeleton": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_skeleton",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_vampire": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_vampire",
+        "stream": false
+      }
+    ]
+  },
+  "race.divine_wisp": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/divine_wisp",
+        "stream": false
+      }
+    ]
+  },
+  "race.dokkaebi_egg": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dokkaebi_egg",
+        "stream": false
+      }
+    ]
+  },
+  "race.dokkaebi_king": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dokkaebi_king",
+        "stream": false
+      }
+    ]
+  },
+  "race.dragonewt": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dragonewt",
+        "stream": false
+      }
+    ]
+  },
+  "race.dullahan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dullahan",
+        "stream": false
+      }
+    ]
+  },
+  "race.dwarf": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dwarf",
+        "stream": false
+      }
+    ]
+  },
+  "race.dwarf_saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/dwarf_saint",
+        "stream": false
+      }
+    ]
+  },
+  "race.elder_bloodfiend": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/elder_bloodfiend",
+        "stream": false
+      }
+    ]
+  },
+  "race.elder_lich": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/elder_lich",
+        "stream": false
+      }
+    ]
+  },
+  "race.elf": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/elf",
+        "stream": false
+      }
+    ]
+  },
+  "race.elf_saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/elf_saint",
+        "stream": false
+      }
+    ]
+  },
+  "race.ender_dragonewt": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/ender_dragonewt",
+        "stream": false
+      }
+    ]
+  },
+  "race.enlightened_dwarf": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/enlightened_dwarf",
+        "stream": false
+      }
+    ]
+  },
+  "race.enlightened_elf": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/enlightened_elf",
+        "stream": false
+      }
+    ]
+  },
+  "race.enlightened_hobgoblin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/enlightened_hobgoblin",
+        "stream": false
+      }
+    ]
+  },
+  "race.enlightened_human": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/enlightened_human",
+        "stream": false
+      }
+    ]
+  },
+  "race.enlightened_merfolk": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/enlightened_merfolk",
+        "stream": false
+      }
+    ]
+  },
+  "race.enlightened_ogre": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/enlightened_ogre",
+        "stream": false
+      }
+    ]
+  },
+  "race.fallen_angel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/fallen_angel",
+        "stream": false
+      }
+    ]
+  },
+  "race.fledgling_bloodfiend": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/fledgling_bloodfiend",
+        "stream": false
+      }
+    ]
+  },
+  "race.frog": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/frog",
+        "stream": false
+      }
+    ]
+  },
+  "race.frog_monarch": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/frog_monarch",
+        "stream": false
+      }
+    ]
+  },
+  "race.gale_wisp": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/gale_wisp",
+        "stream": false
+      }
+    ]
+  },
+  "race.gauth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/gauth",
+        "stream": false
+      }
+    ]
+  },
+  "race.gazer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/gazer",
+        "stream": false
+      }
+    ]
+  },
+  "race.ghoul": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/ghoul",
+        "stream": false
+      }
+    ]
+  },
+  "race.giant": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/giant",
+        "stream": false
+      }
+    ]
+  },
+  "race.giant_frog": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/giant_frog",
+        "stream": false
+      }
+    ]
+  },
+  "race.goblin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/goblin",
+        "stream": false
+      }
+    ]
+  },
+  "race.god_slime": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/god_slime",
+        "stream": false
+      }
+    ]
+  },
+  "race.great_dokkaebi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/great_dokkaebi",
+        "stream": false
+      }
+    ]
+  },
+  "race.greater_daemon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/greater_daemon",
+        "stream": false
+      }
+    ]
+  },
+  "race.harpy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/harpy",
+        "stream": false
+      }
+    ]
+  },
+  "race.harpy_queen": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/harpy_queen",
+        "stream": false
+      }
+    ]
+  },
+  "race.high_orc": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/high_orc",
+        "stream": false
+      }
+    ]
+  },
+  "race.hobgoblin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/hobgoblin",
+        "stream": false
+      }
+    ]
+  },
+  "race.hobgoblin_saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/hobgoblin_saint",
+        "stream": false
+      }
+    ]
+  },
+  "race.human": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/human",
+        "stream": false
+      }
+    ]
+  },
+  "race.human_saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/human_saint",
+        "stream": false
+      }
+    ]
+  },
+  "race.infinite_djinn": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/infinite_djinn",
+        "stream": false
+      }
+    ]
+  },
+  "race.input_race_was_invalid": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/input_race_was_invalid",
+        "stream": false
+      }
+    ]
+  },
+  "race.intermediate_grade_dokkaebi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/intermediate_grade_dokkaebi",
+        "stream": false
+      }
+    ]
+  },
+  "race.kijin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kijin",
+        "stream": false
+      }
+    ]
+  },
+  "race.kindred_bloodfiend": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kindred_bloodfiend",
+        "stream": false
+      }
+    ]
+  },
+  "race.kitsune": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kitsune",
+        "stream": false
+      }
+    ]
+  },
+  "race.kobold": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kobold",
+        "stream": false
+      }
+    ]
+  },
+  "race.kobold_chieftain": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kobold_chieftain",
+        "stream": false
+      }
+    ]
+  },
+  "race.kobold_trader": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kobold_trader",
+        "stream": false
+      }
+    ]
+  },
+  "race.kobold_warrior": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/kobold_warrior",
+        "stream": false
+      }
+    ]
+  },
+  "race.lesser_daemon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/lesser_daemon",
+        "stream": false
+      }
+    ]
+  },
+  "race.lich": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/lich",
+        "stream": false
+      }
+    ]
+  },
+  "race.lich_king": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/lich_king",
+        "stream": false
+      }
+    ]
+  },
+  "race.lizardman": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/lizardman",
+        "stream": false
+      }
+    ]
+  },
+  "race.low_grade_dokkaebi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/low_grade_dokkaebi",
+        "stream": false
+      }
+    ]
+  },
+  "race.mage_skeleton": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/mage_skeleton",
+        "stream": false
+      }
+    ]
+  },
+  "race.merfolk": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/merfolk",
+        "stream": false
+      }
+    ]
+  },
+  "race.merfolk_saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/merfolk_saint",
+        "stream": false
+      }
+    ]
+  },
+  "race.metal_slime": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/metal_slime",
+        "stream": false
+      }
+    ]
+  },
+  "race.mindwitness": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/mindwitness",
+        "stream": false
+      }
+    ]
+  },
+  "race.monkey": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/monkey",
+        "stream": false
+      }
+    ]
+  },
+  "race.monkey_king": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/monkey_king",
+        "stream": false
+      }
+    ]
+  },
+  "race.monkey_martial_artist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/monkey_martial_artist",
+        "stream": false
+      }
+    ]
+  },
+  "race.monkey_warrior": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/monkey_warrior",
+        "stream": false
+      }
+    ]
+  },
+  "race.mystic_fox": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/mystic_fox",
+        "stream": false
+      }
+    ]
+  },
+  "race.mystic_oni": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/mystic_oni",
+        "stream": false
+      }
+    ]
+  },
+  "race.ninetail": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/ninetail",
+        "stream": false
+      }
+    ]
+  },
+  "race.ogre": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/ogre",
+        "stream": false
+      }
+    ]
+  },
+  "race.omniversal_djinn": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/omniversal_djinn",
+        "stream": false
+      }
+    ]
+  },
+  "race.orc": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/orc",
+        "stream": false
+      }
+    ]
+  },
+  "race.orc_disaster": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/orc_disaster",
+        "stream": false
+      }
+    ]
+  },
+  "race.orc_lord": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/orc_lord",
+        "stream": false
+      }
+    ]
+  },
+  "race.phantom_corsair": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/phantom_corsair",
+        "stream": false
+      }
+    ]
+  },
+  "race.phantom_djinn": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/phantom_djinn",
+        "stream": false
+      }
+    ]
+  },
+  "race.player": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/player",
+        "stream": false
+      }
+    ]
+  },
+  "race.semi_advanced_grade_dokkaebi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/semi_advanced_grade_dokkaebi",
+        "stream": false
+      }
+    ]
+  },
+  "race.slime": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/slime",
+        "stream": false
+      }
+    ]
+  },
+  "race.soul_beast": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/soul_beast",
+        "stream": false
+      }
+    ]
+  },
+  "race.spirit_beast": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/spirit_beast",
+        "stream": false
+      }
+    ]
+  },
+  "race.spirit_bird": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/spirit_bird",
+        "stream": false
+      }
+    ]
+  },
+  "race.spirit_boar": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/spirit_boar",
+        "stream": false
+      }
+    ]
+  },
+  "race.spirit_oni": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/spirit_oni",
+        "stream": false
+      }
+    ]
+  },
+  "race.spirit_skeleton": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/spirit_skeleton",
+        "stream": false
+      }
+    ]
+  },
+  "race.true_dragonewt": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/true_dragonewt",
+        "stream": false
+      }
+    ]
+  },
+  "race.vampire": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/vampire",
+        "stream": false
+      }
+    ]
+  },
+  "race.vampire_lord": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/vampire_lord",
+        "stream": false
+      }
+    ]
+  },
+  "race.vampire_overcomer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/vampire_overcomer",
+        "stream": false
+      }
+    ]
+  },
+  "race.wicked_oni": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/wicked_oni",
+        "stream": false
+      }
+    ]
+  },
+  "race.wight": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/wight",
+        "stream": false
+      }
+    ]
+  },
+  "race.wight_king": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/wight_king",
+        "stream": false
+      }
+    ]
+  },
+  "race.wispfolk": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/wispfolk",
+        "stream": false
+      }
+    ]
+  },
+  "race.zephyr_wisp": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:race/zephyr_wisp",
+        "stream": false
+      }
+    ]
+  },
+  "reply.baiomu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/baiomu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.bougyo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/bougyo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.chijou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/chijou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.chika": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/chika",
+        "stream": false
+      }
+    ]
+  },
+  "reply.chinmoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/chinmoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.chiyu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/chiyu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.chiyu_shudan_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/chiyu_shudan_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.chokuzen": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/chokuzen",
+        "stream": false
+      }
+    ]
+  },
+  "reply.doutou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/doutou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.fumei": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/fumei",
+        "stream": false
+      }
+    ]
+  },
+  "reply.fushou_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/fushou_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.fusoku_ryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/fusoku_ryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.fusoku_zairyou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/fusoku_zairyou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.futekisetsu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/futekisetsu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.futsuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/futsuu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.fuyou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/fuyou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.gaitou_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/gaitou_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.haigo_keikoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/haigo_keikoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.haiki_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/haiki_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hani_gai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hani_gai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hatsugen_saikai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hatsugen_saikai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.heikin_sonzaichi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/heikin_sonzaichi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hikaku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hikaku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hiru": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hiru",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hitsuyou_maso": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hitsuyou_maso",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hitsuyou_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hitsuyou_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hokubu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hokubu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hoshoku_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hoshoku_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hoshoku_kanou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hoshoku_kanou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.houi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/houi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.hoyuu_suu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/hoyuu_suu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.iji_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/iji_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jakuten": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jakuten",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jigen": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jigen",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jikkou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jikkou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jikkou_chuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jikkou_chuu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jikkou_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jikkou_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jikkou_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jikkou_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jikoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jikoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.jouhou_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/jouhou_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.joutai_ichiran": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/joutai_ichiran",
+        "stream": false
+      }
+    ]
+  },
+  "reply.joutai_ijou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/joutai_ijou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kachi_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kachi_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kachi_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kachi_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kaiseki_chuudan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kaiseki_chuudan",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kaiseki_fuyou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kaiseki_fuyou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kaiseki_kaishi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kaiseki_kaishi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kaiseki_taishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kaiseki_taishou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kansatsu_suu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kansatsu_suu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kanshi_kaishi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kanshi_kaishi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kanshi_shuuryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kanshi_shuuryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kanshou_kyohi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kanshou_kyohi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.keika_jikan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/keika_jikan",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kengen_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kengen_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kensaku_chuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kensaku_chuu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kiken_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kiken_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kiken_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kiken_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kinou_ichiran": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kinou_ichiran",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kiroku_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kiroku_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kiroku_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kiroku_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kiroku_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kiroku_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kishou_skill": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kishou_skill",
+        "stream": false
+      }
+    ]
+  },
+  "reply.koudo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/koudo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kougeki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kougeki",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kouhosha_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kouhosha_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.koumyaku_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/koumyaku_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kuudou_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kuudou_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kuufuku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kuufuku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kuuseki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kuuseki",
+        "stream": false
+      }
+    ]
+  },
+  "reply.kyori": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/kyori",
+        "stream": false
+      }
+    ]
+  },
+  "reply.machine_error": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/machine_error",
+        "stream": false
+      }
+    ]
+  },
+  "reply.maso_fusoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/maso_fusoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.maso_juubun": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/maso_juubun",
+        "stream": false
+      }
+    ]
+  },
+  "reply.maso_noudo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/maso_noudo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.masoryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/masoryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.meido": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/meido",
+        "stream": false
+      }
+    ]
+  },
+  "reply.meishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/meishou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.mikansoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/mikansoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.mishutoku_suu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/mishutoku_suu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.mousugu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/mousugu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.nanbu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/nanbu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.netsugen_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/netsugen_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.nichibotsu_made": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/nichibotsu_made",
+        "stream": false
+      }
+    ]
+  },
+  "reply.ninshiki_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/ninshiki_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.onsei_suu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/onsei_suu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.rekkyo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/rekkyo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.rendou_kaijo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/rendou_kaijo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.rendou_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/rendou_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.retsui": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/retsui",
+        "stream": false
+      }
+    ]
+  },
+  "reply.ryoukai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/ryoukai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.saido_onegai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/saido_onegai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.saikyou_kiroku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/saikyou_kiroku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.saikyou_skill": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/saikyou_skill",
+        "stream": false
+      }
+    ]
+  },
+  "reply.saikyou_taishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/saikyou_taishou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.saiteki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/saiteki",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sakusei_kanou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sakusei_kanou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sanso": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sanso",
+        "stream": false
+      }
+    ]
+  },
+  "reply.seibu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/seibu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.seiri_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/seiri_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.seizon_jikan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/seizon_jikan",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sentou_kaijo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sentou_kaijo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sentou_kaishi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sentou_kaishi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.setsumei": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/setsumei",
+        "stream": false
+      }
+    ]
+  },
+  "reply.settei_henkou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/settei_henkou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shibou_chiten": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shibou_chiten",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shibou_kaisuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shibou_kaisuu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shiin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shiin",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shinchoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shinchoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shinka_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shinka_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shinka_jouken": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shinka_jouken",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shinka_kanou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shinka_kanou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shoji": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shoji",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shoukyo_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shoukyo_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shouri_kanou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shouri_kanou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shugo_tenkai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shugo_tenkai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shutoku_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shutoku_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shutoku_kanou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shutoku_kanou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shutoku_zumi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shutoku_zumi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shutten": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shutten",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shuujukudo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shuujukudo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shuunou_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shuunou_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shuutoku_suu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shuutoku_suu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.shuzoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/shuzoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sokudo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sokudo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sokutei_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sokutei_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.sonzaichi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/sonzaichi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.souchaku_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/souchaku_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.souhoyuu_suu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/souhoyuu_suu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.souteki_higai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/souteki_higai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.suigen_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/suigen_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.suishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/suishou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.suishou_shinka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/suishou_shinka",
+        "stream": false
+      }
+    ]
+  },
+  "reply.suuryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/suuryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taiki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taiki",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taiki_kaijo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taiki_kaijo",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taikyuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taikyuu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taikyuu_genkai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taikyuu_genkai",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tairyoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tairyoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taishou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taishou_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taishou_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taishou_sonzaichi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taishou_sonzaichi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taishou_tairyoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taishou_tairyoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.taisuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/taisuu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tekisei_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tekisei_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tekisei_nashi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tekisei_nashi",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tenkou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tenkou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tettai_suishou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tettai_suishou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.toridashi_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/toridashi_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.toubu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/toubu",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tsugi_no_shuzoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tsugi_no_shuzoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.tsuiseki_ari": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/tsuiseki_ari",
+        "stream": false
+      }
+    ]
+  },
+  "reply.version": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/version",
+        "stream": false
+      }
+    ]
+  },
+  "reply.watashi_wa_daikenja": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/watashi_wa_daikenja",
+        "stream": false
+      }
+    ]
+  },
+  "reply.watashi_wa_skill": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/watashi_wa_skill",
+        "stream": false
+      }
+    ]
+  },
+  "reply.yoake_made": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/yoake_made",
+        "stream": false
+      }
+    ]
+  },
+  "reply.yoru": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/yoru",
+        "stream": false
+      }
+    ]
+  },
+  "reply.youryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/youryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.yuui": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/yuui",
+        "stream": false
+      }
+    ]
+  },
+  "reply.zahyou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/zahyou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.zairyou_fusoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/zairyou_fusoku",
+        "stream": false
+      }
+    ]
+  },
+  "reply.zanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/zanryou",
+        "stream": false
+      }
+    ]
+  },
+  "reply.ze": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:reply/ze",
+        "stream": false
+      }
+    ]
+  },
+  "sfx.close": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:sfx/close",
+        "stream": false
+      }
+    ]
+  },
+  "sfx.open": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:sfx/open",
+        "stream": false
+      }
+    ]
+  },
+  "sfx.skill": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:sfx/skill",
+        "stream": false
+      }
+    ]
+  },
+  "skill.abaddon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/abaddon",
+        "stream": false
+      }
+    ]
+  },
+  "skill.abnormal_condition_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/abnormal_condition_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.abnormal_condition_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/abnormal_condition_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.abnormally_lucky": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/abnormally_lucky",
+        "stream": false
+      }
+    ]
+  },
+  "skill.absolute_severance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/absolute_severance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.absorb_and_dissolve": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/absorb_and_dissolve",
+        "stream": false
+      }
+    ]
+  },
+  "skill.acceleration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/acceleration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.adaptability": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/adaptability",
+        "stream": false
+      }
+    ]
+  },
+  "skill.administrative_authority": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/administrative_authority",
+        "stream": false
+      }
+    ]
+  },
+  "skill.agni": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/agni",
+        "stream": false
+      }
+    ]
+  },
+  "skill.akashic_records": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/akashic_records",
+        "stream": false
+      }
+    ]
+  },
+  "skill.albis_vina": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/albis_vina",
+        "stream": false
+      }
+    ]
+  },
+  "skill.all_seeing_eye": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/all_seeing_eye",
+        "stream": false
+      }
+    ]
+  },
+  "skill.alteration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/alteration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.alternative": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/alternative",
+        "stream": false
+      }
+    ]
+  },
+  "skill.amaterasu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/amaterasu",
+        "stream": false
+      }
+    ]
+  },
+  "skill.amatsumara": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/amatsumara",
+        "stream": false
+      }
+    ]
+  },
+  "skill.amethyst_golem_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/amethyst_golem_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.analyst": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/analyst",
+        "stream": false
+      }
+    ]
+  },
+  "skill.analytical_appraisal": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/analytical_appraisal",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ancient_soul": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ancient_soul",
+        "stream": false
+      }
+    ]
+  },
+  "skill.angel_wings": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/angel_wings",
+        "stream": false
+      }
+    ]
+  },
+  "skill.anti_skill": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/anti_skill",
+        "stream": false
+      }
+    ]
+  },
+  "skill.anti_symbiote": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/anti_symbiote",
+        "stream": false
+      }
+    ]
+  },
+  "skill.artist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/artist",
+        "stream": false
+      }
+    ]
+  },
+  "skill.asmoday": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/asmoday",
+        "stream": false
+      }
+    ]
+  },
+  "skill.asmodeus": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/asmodeus",
+        "stream": false
+      }
+    ]
+  },
+  "skill.assault_mode": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/assault_mode",
+        "stream": false
+      }
+    ]
+  },
+  "skill.astaroth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/astaroth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.astarte": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/astarte",
+        "stream": false
+      }
+    ]
+  },
+  "skill.astraea": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/astraea",
+        "stream": false
+      }
+    ]
+  },
+  "skill.astral_light": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/astral_light",
+        "stream": false
+      }
+    ]
+  },
+  "skill.authority_of_greed": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/authority_of_greed",
+        "stream": false
+      }
+    ]
+  },
+  "skill.avalon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/avalon",
+        "stream": false
+      }
+    ]
+  },
+  "skill.axolotl_haki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/axolotl_haki",
+        "stream": false
+      }
+    ]
+  },
+  "skill.azathoth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/azathoth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.azazel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/azazel",
+        "stream": false
+      }
+    ]
+  },
+  "skill.basiliskskin_ultimate": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/basiliskskin_ultimate",
+        "stream": false
+      }
+    ]
+  },
+  "skill.beast_transformation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/beast_transformation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.beelzebub": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/beelzebub",
+        "stream": false
+      }
+    ]
+  },
+  "skill.beelzebuth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/beelzebuth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.belial": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/belial",
+        "stream": false
+      }
+    ]
+  },
+  "skill.belphegor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/belphegor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.berserk": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/berserk",
+        "stream": false
+      }
+    ]
+  },
+  "skill.berserker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/berserker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.bewilder": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/bewilder",
+        "stream": false
+      }
+    ]
+  },
+  "skill.black_communion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/black_communion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.black_flame": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/black_flame",
+        "stream": false
+      }
+    ]
+  },
+  "skill.black_lightning": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/black_lightning",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blockade": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blockade",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_arts": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_arts",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_blade": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_blade",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_frenzy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_frenzy",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_mist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_mist",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.blood_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/blood_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.body_armor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/body_armor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.body_double": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/body_double",
+        "stream": false
+      }
+    ]
+  },
+  "skill.boogie_woogie": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/boogie_woogie",
+        "stream": false
+      }
+    ]
+  },
+  "skill.brain": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/brain",
+        "stream": false
+      }
+    ]
+  },
+  "skill.breaker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/breaker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.bubble_majin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/bubble_majin",
+        "stream": false
+      }
+    ]
+  },
+  "skill.bullet_punch": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/bullet_punch",
+        "stream": false
+      }
+    ]
+  },
+  "skill.butcher": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/butcher",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cadence": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cadence",
+        "stream": false
+      }
+    ]
+  },
+  "skill.caedros_god_of_conquest": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/caedros_god_of_conquest",
+        "stream": false
+      }
+    ]
+  },
+  "skill.calamity_chi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/calamity_chi",
+        "stream": false
+      }
+    ]
+  },
+  "skill.captivator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/captivator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.carnation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/carnation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cessation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cessation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.chant_annulment": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/chant_annulment",
+        "stream": false
+      }
+    ]
+  },
+  "skill.chaos_strikes": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/chaos_strikes",
+        "stream": false
+      }
+    ]
+  },
+  "skill.charm": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/charm",
+        "stream": false
+      }
+    ]
+  },
+  "skill.chef": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/chef",
+        "stream": false
+      }
+    ]
+  },
+  "skill.chosen_one": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/chosen_one",
+        "stream": false
+      }
+    ]
+  },
+  "skill.clangorous_soul": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/clangorous_soul",
+        "stream": false
+      }
+    ]
+  },
+  "skill.coalescence": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/coalescence",
+        "stream": false
+      }
+    ]
+  },
+  "skill.coercion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/coercion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.coffin_of_darkness": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/coffin_of_darkness",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cold_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cold_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cold_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cold_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.commander": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/commander",
+        "stream": false
+      }
+    ]
+  },
+  "skill.concentrator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/concentrator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.constant": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/constant",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cook": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cook",
+        "stream": false
+      }
+    ]
+  },
+  "skill.corroder": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/corroder",
+        "stream": false
+      }
+    ]
+  },
+  "skill.corrosion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/corrosion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.corrosion_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/corrosion_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.corrosion_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/corrosion_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.corrosion_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/corrosion_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.crasher": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/crasher",
+        "stream": false
+      }
+    ]
+  },
+  "skill.creator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/creator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.crocodile_skin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/crocodile_skin",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cryogenic_cessation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cryogenic_cessation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cthugha": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cthugha",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cthulhu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cthulhu",
+        "stream": false
+      }
+    ]
+  },
+  "skill.cultivator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/cultivator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.current_unbroken": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/current_unbroken",
+        "stream": false
+      }
+    ]
+  },
+  "skill.danger_sense": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/danger_sense",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dark_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dark_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dark_chi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dark_chi",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dark_magic_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dark_magic_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.darkness_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/darkness_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.darkness_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/darkness_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.darkness_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/darkness_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.darkness_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/darkness_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.darkness_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/darkness_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.deadly_poison": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/deadly_poison",
+        "stream": false
+      }
+    ]
+  },
+  "skill.deal_maker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/deal_maker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.death_god": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/death_god",
+        "stream": false
+      }
+    ]
+  },
+  "skill.degenerate": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/degenerate",
+        "stream": false
+      }
+    ]
+  },
+  "skill.demon_lord_haki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/demon_lord_haki",
+        "stream": false
+      }
+    ]
+  },
+  "skill.demonic_power": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/demonic_power",
+        "stream": false
+      }
+    ]
+  },
+  "skill.designer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/designer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.deus_sanguis": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/deus_sanguis",
+        "stream": false
+      }
+    ]
+  },
+  "skill.devil_host": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/devil_host",
+        "stream": false
+      }
+    ]
+  },
+  "skill.discharge": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/discharge",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dissonance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dissonance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.divide": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/divide",
+        "stream": false
+      }
+    ]
+  },
+  "skill.divine_berserker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/divine_berserker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.divine_general_mahoraga": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/divine_general_mahoraga",
+        "stream": false
+      }
+    ]
+  },
+  "skill.divine_ki_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/divine_ki_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.divine_wisdom_core": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/divine_wisdom_core",
+        "stream": false
+      }
+    ]
+  },
+  "skill.domain_of_negation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/domain_of_negation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.domicile": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/domicile",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dominator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dominator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_ear": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_ear",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_eye": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_eye",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_factor_abyss": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_factor_abyss",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_factor_earth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_factor_earth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_factor_frost": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_factor_frost",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_factor_scorch": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_factor_scorch",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_factor_storm": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_factor_storm",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_mode": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_mode",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_skin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_skin",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dragon_slayer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dragon_slayer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.drain": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/drain",
+        "stream": false
+      }
+    ]
+  },
+  "skill.dreamer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/dreamer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.drygmy_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/drygmy_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.durability": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/durability",
+        "stream": false
+      }
+    ]
+  },
+  "skill.earth_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/earth_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.earth_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/earth_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.earth_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/earth_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.earth_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/earth_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.earth_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/earth_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.earth_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/earth_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.echo_endures": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/echo_endures",
+        "stream": false
+      }
+    ]
+  },
+  "skill.electricity_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/electricity_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.electricity_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/electricity_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.elegy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/elegy",
+        "stream": false
+      }
+    ]
+  },
+  "skill.elementalist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/elementalist",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ember_remains": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ember_remains",
+        "stream": false
+      }
+    ]
+  },
+  "skill.embryo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/embryo",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ending": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ending",
+        "stream": false
+      }
+    ]
+  },
+  "skill.endorse": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/endorse",
+        "stream": false
+      }
+    ]
+  },
+  "skill.energy_charge": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/energy_charge",
+        "stream": false
+      }
+    ]
+  },
+  "skill.engineer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/engineer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.engorger": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/engorger",
+        "stream": false
+      }
+    ]
+  },
+  "skill.envy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/envy",
+        "stream": false
+      }
+    ]
+  },
+  "skill.evil_majin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/evil_majin",
+        "stream": false
+      }
+    ]
+  },
+  "skill.exoskeleton": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/exoskeleton",
+        "stream": false
+      }
+    ]
+  },
+  "skill.exploiter": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/exploiter",
+        "stream": false
+      }
+    ]
+  },
+  "skill.eye_of_mind": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/eye_of_mind",
+        "stream": false
+      }
+    ]
+  },
+  "skill.eye_of_truth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/eye_of_truth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.falsifier": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/falsifier",
+        "stream": false
+      }
+    ]
+  },
+  "skill.farsight": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/farsight",
+        "stream": false
+      }
+    ]
+  },
+  "skill.faust": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/faust",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fighter": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fighter",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fire_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fire_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fire_dragon_armor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fire_dragon_armor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fire_ki_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fire_ki_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flame_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flame_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flame_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flame_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flame_breath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flame_breath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flame_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flame_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flame_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flame_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flame_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flame_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flarecannon_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flarecannon_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.flashjack_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/flashjack_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.food_chain": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/food_chain",
+        "stream": false
+      }
+    ]
+  },
+  "skill.food_lover": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/food_lover",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fourth_wall": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fourth_wall",
+        "stream": false
+      }
+    ]
+  },
+  "skill.freezing_flame": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/freezing_flame",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fungus_infection": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fungus_infection",
+        "stream": false
+      }
+    ]
+  },
+  "skill.fusionist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/fusionist",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gabriel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gabriel",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gardener": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gardener",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gene_editor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gene_editor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.giant_dance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/giant_dance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.giantification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/giantification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gift": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gift",
+        "stream": false
+      }
+    ]
+  },
+  "skill.glorious": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/glorious",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gluttony": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gluttony",
+        "stream": false
+      }
+    ]
+  },
+  "skill.godly_craftsman": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/godly_craftsman",
+        "stream": false
+      }
+    ]
+  },
+  "skill.godly_scientist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/godly_scientist",
+        "stream": false
+      }
+    ]
+  },
+  "skill.godly_smithery": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/godly_smithery",
+        "stream": false
+      }
+    ]
+  },
+  "skill.godwolf_sense": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/godwolf_sense",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gourmand": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gourmand",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gourmet": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gourmet",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_field": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_field",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_flight": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_flight",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_flux": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_flux",
+        "stream": false
+      }
+    ]
+  },
+  "skill.gravity_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/gravity_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.great_mage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/great_mage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.great_sage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/great_sage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.greed": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/greed",
+        "stream": false
+      }
+    ]
+  },
+  "skill.green_thumb": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/green_thumb",
+        "stream": false
+      }
+    ]
+  },
+  "skill.grimoire": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/grimoire",
+        "stream": false
+      }
+    ]
+  },
+  "skill.guardian": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/guardian",
+        "stream": false
+      }
+    ]
+  },
+  "skill.haki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/haki",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hamiel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hamiel",
+        "stream": false
+      }
+    ]
+  },
+  "skill.handler": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/handler",
+        "stream": false
+      }
+    ]
+  },
+  "skill.haniel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/haniel",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hastur": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hastur",
+        "stream": false
+      }
+    ]
+  },
+  "skill.healer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/healer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.heat_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/heat_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.heat_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/heat_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.heat_wave": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/heat_wave",
+        "stream": false
+      }
+    ]
+  },
+  "skill.heavenly_eye": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/heavenly_eye",
+        "stream": false
+      }
+    ]
+  },
+  "skill.heavy_metal": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/heavy_metal",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hecate": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hecate",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hell_hall": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hell_hall",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hell_passage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hell_passage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hellblaze": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hellblaze",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hero_haki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hero_haki",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hidden_ruler": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hidden_ruler",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hidden_void": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hidden_void",
+        "stream": false
+      }
+    ]
+  },
+  "skill.holy_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/holy_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.holy_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/holy_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.holy_magic_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/holy_magic_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hydraulic_propulsion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hydraulic_propulsion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hyper_metabolistic": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hyper_metabolistic",
+        "stream": false
+      }
+    ]
+  },
+  "skill.hyperbolic_passage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/hyperbolic_passage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ice_breath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ice_breath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ice_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ice_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ice_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ice_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ideal": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ideal",
+        "stream": false
+      }
+    ]
+  },
+  "skill.image_training": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/image_training",
+        "stream": false
+      }
+    ]
+  },
+  "skill.imitator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/imitator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.imprisoned_jester": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/imprisoned_jester",
+        "stream": false
+      }
+    ]
+  },
+  "skill.infinite_regeneration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/infinite_regeneration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.infinity": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/infinity",
+        "stream": false
+      }
+    ]
+  },
+  "skill.infinity_prison": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/infinity_prison",
+        "stream": false
+      }
+    ]
+  },
+  "skill.inner_world": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/inner_world",
+        "stream": false
+      }
+    ]
+  },
+  "skill.insensitivity": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/insensitivity",
+        "stream": false
+      }
+    ]
+  },
+  "skill.intimidating_roar": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/intimidating_roar",
+        "stream": false
+      }
+    ]
+  },
+  "skill.investigator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/investigator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.iron_resolve": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/iron_resolve",
+        "stream": false
+      }
+    ]
+  },
+  "skill.istaroth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/istaroth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.kaioken": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/kaioken",
+        "stream": false
+      }
+    ]
+  },
+  "skill.king_of_curses": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/king_of_curses",
+        "stream": false
+      }
+    ]
+  },
+  "skill.kyurem": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/kyurem",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lakes_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lakes_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.law_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/law_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lemegeton": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lemegeton",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lethal_poison": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lethal_poison",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lethe_lady_of_phantasm": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lethe_lady_of_phantasm",
+        "stream": false
+      }
+    ]
+  },
+  "skill.leviathan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/leviathan",
+        "stream": false
+      }
+    ]
+  },
+  "skill.life_returns": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/life_returns",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_remains": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_remains",
+        "stream": false
+      }
+    ]
+  },
+  "skill.light_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/light_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lightning_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lightning_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lightning_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lightning_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lightning_mode": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lightning_mode",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lock": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lock",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lock2": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lock2",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lord_of_magewolves": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lord_of_magewolves",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lucifer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lucifer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lucky": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lucky",
+        "stream": false
+      }
+    ]
+  },
+  "skill.lust": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/lust",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_aura": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_aura",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_darkness_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_darkness_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_earth_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_earth_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_flame_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_flame_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_jamming": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_jamming",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_light_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_light_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_regeneration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_regeneration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_sense": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_sense",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_space_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_space_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_water_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_water_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magic_wind_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magic_wind_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magical_eye": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magical_eye",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magicule_attunement": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magicule_attunement",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magicule_dominion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magicule_dominion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magicule_engravement": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magicule_engravement",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magicule_nourishment": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magicule_nourishment",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magicule_resonance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magicule_resonance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magisteel_body": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magisteel_body",
+        "stream": false
+      }
+    ]
+  },
+  "skill.magnetized_vacuum": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/magnetized_vacuum",
+        "stream": false
+      }
+    ]
+  },
+  "skill.majesty": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/majesty",
+        "stream": false
+      }
+    ]
+  },
+  "skill.malignant_body": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/malignant_body",
+        "stream": false
+      }
+    ]
+  },
+  "skill.malleable": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/malleable",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mammon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mammon",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mammon_casino": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mammon_casino",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mana_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mana_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.manas_host": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/manas_host",
+        "stream": false
+      }
+    ]
+  },
+  "skill.martial_master": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/martial_master",
+        "stream": false
+      }
+    ]
+  },
+  "skill.material_creation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/material_creation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mathematician": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mathematician",
+        "stream": false
+      }
+    ]
+  },
+  "skill.maximum_charge": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/maximum_charge",
+        "stream": false
+      }
+    ]
+  },
+  "skill.meditation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/meditation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.melancholy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/melancholy",
+        "stream": false
+      }
+    ]
+  },
+  "skill.memory_recreation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/memory_recreation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.merciless": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/merciless",
+        "stream": false
+      }
+    ]
+  },
+  "skill.metatron": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/metatron",
+        "stream": false
+      }
+    ]
+  },
+  "skill.michael": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/michael",
+        "stream": false
+      }
+    ]
+  },
+  "skill.michael_angel_of_locks": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/michael_angel_of_locks",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mimicry": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mimicry",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mitama_faith": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mitama_faith",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mithril_strength": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mithril_strength",
+        "stream": false
+      }
+    ]
+  },
+  "skill.molecular_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/molecular_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mood_maker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mood_maker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.morph": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/morph",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mortal_fear": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mortal_fear",
+        "stream": false
+      }
+    ]
+  },
+  "skill.multilayer_barrier": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/multilayer_barrier",
+        "stream": false
+      }
+    ]
+  },
+  "skill.murderer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/murderer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.musician": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/musician",
+        "stream": false
+      }
+    ]
+  },
+  "skill.mystic_aura": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/mystic_aura",
+        "stream": false
+      }
+    ]
+  },
+  "skill.naberius": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/naberius",
+        "stream": false
+      }
+    ]
+  },
+  "skill.necronomicon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/necronomicon",
+        "stream": false
+      }
+    ]
+  },
+  "skill.nirvana": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/nirvana",
+        "stream": false
+      }
+    ]
+  },
+  "skill.nodens": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/nodens",
+        "stream": false
+      }
+    ]
+  },
+  "skill.nyarlathotep": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/nyarlathotep",
+        "stream": false
+      }
+    ]
+  },
+  "skill.observer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/observer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ogre_berserker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ogre_berserker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.one_who_seals": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/one_who_seals",
+        "stream": false
+      }
+    ]
+  },
+  "skill.oppressor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/oppressor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ouroboros": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ouroboros",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pain_lord_of_six_paths": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pain_lord_of_six_paths",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pain_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pain_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pain_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pain_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.paralysing_breath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/paralysing_breath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.paralysis": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/paralysis",
+        "stream": false
+      }
+    ]
+  },
+  "skill.paralysis_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/paralysis_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.paralysis_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/paralysis_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.paralysis_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/paralysis_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.parasite": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/parasite",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pazuzu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pazuzu",
+        "stream": false
+      }
+    ]
+  },
+  "skill.phainon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/phainon",
+        "stream": false
+      }
+    ]
+  },
+  "skill.phantasmal_creation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/phantasmal_creation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.phaser": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/phaser",
+        "stream": false
+      }
+    ]
+  },
+  "skill.phoenix": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/phoenix",
+        "stream": false
+      }
+    ]
+  },
+  "skill.phoenix_next": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/phoenix_next",
+        "stream": false
+      }
+    ]
+  },
+  "skill.physical_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/physical_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.physical_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/physical_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pierce_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pierce_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pierce_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pierce_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.plasmatic_source": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/plasmatic_source",
+        "stream": false
+      }
+    ]
+  },
+  "skill.poison": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/poison",
+        "stream": false
+      }
+    ]
+  },
+  "skill.poison_ki_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/poison_ki_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.poison_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/poison_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.poison_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/poison_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.poison_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/poison_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.poisonous_breath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/poisonous_breath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.possession": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/possession",
+        "stream": false
+      }
+    ]
+  },
+  "skill.prayer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/prayer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.predator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/predator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.prickly_hands": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/prickly_hands",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pride": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pride",
+        "stream": false
+      }
+    ]
+  },
+  "skill.processor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/processor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.profaned_prominence": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/profaned_prominence",
+        "stream": false
+      }
+    ]
+  },
+  "skill.provider": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/provider",
+        "stream": false
+      }
+    ]
+  },
+  "skill.pseudo_dragon_body": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/pseudo_dragon_body",
+        "stream": false
+      }
+    ]
+  },
+  "skill.purple_lightning": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/purple_lightning",
+        "stream": false
+      }
+    ]
+  },
+  "skill.raguel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/raguel",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ranged_barrier": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ranged_barrier",
+        "stream": false
+      }
+    ]
+  },
+  "skill.raphael_knowledge": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/raphael_knowledge",
+        "stream": false
+      }
+    ]
+  },
+  "skill.raphael_wisdom": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/raphael_wisdom",
+        "stream": false
+      }
+    ]
+  },
+  "skill.raphealskill": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/raphealskill",
+        "stream": false
+      }
+    ]
+  },
+  "skill.reaper": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/reaper",
+        "stream": false
+      }
+    ]
+  },
+  "skill.rebirth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/rebirth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.reducer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/reducer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.reflector": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/reflector",
+        "stream": false
+      }
+    ]
+  },
+  "skill.relapse": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/relapse",
+        "stream": false
+      }
+    ]
+  },
+  "skill.remnants_of_ascension": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/remnants_of_ascension",
+        "stream": false
+      }
+    ]
+  },
+  "skill.repeater": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/repeater",
+        "stream": false
+      }
+    ]
+  },
+  "skill.researcher": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/researcher",
+        "stream": false
+      }
+    ]
+  },
+  "skill.reshiram": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/reshiram",
+        "stream": false
+      }
+    ]
+  },
+  "skill.restricted": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/restricted",
+        "stream": false
+      }
+    ]
+  },
+  "skill.reverser": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/reverser",
+        "stream": false
+      }
+    ]
+  },
+  "skill.robotnic": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/robotnic",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ronova": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ronova",
+        "stream": false
+      }
+    ]
+  },
+  "skill.royal_beast": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/royal_beast",
+        "stream": false
+      }
+    ]
+  },
+  "skill.runesmiths_insight": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/runesmiths_insight",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sacred_haki": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sacred_haki",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/saint",
+        "stream": false
+      }
+    ]
+  },
+  "skill.saint_chi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/saint_chi",
+        "stream": false
+      }
+    ]
+  },
+  "skill.samael": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/samael",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sandplay_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sandplay_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sariel": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sariel",
+        "stream": false
+      }
+    ]
+  },
+  "skill.satanael": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/satanael",
+        "stream": false
+      }
+    ]
+  },
+  "skill.satella": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/satella",
+        "stream": false
+      }
+    ]
+  },
+  "skill.scale_armor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/scale_armor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.scavenger": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/scavenger",
+        "stream": false
+      }
+    ]
+  },
+  "skill.scholar": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/scholar",
+        "stream": false
+      }
+    ]
+  },
+  "skill.schrodinger": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/schrodinger",
+        "stream": false
+      }
+    ]
+  },
+  "skill.schwi_ex_machina": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/schwi_ex_machina",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sealer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sealer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.seeker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/seeker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.seer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/seer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.self_regeneration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/self_regeneration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sense_heat_source": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sense_heat_source",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sense_soundwave": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sense_soundwave",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sentient_being": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sentient_being",
+        "stream": false
+      }
+    ]
+  },
+  "skill.severer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/severer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.shadow_motion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/shadow_motion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.shadow_striker": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/shadow_striker",
+        "stream": false
+      }
+    ]
+  },
+  "skill.shape_forgotten": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/shape_forgotten",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sharpened_claws": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sharpened_claws",
+        "stream": false
+      }
+    ]
+  },
+  "skill.shub_niggurath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/shub_niggurath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.siren_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/siren_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.skill_storage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/skill_storage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sky_enjoyer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sky_enjoyer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.slayer_of_dragons": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/slayer_of_dragons",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sloth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sloth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.smelter": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/smelter",
+        "stream": false
+      }
+    ]
+  },
+  "skill.snake_eye": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/snake_eye",
+        "stream": false
+      }
+    ]
+  },
+  "skill.snatch": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/snatch",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sniper": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sniper",
+        "stream": false
+      }
+    ]
+  },
+  "skill.soul_plunderer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/soul_plunderer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.soul_shrine": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/soul_shrine",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sound_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sound_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sound_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sound_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.source_powered": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/source_powered",
+        "stream": false
+      }
+    ]
+  },
+  "skill.space_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/space_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spark": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spark",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spatial_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spatial_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spatial_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spatial_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spatial_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spatial_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spatial_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spatial_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spatial_motion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spatial_motion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spearhead": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spearhead",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spirit_sorcerer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spirit_sorcerer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spiritual_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spiritual_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spiritual_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spiritual_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.spiritualist": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/spiritualist",
+        "stream": false
+      }
+    ]
+  },
+  "skill.stagnator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/stagnator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.starbuncle_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/starbuncle_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.starved": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/starved",
+        "stream": false
+      }
+    ]
+  },
+  "skill.stasis": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/stasis",
+        "stream": false
+      }
+    ]
+  },
+  "skill.steel_dragon_armor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/steel_dragon_armor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.steel_ki_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/steel_ki_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.steel_strength": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/steel_strength",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sticky_steel_thread": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sticky_steel_thread",
+        "stream": false
+      }
+    ]
+  },
+  "skill.strength": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/strength",
+        "stream": false
+      }
+    ]
+  },
+  "skill.strengthen_body": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/strengthen_body",
+        "stream": false
+      }
+    ]
+  },
+  "skill.stripes": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/stripes",
+        "stream": false
+      }
+    ]
+  },
+  "skill.subjugator": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/subjugator",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sunshine": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sunshine",
+        "stream": false
+      }
+    ]
+  },
+  "skill.suppressor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/suppressor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.survivor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/survivor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.surya": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/surya",
+        "stream": false
+      }
+    ]
+  },
+  "skill.susanoo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/susanoo",
+        "stream": false
+      }
+    ]
+  },
+  "skill.sword_saint": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/sword_saint",
+        "stream": false
+      }
+    ]
+  },
+  "skill.symbiote": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/symbiote",
+        "stream": false
+      }
+    ]
+  },
+  "skill.telepathy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/telepathy",
+        "stream": false
+      }
+    ]
+  },
+  "skill.tempter": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/tempter",
+        "stream": false
+      }
+    ]
+  },
+  "skill.tenacity": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/tenacity",
+        "stream": false
+      }
+    ]
+  },
+  "skill.the_warden": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/the_warden",
+        "stream": false
+      }
+    ]
+  },
+  "skill.thermal_fluctuation_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/thermal_fluctuation_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.thermal_fluctuation_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/thermal_fluctuation_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.thought_acceleration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/thought_acceleration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.thought_communication": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/thought_communication",
+        "stream": false
+      }
+    ]
+  },
+  "skill.thrower": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/thrower",
+        "stream": false
+      }
+    ]
+  },
+  "skill.thunder_breath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/thunder_breath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.time_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/time_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.time_traveler": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/time_traveler",
+        "stream": false
+      }
+    ]
+  },
+  "skill.timeless_mage": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/timeless_mage",
+        "stream": false
+      }
+    ]
+  },
+  "skill.titanification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/titanification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.toxic_skin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/toxic_skin",
+        "stream": false
+      }
+    ]
+  },
+  "skill.trash_gamer": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/trash_gamer",
+        "stream": false
+      }
+    ]
+  },
+  "skill.traveler": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/traveler",
+        "stream": false
+      }
+    ]
+  },
+  "skill.trnightmare.beelzebuth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/trnightmare/beelzebuth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.true_authority_of_greed": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/true_authority_of_greed",
+        "stream": false
+      }
+    ]
+  },
+  "skill.true_hero": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/true_hero",
+        "stream": false
+      }
+    ]
+  },
+  "skill.tsukiyomi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/tsukiyomi",
+        "stream": false
+      }
+    ]
+  },
+  "skill.tuner": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/tuner",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ultimate_arroganz": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ultimate_arroganz",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ultra_instinct": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ultra_instinct",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ultrasonic_waves": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ultrasonic_waves",
+        "stream": false
+      }
+    ]
+  },
+  "skill.ultraspeed_regeneration": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/ultraspeed_regeneration",
+        "stream": false
+      }
+    ]
+  },
+  "skill.unbound_jester": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/unbound_jester",
+        "stream": false
+      }
+    ]
+  },
+  "skill.universal_perception": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/universal_perception",
+        "stream": false
+      }
+    ]
+  },
+  "skill.unleashed_dead_end": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/unleashed_dead_end",
+        "stream": false
+      }
+    ]
+  },
+  "skill.unpredictability": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/unpredictability",
+        "stream": false
+      }
+    ]
+  },
+  "skill.unyielding": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/unyielding",
+        "stream": false
+      }
+    ]
+  },
+  "skill.uriel_lord_of_oath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/uriel_lord_of_oath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.uriel_lord_of_vow": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/uriel_lord_of_vow",
+        "stream": false
+      }
+    ]
+  },
+  "skill.usurper": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/usurper",
+        "stream": false
+      }
+    ]
+  },
+  "skill.venuzdonoa": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/venuzdonoa",
+        "stream": false
+      }
+    ]
+  },
+  "skill.vestiges_of_eidolons": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/vestiges_of_eidolons",
+        "stream": false
+      }
+    ]
+  },
+  "skill.victorious_harbinger": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/victorious_harbinger",
+        "stream": false
+      }
+    ]
+  },
+  "skill.villain": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/villain",
+        "stream": false
+      }
+    ]
+  },
+  "skill.voice_cannon": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/voice_cannon",
+        "stream": false
+      }
+    ]
+  },
+  "skill.void_archive": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/void_archive",
+        "stream": false
+      }
+    ]
+  },
+  "skill.void_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/void_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.voidedge": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/voidedge",
+        "stream": false
+      }
+    ]
+  },
+  "skill.voidsovereign": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/voidsovereign",
+        "stream": false
+      }
+    ]
+  },
+  "skill.warded_soul": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/warded_soul",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_blade": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_blade",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_breathing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_breathing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_current_control": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_current_control",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_dragon_armor": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_dragon_armor",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_ki_release": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_ki_release",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.water_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/water_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.weather_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/weather_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.weather_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/weather_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.whirlisprig_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/whirlisprig_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wilden_guardian_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wilden_guardian_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wilden_hunter_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wilden_hunter_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wilden_stalk": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wilden_stalk",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wilden_stalker_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wilden_stalker_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_attack_nullification": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_attack_nullification",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_attack_resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_attack_resistance",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_blessing": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_blessing",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_domination": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_domination",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_evasion": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_evasion",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_manipulation": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_manipulation",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_reading": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_reading",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wind_transform": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wind_transform",
+        "stream": false
+      }
+    ]
+  },
+  "skill.witch_of_envy_satella": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/witch_of_envy_satella",
+        "stream": false
+      }
+    ]
+  },
+  "skill.witch_of_vainglory": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/witch_of_vainglory",
+        "stream": false
+      }
+    ]
+  },
+  "skill.witches_envy": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/witches_envy",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wixie_genetics": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wixie_genetics",
+        "stream": false
+      }
+    ]
+  },
+  "skill.wrath": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/wrath",
+        "stream": false
+      }
+    ]
+  },
+  "skill.yog-sotohort": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/yog-sotohort",
+        "stream": false
+      }
+    ]
+  },
+  "skill.yog_sothoth": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/yog_sothoth",
+        "stream": false
+      }
+    ]
+  },
+  "skill.zekrom": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:skill/zekrom",
+        "stream": false
+      }
+    ]
+  },
+  "tier.common": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:tier/common",
+        "stream": false
+      }
+    ]
+  },
+  "tier.extra": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:tier/extra",
+        "stream": false
+      }
+    ]
+  },
+  "tier.intrinsic": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:tier/intrinsic",
+        "stream": false
+      }
+    ]
+  },
+  "tier.resistance": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:tier/resistance",
+        "stream": false
+      }
+    ]
+  },
+  "tier.ultimate": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:tier/ultimate",
+        "stream": false
+      }
+    ]
+  },
+  "tier.unique": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:tier/unique",
+        "stream": false
+      }
+    ]
+  },
+  "voice.e_no_shinka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/e_no_shinka",
+        "stream": false
+      }
+    ]
+  },
+  "voice.hi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/hi",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kai",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_chuu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_chuu",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_chuudan": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_chuudan",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_fuka": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_fuka",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_kaishi": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_kaishi",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_kakunin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_kakunin",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_kantei": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_kantei",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_mode": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_mode",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_shippai": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_shippai",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kaiseki_shuuryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kaiseki_shuuryou",
+        "stream": false
+      }
+    ]
+  },
+  "voice.kidou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/kidou",
+        "stream": false
+      }
+    ]
+  },
+  "voice.koku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/koku",
+        "stream": false
+      }
+    ]
+  },
+  "voice.mishutoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/mishutoku",
+        "stream": false
+      }
+    ]
+  },
+  "voice.no_kakutoku": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/no_kakutoku",
+        "stream": false
+      }
+    ]
+  },
+  "voice.nouryoku_ichiran": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/nouryoku_ichiran",
+        "stream": false
+      }
+    ]
+  },
+  "voice.ryo": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/ryo",
+        "stream": false
+      }
+    ]
+  },
+  "voice.seiko_shimashita": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/seiko_shimashita",
+        "stream": false
+      }
+    ]
+  },
+  "voice.seizon_kakuritsu": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/seizon_kakuritsu",
+        "stream": false
+      }
+    ]
+  },
+  "voice.sentou_mode": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/sentou_mode",
+        "stream": false
+      }
+    ]
+  },
+  "voice.shinka_jouken": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/shinka_jouken",
+        "stream": false
+      }
+    ]
+  },
+  "voice.shippai_shimashita": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/shippai_shimashita",
+        "stream": false
+      }
+    ]
+  },
+  "voice.shounin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/shounin",
+        "stream": false
+      }
+    ]
+  },
+  "voice.taishou_kakunin": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/taishou_kakunin",
+        "stream": false
+      }
+    ]
+  },
+  "voice.taishou_kanryou": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/taishou_kanryou",
+        "stream": false
+      }
+    ]
+  },
+  "voice.tsuzukete": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/tsuzukete",
+        "stream": false
+      }
+    ]
+  },
+  "voice.yori": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/yori",
+        "stream": false
+      }
+    ]
+  },
+  "voice.ze": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "greatsage:voice/ze",
+        "stream": false
+      }
+    ]
+  }
+}
