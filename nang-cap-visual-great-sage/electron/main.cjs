@@ -89,12 +89,11 @@ async function createDesktopApp() {
     y: 0,
     frame: false,
     transparent: true,
-    backgroundColor: '#00000000',
     alwaysOnTop: true,
     hasShadow: false,
     resizable: false,
     skipTaskbar: false, // User can see icon in taskbar, click, switch, or close
-    show: false,
+    show: true, // Show immediately
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -102,8 +101,12 @@ async function createDesktopApp() {
     },
   });
 
-  // Set always on top with high priority
-  mainWindow.setAlwaysOnTop(true, 'screen-saver');
+  // Keep on top of normal windows
+  mainWindow.setAlwaysOnTop(true);
+
+  mainWindow.webContents.on('console-message', (event, level, message) => {
+    console.log(`[Renderer] ${message}`);
+  });
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
