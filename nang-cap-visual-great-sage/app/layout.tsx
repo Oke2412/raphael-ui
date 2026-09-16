@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
@@ -48,7 +47,6 @@ export default function RootLayout({
     <html lang="en" className={`${notoJp.variable} bg-transparent`}>
       <body className="antialiased bg-transparent">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

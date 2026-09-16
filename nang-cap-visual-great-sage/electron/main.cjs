@@ -53,15 +53,21 @@ function startStaticServer(outDir) {
 
       fs.readFile(filePath, (err, data) => {
         if (err) {
-          fs.readFile(path.join(outDir, 'index.html'), (errIndex, indexData) => {
-            if (errIndex) {
-              res.writeHead(404, { 'Content-Type': 'text/plain' });
-              res.end('Not Found');
-            } else {
-              res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-              res.end(indexData);
-            }
-          });
+          const reqExt = path.extname(reqPath);
+          if (!reqExt || reqExt === '.html') {
+            fs.readFile(path.join(outDir, 'index.html'), (errIndex, indexData) => {
+              if (errIndex) {
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('Not Found');
+              } else {
+                res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+                res.end(indexData);
+              }
+            });
+            return;
+          }
+          res.writeHead(404, { 'Content-Type': 'text/plain' });
+          res.end('Not Found');
           return;
         }
         const ext = path.extname(filePath).toLowerCase();
