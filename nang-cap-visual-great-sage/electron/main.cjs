@@ -1,7 +1,7 @@
 // Tensura (Raphael) - Native Windows Desktop Overlay
 // True Transparency, Frameless, Always-on-top, System Tray & Taskbar App
 
-const { app, BrowserWindow, screen, Tray, Menu, globalShortcut } = require('electron');
+const { app, BrowserWindow, screen, Tray, Menu, globalShortcut, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
@@ -10,6 +10,7 @@ let mainWindow = null;
 let tray = null;
 let staticServer = null;
 let isQuitting = false;
+let currentMode = 'overlay';
 
 // Single-instance lock
 const gotTheLock = app.requestSingleInstanceLock();
@@ -99,10 +100,11 @@ async function createDesktopApp() {
     transparent: true,
     alwaysOnTop: true,
     hasShadow: false,
-    resizable: false,
+    resizable: true,
     skipTaskbar: false, // Show in taskbar so user can click to bring to front
     show: true,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.cjs'),
       nodeIntegration: false,
       contextIsolation: true,
       webSecurity: false,
@@ -143,12 +145,33 @@ async function createDesktopApp() {
     console.error('[Electron] Failed to load UI:', code, desc);
   });
 
-  // Register ESC key to easily exit
-  globalShortcut.register('Escape', () => {
-    console.log('[Electron] User pressed Escape. Closing overlay...');
-    isQuitting = true;
-    app.quit();
+  // Lắng nghe phím Escape bên trong cửa sổ: thu nhỏ về docked mode thay vì thoát app
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    if (input.key === 'Escape' && input.type === 'keyDown') {
+      if (currentMode !== 'docked') {
+        event.preventDefault();
+        applyWindowMode('docked');
+        mainWindow.webContents.send('set-mode-from-main', 'docked');
+      }
+    }
   });
+
+  // Phím tắt toàn cầu Alt+R: toggle giữa Overlay toàn màn hình và Docked Mini Orb
+  try {
+    globalShortcut.register('Alt+R', () => {
+      console.log('[Electron] Hotkey Alt+R triggered');
+      if (!mainWindow || mainWindow.isDestroyed()) return;
+      if (currentMode === 'docked') {
+        applyWindowMode('overlay');
+        mainWindow.webContents.send('set-mode-from-main', 'overlay');
+      } else {
+        applyWindowMode('docked');
+        mainWindow.webContents.send('set-mode-from-main', 'docked');
+      }
+    });
+  } catch (err) {
+    console.warn('[Electron] Could not register Alt+R shortcut:', err);
+  }
 
   // Nạp giao diện tĩnh đã xuất qua server nội bộ hoặc localhost
   const outDir = path.join(__dirname, '..', 'out');
@@ -180,31 +203,111 @@ async function createDesktopApp() {
   });
 }
 
+function applyWindowMode(mode) {
+  if (!mainWindow || mainWindow.isDestroyed()) return;
+  currentMode = mode;
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { workArea, bounds } = primaryDisplay;
+
+  if (mode === 'docked') {
+    // Docked Mini Orb: window is only 180x180 px at bottom right corner!
+    // Leaves 98% of the screen completely free for desktop apps/VS Code!
+    const orbSize = 180;
+    const marginX = 24;
+    const marginY = 24;
+    const x = Math.round(workArea.x + workArea.width - orbSize - marginX);
+    const y = Math.round(workArea.y + workArea.height - orbSize - marginY);
+    mainWindow.setResizable(true);
+    mainWindow.setBounds({ x, y, width: orbSize, height: orbSize });
+    mainWindow.setIgnoreMouseEvents(false);
+    mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+  } else if (mode === 'sidedeck') {
+    // Sidedeck panel: right-docked (440px wide, 100% height)
+    // Leaves entire left side completely free for VS Code / IDE!
+    const sideWidth = 440;
+    const x = Math.round(workArea.x + workArea.width - sideWidth);
+    const y = Math.round(workArea.y);
+    const h = Math.round(workArea.height);
+    mainWindow.setResizable(true);
+    mainWindow.setBounds({ x, y, width: sideWidth, height: h });
+    mainWindow.setIgnoreMouseEvents(false);
+    mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+  } else if (mode === 'overlay') {
+    // Fullscreen transparent overlay
+    mainWindow.setResizable(true);
+    mainWindow.setBounds({
+      x: bounds.x,
+      y: bounds.y,
+      width: bounds.width,
+      height: bounds.height,
+    });
+    mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+  }
+}
+
+ipcMain.on('set-visual-mode', (event, mode) => {
+  console.log(`[Electron] Switching window bounds to mode: ${mode}`);
+  applyWindowMode(mode);
+});
+
+ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.setIgnoreMouseEvents(ignore, options);
+  }
+});
+
+ipcMain.on('quit-app', () => {
+  isQuitting = true;
+  app.quit();
+});
+
 function createSystemTray() {
   const iconPath = path.join(__dirname, '..', 'public', 'icon-light-32x32.png');
   try {
     tray = new Tray(iconPath);
-    tray.setToolTip('Tensura Great Sage (Raphael) - AI Assistant');
+    tray.setToolTip('Tensura Great Sage (Raphael) - AI Assistant (Alt+R)');
 
     const contextMenu = Menu.buildFromTemplate([
       {
-        label: '🔮 Hiện Raphael (Overlay)',
+        label: '🔮 Toàn màn hình (Overlay)',
         click: () => {
           if (mainWindow) {
             mainWindow.show();
             mainWindow.focus();
+            applyWindowMode('overlay');
+            mainWindow.webContents.send('set-mode-from-main', 'overlay');
           }
         },
       },
+      {
+        label: '🔵 Thu nhỏ góc (Mini Orb)',
+        click: () => {
+          if (mainWindow) {
+            mainWindow.show();
+            applyWindowMode('docked');
+            mainWindow.webContents.send('set-mode-from-main', 'docked');
+          }
+        },
+      },
+      {
+        label: '📱 Thanh bên (Sidedeck Panel)',
+        click: () => {
+          if (mainWindow) {
+            mainWindow.show();
+            applyWindowMode('sidedeck');
+            mainWindow.webContents.send('set-mode-from-main', 'sidedeck');
+          }
+        },
+      },
+      { type: 'separator' },
       {
         label: '👁️ Ẩn cửa sổ',
         click: () => {
           if (mainWindow) mainWindow.hide();
         },
       },
-      { type: 'separator' },
       {
-        label: '❌ Thoát ứng dụng (Esc)',
+        label: '❌ Thoát ứng dụng',
         click: () => {
           isQuitting = true;
           app.quit();

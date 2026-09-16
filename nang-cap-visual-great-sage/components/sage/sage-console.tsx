@@ -32,20 +32,75 @@ export function SageConsole() {
   const [visualMode, setVisualMode] = useState<VisualMode>("overlay")
   const [configOpen, setConfigOpen] = useState(false)
   const [previewDesktop, setPreviewDesktop] = useState(false)
+  const [isElectron, setIsElectron] = useState(false)
   const accent = STATE_META[sage.state].color
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && Boolean(window.electronAPI?.isElectron)) {
+      setIsElectron(true)
+      window.electronAPI?.onSetVisualMode((mode) => {
+        setVisualMode(mode)
+      })
+    }
+  }, [])
+
+  const changeVisualMode = (mode: VisualMode) => {
+    setVisualMode(mode)
+    if (typeof window !== "undefined" && window.electronAPI) {
+      window.electronAPI.setVisualMode(mode)
+    }
+  }
 
   // Tự động thức dậy mở Overlay toàn màn hình khi wake word được phát hiện hoặc khi micro bắt đầu lắng nghe
   useEffect(() => {
     if (sage.wakeCount > 0 && visualMode === "docked") {
-      setVisualMode("overlay")
+      changeVisualMode("overlay")
     }
   }, [sage.wakeCount, visualMode])
 
   useEffect(() => {
     if (sage.state === "listening" && visualMode === "docked") {
-      setVisualMode("overlay")
+      changeVisualMode("overlay")
     }
   }, [sage.state, visualMode])
+
+  // Lắng nghe phím Escape để nhanh chóng thu nhỏ về docked mode (Mini Orb)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (visualMode !== "docked") {
+          changeVisualMode("docked")
+        }
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [visualMode])
+
+  // Trong chế độ fullscreen overlay: truyền click-through xuyên qua các vùng trống để không chặn desktop
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.electronAPI) return
+    if (visualMode !== "overlay") {
+      window.electronAPI.setIgnoreMouseEvents(false)
+      return
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null
+      const interactive = target?.closest(".pointer-events-auto, button, input, textarea, a, [role='button']")
+      if (interactive) {
+        window.electronAPI?.setIgnoreMouseEvents(false)
+      } else {
+        window.electronAPI?.setIgnoreMouseEvents(true, { forward: true })
+      }
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      window.electronAPI?.setIgnoreMouseEvents(false)
+    }
+  }, [visualMode])
 
   // Lấy câu nói/stream mới nhất hiển thị phụ đề nổi
   const latestAssistantEntry = [...sage.transcript].reverse().find((t) => t.role === "assistant")
@@ -108,7 +163,7 @@ export function SageConsole() {
           <header className="relative z-10 flex items-center justify-end p-2 pointer-events-auto">
             <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 backdrop-blur-md transition-opacity hover:opacity-100 opacity-60">
               <button
-                onClick={() => setVisualMode("overlay")}
+                onClick={() => changeVisualMode("overlay")}
                 className={`grid size-7 place-items-center rounded-full transition-colors ${
                   visualMode === "overlay"
                     ? "bg-white/20 text-white"
@@ -119,14 +174,14 @@ export function SageConsole() {
                 <Maximize2 className="size-3.5" />
               </button>
               <button
-                onClick={() => setVisualMode("docked")}
+                onClick={() => changeVisualMode("docked")}
                 className="grid size-7 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition-colors"
                 title="Chế độ 2: Thu nhỏ về góc (Mini Orb)"
               >
                 <Minimize2 className="size-3.5" />
               </button>
               <button
-                onClick={() => setVisualMode("sidedeck")}
+                onClick={() => changeVisualMode("sidedeck")}
                 className="grid size-7 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition-colors"
                 title="Chế độ 3: Gemini Sidedeck Panel"
               >
@@ -185,11 +240,17 @@ export function SageConsole() {
       {/* Khớp chính xác với hình ảnh mod Great Sage HUD người dùng cung cấp         */}
       {/* ========================================================================= */}
       {visualMode === "docked" && (
-        <div className="fixed bottom-8 right-8 z-50 group pointer-events-auto transition-all duration-500 animate-in fade-in zoom-in-95">
+        <div
+          className={
+            isElectron
+              ? "size-full flex items-center justify-center p-2 z-50 group pointer-events-auto select-none transition-all duration-300 animate-in fade-in zoom-in-95"
+              : "fixed bottom-8 right-8 z-50 group pointer-events-auto transition-all duration-500 animate-in fade-in zoom-in-95"
+          }
+        >
           {/* Quả cầu tròn với viền tím phát quang đặc trưng như ảnh mẫu */}
           <div
-            onClick={() => setVisualMode("overlay")}
-            className="relative flex size-28 sm:size-32 cursor-pointer items-center justify-center rounded-full border-2 transition-all duration-300 hover:scale-105 active:scale-95"
+            onClick={() => changeVisualMode("overlay")}
+            className="relative flex size-28 cursor-pointer items-center justify-center rounded-full border-2 transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
               borderColor: `${accent}ee`,
               background: `radial-gradient(circle at center, rgba(14, 20, 36, 0.75) 0%, rgba(4, 6, 12, 0.88) 100%)`,
@@ -201,7 +262,7 @@ export function SageConsole() {
               state={sage.state}
               levels={sage.levels}
               showCircleBorder={true}
-              className="size-24 sm:size-28"
+              className="size-24"
             />
 
             {/* Đèn chỉ báo trạng thái ở góc dưới quả cầu */}
@@ -215,26 +276,26 @@ export function SageConsole() {
             />
 
             {/* Các nút thao tác nhanh khi rê chuột vào Mini Orb */}
-            <div className="absolute -top-3 -right-3 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute -top-2 -right-2 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  setVisualMode("overlay")
+                  changeVisualMode("overlay")
                 }}
-                className="grid size-7 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-white/25 hover:text-white"
+                className="grid size-6 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-white/25 hover:text-white"
                 title="Bung toàn màn hình (Overlay)"
               >
-                <Maximize2 className="size-3.5" />
+                <Maximize2 className="size-3" />
               </button>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  setVisualMode("sidedeck")
+                  changeVisualMode("sidedeck")
                 }}
-                className="grid size-7 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-white/25 hover:text-white"
+                className="grid size-6 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-white/25 hover:text-white"
                 title="Mở Sidedeck Panel"
               >
-                <PanelRight className="size-3.5" />
+                <PanelRight className="size-3" />
               </button>
             </div>
           </div>
@@ -245,16 +306,18 @@ export function SageConsole() {
       {/* CHẾ ĐỘ 3: GEMINI SIDEDECK PANEL (Trượt ra từ cạnh phải, Orb ngự trên đầu)  */}
       {/* ========================================================================= */}
       {visualMode === "sidedeck" && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-transparent animate-in fade-in">
-          {/* Nền trong suốt bên trái, nhấp vào để thu nhỏ về góc */}
-          <div
-            className="flex-1 cursor-pointer pointer-events-auto"
-            onClick={() => setVisualMode("docked")}
-            title="Nhấp vào vùng trống để thu nhỏ về góc"
-          />
+        <div className={`fixed inset-0 z-50 flex ${isElectron ? "justify-stretch" : "justify-end"} bg-transparent animate-in fade-in`}>
+          {/* Nền trong suốt bên trái chỉ hiện khi chạy trên trình duyệt web thông thường */}
+          {!isElectron && (
+            <div
+              className="flex-1 cursor-pointer pointer-events-auto"
+              onClick={() => changeVisualMode("docked")}
+              title="Nhấp vào vùng trống để thu nhỏ về góc"
+            />
+          )}
 
           {/* Sidedeck Panel bên phải */}
-          <aside className="relative pointer-events-auto flex h-dvh w-[440px] max-w-[95vw] flex-col border-l border-white/10 bg-[#060810]/85 backdrop-blur-2xl shadow-2xl transition-all animate-in slide-in-from-right">
+          <aside className="relative pointer-events-auto flex h-dvh w-full md:w-[440px] flex-col border-l border-white/10 bg-[#060810]/85 backdrop-blur-2xl shadow-2xl transition-all animate-in slide-in-from-right">
             {/* Header Sidedeck với Quả cầu Raphael Orb ngự trị ngay phía trên */}
             <header className="flex items-center justify-between border-b border-white/10 px-4 py-3 bg-white/5">
               <div className="flex items-center gap-3">
@@ -265,7 +328,7 @@ export function SageConsole() {
                     background: `radial-gradient(circle at center, rgba(14, 20, 36, 0.8) 0%, rgba(4, 6, 12, 0.9) 100%)`,
                     boxShadow: `0 0 16px ${accent}55, inset 0 0 10px ${accent}22`,
                   }}
-                  onClick={() => setVisualMode("overlay")}
+                  onClick={() => changeVisualMode("overlay")}
                   title="Nhấp để bung toàn màn hình"
                 >
                   <SageCoreCanvas
@@ -287,21 +350,21 @@ export function SageConsole() {
 
               <div className="flex items-center gap-1.5">
                 <button
-                  onClick={() => setVisualMode("overlay")}
+                  onClick={() => changeVisualMode("overlay")}
                   className="grid size-8 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-colors"
                   title="Bung toàn màn hình"
                 >
                   <Maximize2 className="size-3.5" />
                 </button>
                 <button
-                  onClick={() => setVisualMode("docked")}
+                  onClick={() => changeVisualMode("docked")}
                   className="grid size-8 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-colors"
                   title="Thu nhỏ xuống góc (Chỉ còn quả cầu)"
                 >
                   <Minimize2 className="size-3.5" />
                 </button>
                 <button
-                  onClick={() => setVisualMode("docked")}
+                  onClick={() => changeVisualMode("docked")}
                   className="grid size-8 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-colors"
                   title="Đóng panel"
                 >
