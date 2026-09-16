@@ -14,4 +14,4 @@ if not exist "out\index.html" (
 )
 
 echo [*] Dang khoi chay cua so trong suot Native tren man hinh...
-call npx.cmd electron electron/main.cjs
+call npx.cmd electron electron/main.cjs %*

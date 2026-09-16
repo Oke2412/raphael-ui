@@ -4,6 +4,7 @@
 const { app, BrowserWindow, screen, Tray, Menu, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
 
 // Cho phép cửa sổ trong suốt và tăng tốc GPU
 app.commandLine.appendSwitch('enable-transparent-visuals');
@@ -11,6 +12,7 @@ app.commandLine.appendSwitch('high-dpi-support', '1');
 
 let mainWindow = null;
 let tray = null;
+let staticServer = null;
 let isQuitting = false;
 
 // Đảm bảo chỉ có 1 instance chạy ngầm duy nhất
@@ -29,7 +31,56 @@ if (!gotTheLock) {
   app.whenReady().then(createDesktopApp);
 }
 
-function createDesktopApp() {
+function startStaticServer(outDir) {
+  const mimeTypes = {
+    '.html': 'text/html; charset=utf-8',
+    '.js': 'text/javascript; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.json': 'application/json; charset=utf-8',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml',
+    '.woff2': 'font/woff2',
+    '.woff': 'font/woff',
+    '.ttf': 'font/ttf',
+    '.ico': 'image/x-icon',
+  };
+
+  return new Promise((resolve) => {
+    const server = http.createServer((req, res) => {
+      let reqPath = req.url.split('?')[0];
+      if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
+      const filePath = path.join(outDir, decodeURIComponent(reqPath));
+
+      fs.readFile(filePath, (err, data) => {
+        if (err) {
+          // Fallback to index.html for client-side navigation
+          fs.readFile(path.join(outDir, 'index.html'), (errIndex, indexData) => {
+            if (errIndex) {
+              res.writeHead(404, { 'Content-Type': 'text/plain' });
+              res.end('Not Found');
+            } else {
+              res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+              res.end(indexData);
+            }
+          });
+          return;
+        }
+        const ext = path.extname(filePath).toLowerCase();
+        const contentType = mimeTypes[ext] || 'application/octet-stream';
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(data);
+      });
+    });
+
+    server.listen(0, '127.0.0.1', () => {
+      const port = server.address().port;
+      resolve({ server, port });
+    });
+  });
+}
+
+async function createDesktopApp() {
   const primaryDisplay = screen.getPrimaryDisplay();
   const { width, height } = primaryDisplay.bounds;
 
@@ -51,10 +102,12 @@ function createDesktopApp() {
     },
   });
 
-  // Nạp giao diện tĩnh đã xuất (Không cần mở localhost hay server web!)
-  const outIndexPath = path.join(__dirname, '..', 'out', 'index.html');
-  if (fs.existsSync(outIndexPath)) {
-    mainWindow.loadFile(outIndexPath);
+  // Nạp giao diện tĩnh đã xuất qua server nội bộ hoặc localhost
+  const outDir = path.join(__dirname, '..', 'out');
+  if (fs.existsSync(path.join(outDir, 'index.html'))) {
+    const { server, port } = await startStaticServer(outDir);
+    staticServer = server;
+    mainWindow.loadURL(`http://127.0.0.1:${port}`);
   } else {
     // Nếu chưa build export tĩnh thì kết nối localhost dev server
     mainWindow.loadURL('http://localhost:3000');
@@ -62,6 +115,24 @@ function createDesktopApp() {
 
   // Khởi tạo khay hệ thống (System Tray) ở góc đồng hồ Windows
   createSystemTray();
+
+  // Hỗ trợ tự động tắt sau N giây nếu được truyền tham số (ví dụ kiểm thử)
+  const durationArg = process.argv.find((arg) => arg.startsWith('--duration='));
+  const durationSeconds = durationArg
+    ? parseInt(durationArg.split('=')[1], 10)
+    : process.env.AUTO_CLOSE_SECONDS
+    ? parseInt(process.env.AUTO_CLOSE_SECONDS, 10)
+    : 0;
+
+  if (durationSeconds > 0) {
+    setTimeout(() => {
+      isQuitting = true;
+      if (staticServer) {
+        try { staticServer.close(); } catch (_) {}
+      }
+      app.quit();
+    }, durationSeconds * 1000);
+  }
 
   // Đảm bảo không bị tắt khi đóng cửa sổ
   mainWindow.on('close', (e) => {
