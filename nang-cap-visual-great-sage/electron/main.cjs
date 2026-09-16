@@ -89,6 +89,8 @@ async function createDesktopApp() {
   const { width, height } = primaryDisplay.bounds;
 
   mainWindow = new BrowserWindow({
+    title: 'Tensura Raphael - AI Assistant',
+    icon: path.join(__dirname, '..', 'public', 'icon-light-32x32.png'),
     width: width,
     height: height,
     x: 0,
@@ -98,8 +100,8 @@ async function createDesktopApp() {
     alwaysOnTop: true,
     hasShadow: false,
     resizable: false,
-    skipTaskbar: false, // User can see icon in taskbar, click, switch, or close
-    show: true, // Show immediately
+    skipTaskbar: false, // Show in taskbar so user can click to bring to front
+    show: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -107,8 +109,10 @@ async function createDesktopApp() {
     },
   });
 
-  // Keep on top of normal windows
-  mainWindow.setAlwaysOnTop(true);
+  // Force window to stay above all other applications
+  mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+  mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+  mainWindow.moveTop();
 
   mainWindow.webContents.on('console-message', (event, level, message) => {
     console.log(`[Renderer] ${message}`);
@@ -117,12 +121,22 @@ async function createDesktopApp() {
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     mainWindow.focus();
+    mainWindow.moveTop();
     console.log('[Electron] Raphael Desktop Overlay is now OPEN on your screen.');
   });
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.focus();
+    setTimeout(async () => {
+      try {
+        const image = await mainWindow.capturePage();
+        fs.writeFileSync(path.join(__dirname, 'screenshot.png'), image.toPNG());
+        console.log('[Electron] Screenshot saved to screenshot.png');
+      } catch (err) {
+        console.error('[Electron] Capture failed:', err);
+      }
+    }, 2000);
   });
 
   mainWindow.webContents.on('did-fail-load', (e, code, desc) => {
