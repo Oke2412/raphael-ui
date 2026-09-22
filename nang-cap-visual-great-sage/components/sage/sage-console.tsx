@@ -51,13 +51,8 @@ function playWakeChime() {
 
 export function SageConsole() {
   const sage = useSageSocket()
-  // Mặc định khởi chạy ngầm ở chế độ Stealth (hidden) trong môi trường Native Electron
-  const [visualMode, setVisualMode] = useState<VisualMode>(() => {
-    if (typeof window !== "undefined" && Boolean(window.electronAPI?.isElectron)) {
-      return "hidden"
-    }
-    return "overlay"
-  })
+  // Mặc định khởi chạy ngầm 100% Stealth (hidden)
+  const [visualMode, setVisualMode] = useState<VisualMode>("hidden")
   const [configOpen, setConfigOpen] = useState(false)
   const [previewDesktop, setPreviewDesktop] = useState(false)
   const [isElectron, setIsElectron] = useState(false)
@@ -73,6 +68,9 @@ export function SageConsole() {
       if (window.electronAPI?.getStartupStatus) {
         window.electronAPI.getStartupStatus().then((en) => setStartupEnabled(Boolean(en)))
       }
+    } else {
+      // Khi mở trên trình duyệt thường (Next.js dev/browser test), hiển thị Overlay
+      setVisualMode("overlay")
     }
   }, [])
 
