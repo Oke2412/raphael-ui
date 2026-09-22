@@ -360,9 +360,17 @@ export function useSageSocket(initialUrl: string = DEFAULT_WS_URL): UseSageSocke
         // A stale socket (superseded by reconnect/unmount) must be ignored.
         if (!isCurrent()) return
         wsRef.current = null
-        // Fall back to demo so the visuals stay alive.
+        // Fall back to demo so the visuals stay alive, nhưng vẫn thử kết nối lại ngầm.
         setDemo(true)
         runDemo()
+
+        // Tự động kết nối lại sau 2 giây để ngay khi Python Pipeline khởi động xong sẽ lập tức bắt tay
+        if (!reconnectRef.current) {
+          reconnectRef.current = setTimeout(() => {
+            reconnectRef.current = null
+            connectTo(target)
+          }, 2000)
+        }
       }
     },
     [applyEvent, cleanupSocket, pushLog, runDemo, stopDemo],

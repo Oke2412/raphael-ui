@@ -190,13 +190,19 @@ class PipelineManager:
             if self.current_state == "idle" and self.wake_word.enabled:
                 chunk = self.recorder.read_chunk(timeout=0.05)
                 if chunk is not None:
+                    # 1a. Kiểm tra qua OpenWakeWord (Hey Jarvis hoặc model ONNX tùy biến)
                     detected, keyword, score = self.wake_word.process_chunk(chunk)
                     if detected:
                         print(f"[WakeWord] Đã phát hiện từ khóa '{keyword}' (Score: {score:.2f})!")
                         if self.on_wake_word:
                             self.on_wake_word(keyword)
-                        # Đánh thức trợ lý chuyển sang listening
                         self.start_listening()
+                        continue
+
+                    # 1b. Nhận diện từ khóa "Raphael" / "Great Sage" trực tiếp bằng VAD + Whisper CUDA
+                    is_speaking, completed_audio = self.vad.process_chunk(chunk)
+                    if completed_audio is not None and self.current_state == "idle":
+                        threading.Thread(target=self._check_wake_word_phrase, args=(completed_audio,), daemon=True).start()
 
             # 2. Khi ở trạng thái LISTENING: VAD kiểm tra khi nào người dùng dứt câu
             elif self.current_state == "listening":
@@ -211,6 +217,34 @@ class PipelineManager:
                         threading.Thread(target=self._process_user_audio, args=(completed_audio,), daemon=True).start()
             else:
                 time.sleep(0.05)
+
+    def _check_wake_word_phrase(self, audio: np.ndarray):
+        """Nhận diện nhanh từ khóa khi idle bằng Faster-Whisper trên CUDA (~50ms)."""
+        try:
+            duration_sec = len(audio) / float(self.config["audio"]["sample_rate"])
+            if duration_sec > 4.5:
+                return
+
+            text = self.stt.transcribe(audio).strip().lower()
+            if not text:
+                return
+
+            # Các biến thể cách gọi Raphael & Great Sage bằng tiếng Việt / tiếng Anh
+            wake_phrases = [
+                "raphael", "rafael", "ra fa el", "ra-pha-el", "la fa en",
+                "great sage", "greatsage", "sage",
+                "đại hiền triết", "huyền triết", "hiền triết",
+                "hey jarvis", "jarvis"
+            ]
+
+            is_wake = any(phrase in text for phrase in wake_phrases)
+            if is_wake and self.current_state == "idle":
+                print(f"[WakeWord] Phát hiện khẩu lệnh gọi: '{text}'!")
+                if self.on_wake_word:
+                    self.on_wake_word("raphael")
+                self.start_listening()
+        except Exception as e:
+            print(f"[WakeWord] Lỗi kiểm tra từ khóa: {e}")
 
     def _process_user_audio(self, audio_data: np.ndarray):
         """Nhận audio -> STT -> gửi lên Server."""

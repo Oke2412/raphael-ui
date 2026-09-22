@@ -17,6 +17,7 @@ echo [*] Dang kich hoat moi truong Python...
 call .venv\Scripts\activate.bat
 
 echo [*] Dang khoi dong Core Audio Pipeline va WebSocket Server (ws://127.0.0.1:8765)...
-python main.py
+set PYTHONIOENCODING=utf-8
+python -u main.py
 
 pause

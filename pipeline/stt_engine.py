@@ -5,8 +5,22 @@ Tối ưu hóa VRAM bằng định dạng int8_float16 hoặc float16.
 """
 
 import os
+import sys
 import numpy as np
 from typing import Optional
+
+
+def _setup_cuda_dlls():
+    """Bổ sung thư mục DLL của PyTorch vào PATH để ctranslate2 nạp được cublas64_12.dll trên Windows."""
+    torch_lib = os.path.join(sys.prefix, "Lib", "site-packages", "torch", "lib")
+    if os.path.exists(torch_lib):
+        if torch_lib not in os.environ.get("PATH", ""):
+            os.environ["PATH"] = torch_lib + os.pathsep + os.environ.get("PATH", "")
+        if hasattr(os, "add_dll_directory"):
+            try:
+                os.add_dll_directory(torch_lib)
+            except Exception:
+                pass
 
 
 class STTEngine:
@@ -27,6 +41,7 @@ class STTEngine:
         self._init_model()
 
     def _init_model(self):
+        _setup_cuda_dlls()
         try:
             from faster_whisper import WhisperModel
             os.makedirs(self.download_root, exist_ok=True)
