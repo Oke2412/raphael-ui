@@ -1,4 +1,4 @@
-﻿// Tensura (Raphael) - Preload Script
+// Tensura (Raphael) - Preload Script
 // Safely expose Electron APIs to renderer process
 
 const { contextBridge, ipcRenderer } = require('electron');
@@ -15,6 +15,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
   },
   quitApp: () => {
     ipcRenderer.send('quit-app');
+  },
+  getStartupStatus: () => ipcRenderer.invoke('get-startup-status'),
+  toggleStartup: (enable) => ipcRenderer.invoke('toggle-startup', enable),
+  stopAssistant: () => {
+    ipcRenderer.send('stop-assistant');
   },
   isElectron: true,
 });

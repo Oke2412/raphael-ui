@@ -56,7 +56,7 @@
     "description": "Do thi tri thuc Neo4j Cosmos Graph (mạng lưới sao sau Orb Raphael)"
   },
   "system": {
-    "hotkey": "ctrl+space",
+    "hotkey": "Ctrl+Alt+Shift+\\",
     "output_mode": "voice_and_text",
     "ws_host": "127.0.0.1",
     "ws_port": 8765

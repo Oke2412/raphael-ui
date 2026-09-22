@@ -175,65 +175,65 @@ export function SageCoreCanvas({ state, levels, className, showCircleBorder = fa
       )
       smooth.current.voice += (targetVoice - smooth.current.voice) * 0.12
 
-      // target color from state
+      // target color from state with smooth graceful inertia
       const tc = hexToRgb(STATE_META[st].color)
-      smooth.current.r += (tc.r - smooth.current.r) * 0.06
-      smooth.current.g += (tc.g - smooth.current.g) * 0.06
-      smooth.current.b += (tc.b - smooth.current.b) * 0.06
+      smooth.current.r += (tc.r - smooth.current.r) * 0.025
+      smooth.current.g += (tc.g - smooth.current.g) * 0.025
+      smooth.current.b += (tc.b - smooth.current.b) * 0.025
       const { r, g, b, voice } = smooth.current
       const baseColor = rgba(r, g, b, 1)
-      const deepColor = "#8fe9c0"
+      const deepColor = rgba(Math.round(r * 0.88), Math.round(g * 0.94), b, 0.9)
 
       ctx.clearRect(0, 0, W, H)
 
       const cx = W / 2
       const cy = H / 2
       const baseR = Math.min(W, H) * 0.15
-      const alpha = 0.95
-      const breath = 1.0 + voice * 0.14 + Math.sin(time / 1400) * 0.015
+      const alpha = 0.85
+      const breath = 1.0 + voice * 0.08 + Math.sin(time / 2200) * 0.012
       const scale = baseR * breath
 
-      // --- 1. central star & rays -------------------------------------
-      const pulse = 0.85 + 0.15 * Math.sin(time / 240) + voice * 0.65
-      const starSize = baseR * 0.38 * pulse
-      drawGlow(cx, cy, starSize * 1.8, baseColor, alpha * 0.35)
-      drawGlow(cx, cy, starSize * 0.75, "#ffffff", alpha * (0.6 + voice * 0.4))
+      // --- 1. central star & rays (calm meditative breathing, no rapid neon flicker) ---
+      const pulse = 0.92 + 0.08 * Math.sin(time / 1800) + voice * 0.3
+      const starSize = baseR * 0.32 * pulse
+      drawGlow(cx, cy, starSize * 1.5, baseColor, alpha * 0.25)
+      drawGlow(cx, cy, starSize * 0.65, "#ffffff", alpha * (0.5 + voice * 0.25))
       for (let i = 0; i < 8; i++) {
-        const angle = (i * 45 * Math.PI) / 180 + time * 0.0008
-        const len = (i % 2 === 0 ? starSize * 3.2 : starSize * 1.7) * pulse
+        const angle = (i * 45 * Math.PI) / 180 + time * 0.0003
+        const len = (i % 2 === 0 ? starSize * 2.5 : starSize * 1.4) * pulse
         drawBeam(
           cx,
           cy,
           cx + Math.cos(angle) * len,
           cy + Math.sin(angle) * len,
-          3.0,
+          2.0,
           "#ffffff",
-          alpha * 0.4,
+          alpha * 0.3,
         )
       }
 
       // --- 2. radiating rays (fade smoothly before edge to prevent any clipping) ---
-      const rays = 18
+      const rays = 16
       for (let ri = 0; ri < rays; ri++) {
-        const angle = (ri / rays) * Math.PI * 2 + time * 7.0e-5
+        const angle = (ri / rays) * Math.PI * 2 + time * 4.0e-5
         const cos = Math.cos(angle)
         const sin = Math.sin(angle)
-        const drift = (time * 0.035) % 20
-        const reach = baseR * (2.4 + voice * 0.5)
-        for (let d = baseR * 0.75 + drift; d < reach; d += 20) {
+        const drift = (time * 0.02) % 24
+        const reach = baseR * (2.2 + voice * 0.3)
+        for (let d = baseR * 0.75 + drift; d < reach; d += 24) {
           const fade = Math.max(0, 1 - d / reach)
-          drawGlow(cx + cos * d, cy + sin * d, 4 + fade * 3, baseColor, alpha * fade * 0.45)
+          drawGlow(cx + cos * d, cy + sin * d, 3.5 + fade * 2, baseColor, alpha * fade * 0.3)
         }
       }
 
-      // --- 2b. circular boundary ring (matching Great Sage mod HUD from user screenshot) ---
+      // --- 2b. circular boundary ring (matching Great Sage mod HUD) ---
       if (showBorderRef.current) {
         ctx.save()
         ctx.strokeStyle = baseColor
-        ctx.lineWidth = 1.8 + voice * 1.2
-        ctx.globalAlpha = 0.85
+        ctx.lineWidth = 1.2 + voice * 0.8
+        ctx.globalAlpha = 0.65
         ctx.shadowColor = baseColor
-        ctx.shadowBlur = 14
+        ctx.shadowBlur = 8
         ctx.beginPath()
         ctx.arc(cx, cy, baseR * 2.36, 0, Math.PI * 2)
         ctx.stroke()
@@ -244,7 +244,7 @@ export function SageCoreCanvas({ state, levels, className, showCircleBorder = fa
       const beads = 54
       for (let ring = 0; ring < 3; ring++) {
         const tilt = 0.5 + ring * 0.75
-        const spin = time * (4.2e-4 - ring * 1.1e-4) * (ring % 2 === 0 ? 1 : -1)
+        const spin = time * (3.0e-4 - ring * 0.8e-4) * (ring % 2 === 0 ? 1 : -1)
         const ringRadius = baseR * (1.02 + ring * 0.16) * breath
         const c = ring === 1 ? baseColor : deepColor
         for (let i = 0; i < beads; i++) {
@@ -255,9 +255,9 @@ export function SageCoreCanvas({ state, levels, className, showCircleBorder = fa
           drawGlow(
             cx + pt[0] * ringRadius,
             cy + pt[1] * ringRadius,
-            5 * weight,
+            4 * weight,
             c,
-            alpha * 0.75 * weight,
+            alpha * 0.6 * weight,
           )
         }
       }

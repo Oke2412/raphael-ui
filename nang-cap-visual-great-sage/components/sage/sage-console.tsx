@@ -11,6 +11,9 @@ import {
   Monitor,
   Layers,
   X,
+  Activity,
+  EyeOff,
+  Power,
 } from "lucide-react"
 import { STATE_META } from "@/lib/sage-protocol"
 import { useSageSocket } from "@/lib/use-sage-socket"
@@ -25,7 +28,7 @@ import { ConversationPanel } from "./conversation-panel"
 import { ControlPanel } from "./control-panel"
 import { ConfigDialog } from "./config-dialog"
 
-export type VisualMode = "overlay" | "docked" | "sidedeck"
+export type VisualMode = "overlay" | "docked" | "sidedeck" | "hidden"
 
 function playWakeChime() {
   if (typeof window === "undefined") return
@@ -48,11 +51,17 @@ function playWakeChime() {
 
 export function SageConsole() {
   const sage = useSageSocket()
-  // Mặc định khởi chạy ngầm ở chế độ Mini Orb góc màn hình
-  const [visualMode, setVisualMode] = useState<VisualMode>("docked")
+  // Mặc định khởi chạy ngầm ở chế độ Stealth (hidden) trong môi trường Native Electron
+  const [visualMode, setVisualMode] = useState<VisualMode>(() => {
+    if (typeof window !== "undefined" && Boolean(window.electronAPI?.isElectron)) {
+      return "hidden"
+    }
+    return "overlay"
+  })
   const [configOpen, setConfigOpen] = useState(false)
   const [previewDesktop, setPreviewDesktop] = useState(false)
   const [isElectron, setIsElectron] = useState(false)
+  const [startupEnabled, setStartupEnabled] = useState(false)
   const accent = STATE_META[sage.state].color
 
   useEffect(() => {
@@ -61,8 +70,18 @@ export function SageConsole() {
       window.electronAPI?.onSetVisualMode((mode) => {
         setVisualMode(mode)
       })
+      if (window.electronAPI?.getStartupStatus) {
+        window.electronAPI.getStartupStatus().then((en) => setStartupEnabled(Boolean(en)))
+      }
     }
   }, [])
+
+  const handleToggleStartup = async () => {
+    if (typeof window !== "undefined" && window.electronAPI?.toggleStartup) {
+      const res = await window.electronAPI.toggleStartup(!startupEnabled)
+      setStartupEnabled(res)
+    }
+  }
 
   const changeVisualMode = (mode: VisualMode) => {
     setVisualMode(mode)
@@ -73,25 +92,25 @@ export function SageConsole() {
 
   // Tự động thức dậy mở Overlay toàn màn hình khi wake word được phát hiện hoặc khi micro bắt đầu lắng nghe
   useEffect(() => {
-    if (sage.wakeCount > 0 && visualMode === "docked") {
+    if (sage.wakeCount > 0 && visualMode !== "overlay") {
       playWakeChime()
       changeVisualMode("overlay")
     }
-  }, [sage.wakeCount, visualMode])
+  }, [sage.wakeCount])
 
   useEffect(() => {
-    if (sage.state === "listening" && visualMode === "docked") {
+    if (sage.state === "listening" && visualMode === "hidden") {
       playWakeChime()
       changeVisualMode("overlay")
     }
-  }, [sage.state, visualMode])
+  }, [sage.state])
 
-  // Lắng nghe phím Escape để nhanh chóng thu nhỏ về docked mode (Mini Orb)
+  // Lắng nghe phím Escape để nhanh chóng ẩn về chế độ chạy ngầm
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (visualMode !== "docked") {
-          changeVisualMode("docked")
+        if (visualMode !== "hidden") {
+          changeVisualMode("hidden")
         }
       }
     }
@@ -127,6 +146,10 @@ export function SageConsole() {
   // Lấy câu nói/stream mới nhất hiển thị phụ đề nổi
   const latestAssistantEntry = [...sage.transcript].reverse().find((t) => t.role === "assistant")
   const latestUserEntry = [...sage.transcript].reverse().find((t) => t.role === "user")
+
+  if (visualMode === "hidden") {
+    return <div className="sage-root pointer-events-none opacity-0 select-none" />
+  }
 
   return (
     <div className="sage-root relative min-h-dvh overflow-hidden select-none bg-transparent">
@@ -181,7 +204,7 @@ export function SageConsole() {
             className="pointer-events-none absolute inset-0 h-full w-full opacity-75"
           />
 
-          {/* Góc trên bên phải: 3 nút chuyển chế độ siêu gọn & tinh tế */}
+          {/* Góc trên bên phải: Các nút chuyển chế độ & Nút Ẩn ngầm */}
           <header className="relative z-10 flex items-center justify-end p-2 pointer-events-auto">
             <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 backdrop-blur-md transition-opacity hover:opacity-100 opacity-60">
               <button
@@ -191,21 +214,21 @@ export function SageConsole() {
                     ? "bg-white/20 text-white"
                     : "text-white/60 hover:bg-white/10 hover:text-white"
                 }`}
-                title="Chế độ 1: Toàn màn hình (Overlay)"
+                title="Toàn màn hình (Overlay)"
               >
                 <Maximize2 className="size-3.5" />
               </button>
               <button
                 onClick={() => changeVisualMode("docked")}
                 className="grid size-7 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition-colors"
-                title="Chế độ 2: Thu nhỏ về góc (Mini Orb)"
+                title="Thu nhỏ về góc (Mini Orb)"
               >
                 <Minimize2 className="size-3.5" />
               </button>
               <button
                 onClick={() => changeVisualMode("sidedeck")}
                 className="grid size-7 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition-colors"
-                title="Chế độ 3: Gemini Sidedeck Panel"
+                title="Thanh bên (Sidedeck Panel)"
               >
                 <PanelRight className="size-3.5" />
               </button>
@@ -215,6 +238,13 @@ export function SageConsole() {
                 title="Cài đặt kết nối"
               >
                 <Settings className="size-3" />
+              </button>
+              <button
+                onClick={() => changeVisualMode("hidden")}
+                className="grid size-7 place-items-center rounded-full text-white/40 hover:bg-rose-500/20 hover:text-rose-300 transition-colors ml-1 border-l border-white/10 pl-1"
+                title="Ẩn hoàn toàn (Chạy ngầm - Phím tắt: Escape hoặc Ctrl+Alt+Shift+\)"
+              >
+                <X className="size-3.5" />
               </button>
             </div>
           </header>
@@ -323,11 +353,21 @@ export function SageConsole() {
               >
                 <PanelRight className="size-3" />
               </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  changeVisualMode("hidden")
+                }}
+                className="grid size-6 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-rose-500/30 hover:text-rose-300"
+                title="Ẩn hoàn toàn (Chạy ngầm)"
+              >
+                <X className="size-3" />
+              </button>
             </div>
           </div>
 
-          {/* Nhãn trạng thái trực quan bên dưới Mini Orb: Người dùng luôn biết micro và wakeword có hoạt động hay không */}
-          <div className="mt-1 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/85 px-2.5 py-0.5 text-[9px] font-mono text-white/80 shadow-md backdrop-blur-md">
+          {/* Nhãn trạng thái trực quan bên dưới Mini Orb */}
+          <div className="mt-1 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/85 px-2.5 py-0.5 text-[9px] font-mono text-white/80 shadow-md">
             <span
               className={`size-1.5 rounded-full ${
                 sage.status === "connected"
@@ -362,17 +402,17 @@ export function SageConsole() {
             />
           )}
 
-          {/* Sidedeck Panel bên phải */}
-          <aside className="relative pointer-events-auto flex h-dvh w-full md:w-[440px] flex-col border-l border-white/10 bg-[#060810]/85 backdrop-blur-2xl shadow-2xl transition-all animate-in slide-in-from-right">
+          {/* Sidedeck Panel bên phải (Thiết kế Matte Architectural Minimalist, bo góc nhẹ 8px thanh thoát) */}
+          <aside className="relative pointer-events-auto flex h-dvh w-full md:w-[440px] flex-col rounded-l-lg border-l border-zinc-800/80 bg-[#090a10] shadow-2xl transition-all animate-in slide-in-from-right">
             {/* Header Sidedeck với Quả cầu Raphael Orb ngự trị ngay phía trên */}
-            <header className="flex items-center justify-between border-b border-white/10 px-4 py-3 bg-white/5">
+            <header className="flex items-center justify-between border-b border-zinc-800/70 px-4 py-3 bg-zinc-950/40">
               <div className="flex items-center gap-3">
                 <div
-                  className="relative size-12 cursor-pointer rounded-full border-2 transition-transform hover:scale-105"
+                  className="relative size-12 cursor-pointer rounded-full border border-zinc-700/80 transition-transform hover:scale-105"
                   style={{
-                    borderColor: `${accent}ee`,
+                    borderColor: `${accent}bb`,
                     background: `radial-gradient(circle at center, rgba(14, 20, 36, 0.8) 0%, rgba(4, 6, 12, 0.9) 100%)`,
-                    boxShadow: `0 0 16px ${accent}55, inset 0 0 10px ${accent}22`,
+                    boxShadow: `0 0 12px ${accent}33`,
                   }}
                   onClick={() => changeVisualMode("overlay")}
                   title="Nhấp để bung toàn màn hình"
@@ -385,7 +425,7 @@ export function SageConsole() {
                   />
                 </div>
                 <div>
-                  <h2 className="text-xs font-semibold tracking-[0.2em] text-[color:var(--sage-text)]">
+                  <h2 className="text-xs font-semibold tracking-[0.2em] text-slate-200">
                     RAPHAEL SIDEDECK
                   </h2>
                   <div className="flex items-center gap-1.5 mt-0.5">
@@ -397,35 +437,89 @@ export function SageConsole() {
               <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => changeVisualMode("overlay")}
-                  className="grid size-8 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+                  className="grid size-8 place-items-center rounded-md border border-zinc-800 text-slate-400 hover:bg-zinc-800 hover:text-white transition-colors"
                   title="Bung toàn màn hình"
                 >
                   <Maximize2 className="size-3.5" />
                 </button>
                 <button
                   onClick={() => changeVisualMode("docked")}
-                  className="grid size-8 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+                  className="grid size-8 place-items-center rounded-md border border-zinc-800 text-slate-400 hover:bg-zinc-800 hover:text-white transition-colors"
                   title="Thu nhỏ xuống góc (Chỉ còn quả cầu)"
                 >
                   <Minimize2 className="size-3.5" />
                 </button>
                 <button
-                  onClick={() => changeVisualMode("docked")}
-                  className="grid size-8 place-items-center rounded-lg border border-white/10 text-white/70 hover:bg-white/10 hover:text-white transition-colors"
-                  title="Đóng panel"
+                  onClick={() => changeVisualMode("hidden")}
+                  className="grid size-8 place-items-center rounded-md border border-zinc-800 text-slate-400 hover:bg-rose-500/20 hover:text-rose-300 transition-colors"
+                  title="Ẩn hoàn toàn về chạy ngầm (Escape hoặc Ctrl+Alt+Shift+\)"
                 >
                   <X className="size-3.5" />
                 </button>
               </div>
             </header>
 
-            {/* Nội dung Sidedeck: Lịch sử hội thoại & Khối Neo4j Graph */}
+            {/* Nội dung Sidedeck: Lịch sử hội thoại, Khối Neo4j Graph & Cấu hình Stealth */}
             <div className="flex min-h-0 flex-1 flex-col gap-3 p-4 overflow-y-auto">
               <GraphQueryNote query={sage.graphQuery} />
 
+              {/* Thẻ Cấu hình Khởi động & Hệ thống Chạy Ngầm (Minimalist Matte Style) */}
+              <div className="rounded-md border border-zinc-800/80 bg-[#0d0f17] p-3 text-slate-300">
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <span className="text-xs font-medium text-slate-200">Khởi động cùng Windows</span>
+                    <span className="text-[10px] text-slate-400">Túc trực ngầm khi mở máy tính</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleToggleStartup}
+                    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 ${
+                      startupEnabled ? "bg-sky-500" : "bg-zinc-700"
+                    }`}
+                    title="Bật/Tắt tự động chạy ngầm khi khởi động Windows"
+                  >
+                    <span
+                      className={`inline-block size-3.5 transform rounded-full bg-white shadow transition-transform duration-200 ${
+                        startupEnabled ? "translate-x-4" : "translate-x-1"
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                {/* Cụm Micro-Actions Hệ thống */}
+                <div className="mt-3 flex items-center justify-between border-t border-zinc-800/60 pt-2 text-[10px] font-mono text-slate-400">
+                  <div className="flex items-center gap-1.5" title="Cổng kết nối WebSocket Audio Pipeline">
+                    <Activity className="size-3 text-sky-400" />
+                    <span>ws://127.0.0.1:8765</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => changeVisualMode("hidden")}
+                      className="flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-zinc-800 hover:text-slate-200 transition-colors"
+                      title="Ẩn về chế độ chạy ngầm (Escape hoặc Ctrl+Alt+Shift+\)"
+                    >
+                      <EyeOff className="size-3" />
+                      <span>Ẩn ngầm</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (typeof window !== "undefined" && window.electronAPI?.stopAssistant) {
+                          window.electronAPI.stopAssistant()
+                        }
+                      }}
+                      className="flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-rose-950/40 hover:text-rose-300 transition-colors"
+                      title="Dừng toàn bộ tiến trình Raphael"
+                    >
+                      <Power className="size-3" />
+                      <span>Dừng</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <ConversationPanel
                 transcript={sage.transcript}
-                className="flex min-h-[300px] flex-1 flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40"
+                className="flex min-h-[300px] flex-1 flex-col overflow-hidden rounded-md border border-zinc-800/80 bg-black/60"
               />
             </div>
 

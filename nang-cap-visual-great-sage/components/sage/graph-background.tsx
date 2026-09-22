@@ -161,10 +161,10 @@ export function GraphBackground({ pulse, accent, className }: Props) {
         const nb = nodes[e.b]
         const dist = Math.hypot(na.x - nb.x, na.y - nb.y)
         if (dist > Math.max(W, H) * 0.28) continue
-        const base = 0.05
+        const base = 0.025
         const litA = Math.max(na.glow, nb.glow)
-        ctx.strokeStyle = `rgba(${r},${g},${b},${base + litA * 0.35 + e.charge * 0.4})`
-        ctx.lineWidth = 0.6 + e.charge * 1.4
+        ctx.strokeStyle = `rgba(${r},${g},${b},${base + litA * 0.45 + e.charge * 0.5})`
+        ctx.lineWidth = 0.5 + e.charge * 1.5
         ctx.beginPath()
         ctx.moveTo(na.x, na.y)
         ctx.lineTo(nb.x, nb.y)
@@ -177,12 +177,12 @@ export function GraphBackground({ pulse, accent, className }: Props) {
           const py = na.y + (nb.y - na.y) * p
           ctx.save()
           ctx.globalCompositeOperation = "lighter"
-          const grad = ctx.createRadialGradient(px, py, 0, px, py, 8)
+          const grad = ctx.createRadialGradient(px, py, 0, px, py, 10)
           grad.addColorStop(0, `rgba(${r},${g},${b},${e.charge})`)
           grad.addColorStop(1, "rgba(0,0,0,0)")
           ctx.fillStyle = grad
           ctx.beginPath()
-          ctx.arc(px, py, 8, 0, Math.PI * 2)
+          ctx.arc(px, py, 10, 0, Math.PI * 2)
           ctx.fill()
           ctx.restore()
           e.charge *= 0.955
@@ -191,23 +191,23 @@ export function GraphBackground({ pulse, accent, className }: Props) {
         }
       }
 
-      // nodes
+      // nodes (dormant cosmic stars that ignite on Neo4j query)
       for (const n of nodes) {
-        const twinkle = 0.25 + 0.15 * Math.sin(t * 1.5 + n.seed)
-        const a = twinkle + n.glow * 0.75
-        const size = 1.4 + n.glow * 3.5
+        const twinkle = 0.12 + 0.08 * Math.sin(t * 1.2 + n.seed)
+        const a = twinkle + n.glow * 0.85
+        const size = 1.2 + n.glow * 4.0
         ctx.save()
         ctx.globalCompositeOperation = "lighter"
-        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, size * 3)
+        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, size * 2.5)
         grad.addColorStop(0, `rgba(${r},${g},${b},${a})`)
         grad.addColorStop(1, "rgba(0,0,0,0)")
         ctx.fillStyle = grad
         ctx.beginPath()
-        ctx.arc(n.x, n.y, size * 3, 0, Math.PI * 2)
+        ctx.arc(n.x, n.y, size * 2.5, 0, Math.PI * 2)
         ctx.fill()
-        ctx.fillStyle = `rgba(255,255,255,${Math.min(1, a + 0.15)})`
+        ctx.fillStyle = `rgba(255,255,255,${Math.min(1, a + 0.1)})`
         ctx.beginPath()
-        ctx.arc(n.x, n.y, size * 0.6, 0, Math.PI * 2)
+        ctx.arc(n.x, n.y, size * 0.5, 0, Math.PI * 2)
         ctx.fill()
         ctx.restore()
       }

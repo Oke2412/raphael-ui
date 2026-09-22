@@ -115,31 +115,31 @@ export const STATE_META: Record<
   idle: {
     label: "Idle",
     jp: "待機",
-    color: "#dffcec",
-    hint: "Great Sage đang chờ lệnh",
+    color: "#e8f1f5",
+    hint: "Raphael đang chờ lệnh ngầm",
   },
   listening: {
     label: "Listening",
     jp: "傾聴",
-    color: "#8fe9c0",
+    color: "#9ee0f5",
     hint: "Đang lắng nghe micro",
   },
   transcribing: {
     label: "Transcribing",
     jp: "解析",
-    color: "#7fd0ff",
-    hint: "Đang chuyển giọng nói thành văn bản",
+    color: "#a5d8ea",
+    hint: "Đang phân tích khẩu lệnh",
   },
   thinking: {
     label: "Thinking",
     jp: "思考",
-    color: "#b070ff",
+    color: "#b8c5e8",
     hint: "Truy xuất tri thức & suy luận",
   },
   speaking: {
     label: "Speaking",
     jp: "解答",
-    color: "#ffe9a8",
+    color: "#d8e4f8",
     hint: "Raphael đang phúc đáp",
   },
 }

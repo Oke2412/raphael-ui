@@ -239,12 +239,45 @@ class PipelineManager:
 
             is_wake = any(phrase in text for phrase in wake_phrases)
             if is_wake and self.current_state == "idle":
-                print(f"[WakeWord] Phát hiện khẩu lệnh gọi: '{text}'!")
+                # Kiểm tra xác thực vân giọng chính chủ nếu có file models/voiceprint.npy
+                if not self._verify_speaker_voiceprint(audio):
+                    print(f"[Voiceprint] Khẩu lệnh '{text}' không trùng khớp vân giọng chính chủ. Bỏ qua.")
+                    return
+
+                print(f"[WakeWord] Phát hiện khẩu lệnh gọi chính chủ: '{text}'!")
                 if self.on_wake_word:
                     self.on_wake_word("raphael")
                 self.start_listening()
         except Exception as e:
             print(f"[WakeWord] Lỗi kiểm tra từ khóa: {e}")
+
+    def _verify_speaker_voiceprint(self, audio: np.ndarray) -> bool:
+        """Xác thực vân giọng chính chủ (Voice Biometrics) nếu đã tạo models/voiceprint.npy."""
+        voiceprint_path = os.path.join("models", "voiceprint.npy")
+        if not os.path.exists(voiceprint_path):
+            return True  # Chưa tạo file mẫu -> Cho phép mọi giọng gọi dậy
+
+        try:
+            enrolled_emb = np.load(voiceprint_path)
+            fft_data = np.abs(np.fft.rfft(audio[:min(len(audio), 16000)]))
+            target_len = len(enrolled_emb)
+            if len(fft_data) < target_len:
+                fft_data = np.pad(fft_data, (0, target_len - len(fft_data)))
+            else:
+                fft_data = fft_data[:target_len]
+
+            norm_a = np.linalg.norm(fft_data)
+            norm_b = np.linalg.norm(enrolled_emb)
+            if norm_a == 0 or norm_b == 0:
+                return True
+
+            similarity = float(np.dot(fft_data, enrolled_emb) / (norm_a * norm_b))
+            threshold = float(self.config.get("wake_word", {}).get("speaker_similarity_threshold", 0.65))
+            print(f"[Voiceprint] Độ tương đồng âm sắc: {similarity:.3f} (Ngưỡng yêu cầu: {threshold})")
+            return similarity >= threshold
+        except Exception as e:
+            print(f"[Voiceprint] Lỗi so khớp vân giọng: {e}")
+            return True
 
     def _process_user_audio(self, audio_data: np.ndarray):
         """Nhận audio -> STT -> gửi lên Server."""

@@ -1,8 +1,13 @@
-﻿export interface IElectronAPI {
-  setVisualMode: (mode: 'overlay' | 'docked' | 'sidedeck') => void;
-  onSetVisualMode: (callback: (mode: 'overlay' | 'docked' | 'sidedeck') => void) => void;
+export type VisualMode = 'overlay' | 'docked' | 'sidedeck' | 'hidden';
+
+export interface IElectronAPI {
+  setVisualMode: (mode: VisualMode) => void;
+  onSetVisualMode: (callback: (mode: VisualMode) => void) => void;
   setIgnoreMouseEvents: (ignore: boolean, options?: { forward: boolean }) => void;
   quitApp: () => void;
+  getStartupStatus: () => Promise<boolean>;
+  toggleStartup: (enable: boolean) => Promise<boolean>;
+  stopAssistant: () => void;
   isElectron?: boolean;
 }
 

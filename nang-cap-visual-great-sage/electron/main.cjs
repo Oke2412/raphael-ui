@@ -1,16 +1,18 @@
 // Tensura (Raphael) - Native Windows Desktop Overlay
 // True Transparency, Frameless, Always-on-top, System Tray & Taskbar App
+// Architectural Minimalist & Stealth Background Daemon
 
-const { app, BrowserWindow, screen, Tray, Menu, globalShortcut, ipcMain } = require('electron');
+const { app, BrowserWindow, screen, Tray, Menu, globalShortcut, ipcMain, Notification } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
+const { exec, execSync } = require('child_process');
 
 let mainWindow = null;
 let tray = null;
 let staticServer = null;
 let isQuitting = false;
-let currentMode = 'overlay';
+let currentMode = 'hidden';
 
 // Single-instance lock
 const gotTheLock = app.requestSingleInstanceLock();
@@ -20,8 +22,10 @@ if (!gotTheLock) {
   app.on('second-instance', () => {
     if (mainWindow) {
       if (mainWindow.isMinimized()) mainWindow.restore();
-      mainWindow.show();
-      mainWindow.focus();
+      applyWindowMode('overlay');
+      if (mainWindow.webContents) {
+        mainWindow.webContents.send('set-mode-from-main', 'overlay');
+      }
     }
   });
 
@@ -85,36 +89,46 @@ function startStaticServer(outDir) {
   });
 }
 
+function getStartupShortcutPath() {
+  const startupFolder = path.join(
+    process.env.APPDATA || '',
+    'Microsoft',
+    'Windows',
+    'Start Menu',
+    'Programs',
+    'Startup'
+  );
+  return path.join(startupFolder, 'TensuraRaphael.lnk');
+}
+
 async function createDesktopApp() {
   const primaryDisplay = screen.getPrimaryDisplay();
   const { workArea, bounds } = primaryDisplay;
 
-  // Mặc định khởi chạy ngầm ở góc màn hình (Docked Mini Orb) để không choán màn hình làm việc
-  const startMode = process.argv.includes('--overlay') ? 'overlay' : 'docked';
+  // Mặc định khởi chạy ngầm hoàn toàn (hidden), trừ khi có cờ gọi hiển thị
+  const startMode = process.argv.includes('--overlay')
+    ? 'overlay'
+    : process.argv.includes('--docked')
+    ? 'docked'
+    : process.argv.includes('--sidedeck')
+    ? 'sidedeck'
+    : 'hidden';
   currentMode = startMode;
-
-  const orbSize = 190;
-  const marginX = 24;
-  const marginY = 24;
-  const startWidth = startMode === 'docked' ? orbSize : bounds.width;
-  const startHeight = startMode === 'docked' ? orbSize : bounds.height;
-  const startX = startMode === 'docked' ? Math.round(workArea.x + workArea.width - orbSize - marginX) : bounds.x;
-  const startY = startMode === 'docked' ? Math.round(workArea.y + workArea.height - orbSize - marginY) : bounds.y;
 
   mainWindow = new BrowserWindow({
     title: 'Tensura Raphael - AI Assistant',
     icon: path.join(__dirname, '..', 'public', 'icon-light-32x32.png'),
-    width: startWidth,
-    height: startHeight,
-    x: startX,
-    y: startY,
+    width: bounds.width,
+    height: bounds.height,
+    x: bounds.x,
+    y: bounds.y,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
     hasShadow: false,
     resizable: true,
-    skipTaskbar: false, // Show in taskbar so user can click to bring to front
-    show: true,
+    skipTaskbar: startMode === 'hidden',
+    show: startMode !== 'hidden',
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
       nodeIntegration: false,
@@ -123,69 +137,91 @@ async function createDesktopApp() {
     },
   });
 
-  // Force window to stay above all other applications
   mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
   mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
-  mainWindow.moveTop();
 
   mainWindow.webContents.on('console-message', (event, level, message) => {
     console.log(`[Renderer] ${message}`);
   });
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
-    mainWindow.focus();
-    mainWindow.moveTop();
-    console.log('[Electron] Raphael Desktop Overlay is now OPEN on your screen.');
+    if (currentMode !== 'hidden') {
+      applyWindowMode(currentMode);
+      mainWindow.show();
+      mainWindow.focus();
+      mainWindow.moveTop();
+      console.log(`[Electron] Raphael opened in mode: ${currentMode}`);
+    } else {
+      mainWindow.hide();
+      mainWindow.setSkipTaskbar(true);
+      console.log('[Electron] Raphael is running in STEALTH background mode. Listening silently.');
+
+      // Thông báo Windows Toast khi app khởi động ngầm thành công
+      if (Notification.isSupported()) {
+        try {
+          new Notification({
+            title: 'Tensura Raphael đã sẵn sàng',
+            body: 'Raphael đang túc trực ngầm. Nói "Raphael" hoặc bấm Ctrl+Alt+Shift+\\ để đánh thức.',
+            icon: path.join(__dirname, '..', 'public', 'icon-light-32x32.png'),
+          }).show();
+        } catch (_) {}
+      }
+    }
   });
 
   mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.show();
-    mainWindow.focus();
-    setTimeout(async () => {
-      try {
-        const image = await mainWindow.capturePage();
-        fs.writeFileSync(path.join(__dirname, 'screenshot.png'), image.toPNG());
-        console.log('[Electron] Screenshot saved to screenshot.png');
-      } catch (err) {
-        console.error('[Electron] Capture failed:', err);
-      }
-    }, 2000);
+    if (currentMode !== 'hidden') {
+      mainWindow.show();
+      mainWindow.focus();
+    }
   });
 
   mainWindow.webContents.on('did-fail-load', (e, code, desc) => {
     console.error('[Electron] Failed to load UI:', code, desc);
   });
 
-  // Lắng nghe phím Escape bên trong cửa sổ: thu nhỏ về docked mode thay vì thoát app
+  // Lắng nghe phím Escape bên trong cửa sổ: ẩn hoàn toàn về chế độ chạy ngầm
   mainWindow.webContents.on('before-input-event', (event, input) => {
     if (input.key === 'Escape' && input.type === 'keyDown') {
-      if (currentMode !== 'docked') {
-        event.preventDefault();
-        applyWindowMode('docked');
-        mainWindow.webContents.send('set-mode-from-main', 'docked');
-      }
+      event.preventDefault();
+      applyWindowMode('hidden');
+      mainWindow.webContents.send('set-mode-from-main', 'hidden');
     }
   });
 
-  // Phím tắt toàn cầu Alt+R: toggle giữa Overlay toàn màn hình và Docked Mini Orb
+  // Đọc phím tắt từ cấu hình settings.json (Mặc định: 2 tay Ctrl+Alt+Shift+\ trên bàn phím 68 keys)
+  let hotkey = 'Ctrl+Alt+Shift+\\';
   try {
-    globalShortcut.register('Alt+R', () => {
-      console.log('[Electron] Hotkey Alt+R triggered');
+    const configPath = path.join(__dirname, '..', '..', 'config', 'settings.json');
+    if (fs.existsSync(configPath)) {
+      const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+      if (cfg.system && cfg.system.hotkey) {
+        hotkey = cfg.system.hotkey;
+      }
+    }
+  } catch (_) {}
+
+  // Đăng ký phím tắt toàn cầu (Toggle giữa Hiện và Ẩn ngầm)
+  try {
+    // Chuẩn hóa tên phím cho Electron globalShortcut
+    const electronHotkey = hotkey.replace(/ctrl/i, 'CommandOrControl').replace(/\\/g, '\\');
+    globalShortcut.register(electronHotkey, () => {
+      console.log(`[Electron] Hotkey ${hotkey} triggered`);
       if (!mainWindow || mainWindow.isDestroyed()) return;
-      if (currentMode === 'docked') {
+      if (currentMode === 'hidden' || !mainWindow.isVisible()) {
         applyWindowMode('overlay');
         mainWindow.webContents.send('set-mode-from-main', 'overlay');
       } else {
-        applyWindowMode('docked');
-        mainWindow.webContents.send('set-mode-from-main', 'docked');
+        applyWindowMode('hidden');
+        mainWindow.webContents.send('set-mode-from-main', 'hidden');
       }
     });
+    console.log(`[Electron] Registered global hotkey: ${hotkey}`);
   } catch (err) {
-    console.warn('[Electron] Could not register Alt+R shortcut:', err);
+    console.warn('[Electron] Could not register global shortcut:', err);
   }
 
-  // Nạp giao diện tĩnh đã xuất qua server nội bộ hoặc localhost
+  // Khởi động server nội bộ phục vụ bản build tĩnh
   const outDir = path.join(__dirname, '..', 'out');
   if (fs.existsSync(path.join(outDir, 'index.html'))) {
     const { server, port } = await startStaticServer(outDir);
@@ -196,7 +232,7 @@ async function createDesktopApp() {
     mainWindow.loadURL('http://localhost:3000');
   }
 
-  // Khởi tạo khay hệ thống (System Tray) ở góc đồng hồ Windows
+  // Khởi tạo khay hệ thống (System Tray)
   createSystemTray();
 
   mainWindow.on('closed', () => {
@@ -221,9 +257,16 @@ function applyWindowMode(mode) {
   const primaryDisplay = screen.getPrimaryDisplay();
   const { workArea, bounds } = primaryDisplay;
 
+  if (mode === 'hidden') {
+    mainWindow.hide();
+    mainWindow.setSkipTaskbar(true);
+    console.log('[Electron] Raphael switched to HIDDEN (Stealth mode)');
+    return;
+  }
+
+  mainWindow.setSkipTaskbar(false);
+
   if (mode === 'docked') {
-    // Docked Mini Orb: window is 190x190 px at bottom right corner!
-    // Leaves 98% of the screen completely free for desktop apps/VS Code!
     const orbSize = 190;
     const marginX = 24;
     const marginY = 24;
@@ -233,9 +276,9 @@ function applyWindowMode(mode) {
     mainWindow.setBounds({ x, y, width: orbSize, height: orbSize });
     mainWindow.setIgnoreMouseEvents(false);
     mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+    mainWindow.show();
+    mainWindow.focus();
   } else if (mode === 'sidedeck') {
-    // Sidedeck panel: right-docked (440px wide, 100% height)
-    // Leaves entire left side completely free for VS Code / IDE!
     const sideWidth = 440;
     const x = Math.round(workArea.x + workArea.width - sideWidth);
     const y = Math.round(workArea.y);
@@ -244,8 +287,9 @@ function applyWindowMode(mode) {
     mainWindow.setBounds({ x, y, width: sideWidth, height: h });
     mainWindow.setIgnoreMouseEvents(false);
     mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+    mainWindow.show();
+    mainWindow.focus();
   } else if (mode === 'overlay') {
-    // Fullscreen transparent overlay
     mainWindow.setResizable(true);
     mainWindow.setBounds({
       x: bounds.x,
@@ -254,9 +298,13 @@ function applyWindowMode(mode) {
       height: bounds.height,
     });
     mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.moveTop();
   }
 }
 
+// IPC Handlers
 ipcMain.on('set-visual-mode', (event, mode) => {
   console.log(`[Electron] Switching window bounds to mode: ${mode}`);
   applyWindowMode(mode);
@@ -273,69 +321,122 @@ ipcMain.on('quit-app', () => {
   app.quit();
 });
 
+ipcMain.on('stop-assistant', () => {
+  console.log('[Electron] Requesting full stop of Raphael...');
+  const rootDir = path.join(__dirname, '..', '..');
+  const stopBat = path.join(rootDir, 'stop_assistant.bat');
+  if (fs.existsSync(stopBat)) {
+    exec(`cmd /c "${stopBat}"`, () => {
+      app.quit();
+    });
+  } else {
+    app.quit();
+  }
+});
+
+ipcMain.handle('get-startup-status', () => {
+  const lnk = getStartupShortcutPath();
+  return fs.existsSync(lnk);
+});
+
+ipcMain.handle('toggle-startup', (event, enable) => {
+  const lnk = getStartupShortcutPath();
+  const rootDir = path.join(__dirname, '..', '..');
+  const vbsPath = path.join(rootDir, 'run_silent.vbs');
+
+  try {
+    if (enable) {
+      const psCommand = `$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('${lnk.replace(/'/g, "''")}'); $s.TargetPath = 'wscript.exe'; $s.Arguments = '\`"${vbsPath.replace(/'/g, "''")}\`"'; $s.WorkingDirectory = '\`"${rootDir.replace(/'/g, "''")}\`"'; $s.Description = 'Tensura Raphael AI Assistant'; $s.Save();`;
+      execSync(`powershell -NoProfile -Command "${psCommand}"`);
+      return fs.existsSync(lnk);
+    } else {
+      if (fs.existsSync(lnk)) {
+        fs.unlinkSync(lnk);
+      }
+      return false;
+    }
+  } catch (err) {
+    console.error('[Startup] Failed to toggle startup:', err);
+    return fs.existsSync(lnk);
+  }
+});
+
 function createSystemTray() {
   const iconPath = path.join(__dirname, '..', 'public', 'icon-light-32x32.png');
   try {
     tray = new Tray(iconPath);
-    tray.setToolTip('Tensura Great Sage (Raphael) - AI Assistant (Alt+R)');
+    tray.setToolTip('Tensura Raphael (Nói "Raphael" hoặc Ctrl+Alt+Shift+\\)');
 
-    const contextMenu = Menu.buildFromTemplate([
-      {
-        label: '🔮 Toàn màn hình (Overlay)',
-        click: () => {
-          if (mainWindow) {
-            mainWindow.show();
-            mainWindow.focus();
-            applyWindowMode('overlay');
-            mainWindow.webContents.send('set-mode-from-main', 'overlay');
-          }
+    const updateTrayMenu = () => {
+      const contextMenu = Menu.buildFromTemplate([
+        {
+          label: '🔮 Đánh thức Raphael (Mở Overlay)',
+          click: () => {
+            if (mainWindow) {
+              applyWindowMode('overlay');
+              mainWindow.webContents.send('set-mode-from-main', 'overlay');
+            }
+          },
         },
-      },
-      {
-        label: '🔵 Thu nhỏ góc (Mini Orb)',
-        click: () => {
-          if (mainWindow) {
-            mainWindow.show();
-            applyWindowMode('docked');
-            mainWindow.webContents.send('set-mode-from-main', 'docked');
-          }
+        {
+          label: '👁️ Ẩn hoàn toàn (Chạy ngầm)',
+          click: () => {
+            if (mainWindow) {
+              applyWindowMode('hidden');
+              mainWindow.webContents.send('set-mode-from-main', 'hidden');
+            }
+          },
         },
-      },
-      {
-        label: '📱 Thanh bên (Sidedeck Panel)',
-        click: () => {
-          if (mainWindow) {
-            mainWindow.show();
-            applyWindowMode('sidedeck');
-            mainWindow.webContents.send('set-mode-from-main', 'sidedeck');
-          }
+        { type: 'separator' },
+        {
+          label: '🔵 Chế độ góc (Mini Orb)',
+          click: () => {
+            if (mainWindow) {
+              applyWindowMode('docked');
+              mainWindow.webContents.send('set-mode-from-main', 'docked');
+            }
+          },
         },
-      },
-      { type: 'separator' },
-      {
-        label: '👁️ Ẩn cửa sổ',
-        click: () => {
-          if (mainWindow) mainWindow.hide();
+        {
+          label: '📱 Thanh bên (Sidedeck Panel)',
+          click: () => {
+            if (mainWindow) {
+              applyWindowMode('sidedeck');
+              mainWindow.webContents.send('set-mode-from-main', 'sidedeck');
+            }
+          },
         },
-      },
-      {
-        label: '❌ Thoát ứng dụng',
-        click: () => {
-          isQuitting = true;
-          app.quit();
+        { type: 'separator' },
+        {
+          label: '❌ Thoát hoàn toàn Raphael',
+          click: () => {
+            const rootDir = path.join(__dirname, '..', '..');
+            const stopBat = path.join(rootDir, 'stop_assistant.bat');
+            if (fs.existsSync(stopBat)) {
+              exec(`cmd /c "${stopBat}"`, () => {
+                app.quit();
+              });
+            } else {
+              app.quit();
+            }
+          },
         },
-      },
-    ]);
+      ]);
+      tray.setContextMenu(contextMenu);
+    };
 
-    tray.setContextMenu(contextMenu);
+    updateTrayMenu();
 
     tray.on('click', () => {
       if (mainWindow) {
-        if (mainWindow.isVisible()) {
-          mainWindow.focus();
+        if (mainWindow.isVisible() && currentMode !== 'hidden') {
+          applyWindowMode('hidden');
+          mainWindow.webContents.send('set-mode-from-main', 'hidden');
         } else {
-          mainWindow.show();
+          applyWindowMode('overlay');
+          mainWindow.webContents.send('set-mode-from-main', 'overlay');
         }
+        updateTrayMenu();
       }
     });
   } catch (err) {
