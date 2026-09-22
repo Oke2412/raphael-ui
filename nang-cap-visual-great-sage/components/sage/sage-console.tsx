@@ -27,9 +27,29 @@ import { ConfigDialog } from "./config-dialog"
 
 export type VisualMode = "overlay" | "docked" | "sidedeck"
 
+function playWakeChime() {
+  if (typeof window === "undefined") return
+  try {
+    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+    const ctx = new AudioCtx()
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.type = "sine"
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime) // D5
+    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.14) // A5
+    gain.gain.setValueAtTime(0.2, ctx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45)
+    osc.connect(gain)
+    gain.connect(ctx.destination)
+    osc.start()
+    osc.stop(ctx.currentTime + 0.45)
+  } catch (_) {}
+}
+
 export function SageConsole() {
   const sage = useSageSocket()
-  const [visualMode, setVisualMode] = useState<VisualMode>("overlay")
+  // Mặc định khởi chạy ngầm ở chế độ Mini Orb góc màn hình
+  const [visualMode, setVisualMode] = useState<VisualMode>("docked")
   const [configOpen, setConfigOpen] = useState(false)
   const [previewDesktop, setPreviewDesktop] = useState(false)
   const [isElectron, setIsElectron] = useState(false)
@@ -54,12 +74,14 @@ export function SageConsole() {
   // Tự động thức dậy mở Overlay toàn màn hình khi wake word được phát hiện hoặc khi micro bắt đầu lắng nghe
   useEffect(() => {
     if (sage.wakeCount > 0 && visualMode === "docked") {
+      playWakeChime()
       changeVisualMode("overlay")
     }
   }, [sage.wakeCount, visualMode])
 
   useEffect(() => {
     if (sage.state === "listening" && visualMode === "docked") {
+      playWakeChime()
       changeVisualMode("overlay")
     }
   }, [sage.state, visualMode])
@@ -243,18 +265,18 @@ export function SageConsole() {
         <div
           className={
             isElectron
-              ? "size-full flex items-center justify-center p-2 z-50 group pointer-events-auto select-none transition-all duration-300 animate-in fade-in zoom-in-95"
+              ? "size-full flex flex-col items-center justify-center p-2 z-50 group pointer-events-auto select-none transition-all duration-300 animate-in fade-in zoom-in-95"
               : "fixed bottom-8 right-8 z-50 group pointer-events-auto transition-all duration-500 animate-in fade-in zoom-in-95"
           }
         >
-          {/* Quả cầu tròn với viền tím phát quang đặc trưng như ảnh mẫu */}
+          {/* Quả cầu tròn với viền tím phát quang đặc trưng, co dãn hào quang theo âm lượng mic thực tế */}
           <div
             onClick={() => changeVisualMode("overlay")}
             className="relative flex size-28 cursor-pointer items-center justify-center rounded-full border-2 transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
               borderColor: `${accent}ee`,
               background: `radial-gradient(circle at center, rgba(14, 20, 36, 0.75) 0%, rgba(4, 6, 12, 0.88) 100%)`,
-              boxShadow: `0 0 35px ${accent}66, inset 0 0 20px ${accent}33`,
+              boxShadow: `0 0 ${25 + sage.levels.mic_level * 50}px ${accent}${Math.min(99, Math.round(40 + sage.levels.mic_level * 59))}, inset 0 0 20px ${accent}33`,
             }}
             title="Raphael Mini Orb · Nhấp để bung toàn màn hình hoặc gọi 'Raphael!'"
           >
@@ -269,10 +291,14 @@ export function SageConsole() {
             <div
               className="absolute bottom-1 right-1 size-3 rounded-full border-2 border-[#060810]"
               style={{
-                backgroundColor: accent,
-                boxShadow: `0 0 10px ${accent}`,
+                backgroundColor: sage.status === "connected" ? accent : "#f59e0b",
+                boxShadow: `0 0 10px ${sage.status === "connected" ? accent : "#f59e0b"}`,
               }}
-              title={`Trạng thái: ${sage.state}`}
+              title={
+                sage.status === "connected"
+                  ? `Trạng thái: ${sage.state} (Đang lắng nghe: 'Raphael')`
+                  : "Đang kết nối WebSocket Core Pipeline..."
+              }
             />
 
             {/* Các nút thao tác nhanh khi rê chuột vào Mini Orb */}
@@ -298,6 +324,26 @@ export function SageConsole() {
                 <PanelRight className="size-3" />
               </button>
             </div>
+          </div>
+
+          {/* Nhãn trạng thái trực quan bên dưới Mini Orb: Người dùng luôn biết micro và wakeword có hoạt động hay không */}
+          <div className="mt-1 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/85 px-2.5 py-0.5 text-[9px] font-mono text-white/80 shadow-md backdrop-blur-md">
+            <span
+              className={`size-1.5 rounded-full ${
+                sage.status === "connected"
+                  ? sage.levels.mic_level > 0.04
+                    ? "bg-cyan-400 animate-ping"
+                    : "bg-emerald-400"
+                  : "bg-amber-400 animate-pulse"
+              }`}
+            />
+            <span className="truncate max-w-[130px]">
+              {sage.status === "connected"
+                ? sage.levels.mic_level > 0.04
+                  ? "🎙️ Đang nhận âm..."
+                  : "Nghe: 'Raphael'"
+                : "Kết nối Pipeline..."}
+            </span>
           </div>
         </div>
       )}

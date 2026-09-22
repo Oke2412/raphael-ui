@@ -87,15 +87,27 @@ function startStaticServer(outDir) {
 
 async function createDesktopApp() {
   const primaryDisplay = screen.getPrimaryDisplay();
-  const { width, height } = primaryDisplay.bounds;
+  const { workArea, bounds } = primaryDisplay;
+
+  // Mặc định khởi chạy ngầm ở góc màn hình (Docked Mini Orb) để không choán màn hình làm việc
+  const startMode = process.argv.includes('--overlay') ? 'overlay' : 'docked';
+  currentMode = startMode;
+
+  const orbSize = 190;
+  const marginX = 24;
+  const marginY = 24;
+  const startWidth = startMode === 'docked' ? orbSize : bounds.width;
+  const startHeight = startMode === 'docked' ? orbSize : bounds.height;
+  const startX = startMode === 'docked' ? Math.round(workArea.x + workArea.width - orbSize - marginX) : bounds.x;
+  const startY = startMode === 'docked' ? Math.round(workArea.y + workArea.height - orbSize - marginY) : bounds.y;
 
   mainWindow = new BrowserWindow({
     title: 'Tensura Raphael - AI Assistant',
     icon: path.join(__dirname, '..', 'public', 'icon-light-32x32.png'),
-    width: width,
-    height: height,
-    x: 0,
-    y: 0,
+    width: startWidth,
+    height: startHeight,
+    x: startX,
+    y: startY,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
@@ -210,9 +222,9 @@ function applyWindowMode(mode) {
   const { workArea, bounds } = primaryDisplay;
 
   if (mode === 'docked') {
-    // Docked Mini Orb: window is only 180x180 px at bottom right corner!
+    // Docked Mini Orb: window is 190x190 px at bottom right corner!
     // Leaves 98% of the screen completely free for desktop apps/VS Code!
-    const orbSize = 180;
+    const orbSize = 190;
     const marginX = 24;
     const marginY = 24;
     const x = Math.round(workArea.x + workArea.width - orbSize - marginX);
