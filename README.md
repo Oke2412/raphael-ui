@@ -3,20 +3,23 @@
 Hệ thống **Trợ lý ảo AI thời gian thực** phong cách **Đại Hiền Triết / Raphael (Tensura - Tensei Shitara Slime Datta Ken)**.  
 Được thiết kế, xây dựng và tối ưu hóa chuyên biệt cho cấu hình phần cứng **NVIDIA GeForce RTX 2050 (4GB VRAM)** trên hệ điều hành **Windows**.
 
+> ⚠️ **TÌNH TRẠNG DỰ ÁN**: Toàn bộ dự án đang trong giai đoạn **Nghiên cứu & Phát triển tích cực (Active Development / R&D - Alpha)**.  
+> Các tính năng dưới đây đang được tích hợp, tinh chỉnh và kiểm thử liên tục; chưa có thành phần nào được đóng băng hay hoàn thiện cố định.
+
 ---
 
-## 📌 Bảng Tóm Tắt Tiến Độ Dự Án (Project Milestones)
+## 📌 Bảng Tiến Độ Phát Triển & Kiểm Thử (Current Status)
 
-| Hạng mục | Trạng thái | Công nghệ / Thành phần | Chi tiết hoàn thành |
+| Hạng mục | Trạng thái hiện tại | Công nghệ / Module | Tình trạng kiểm thử & Vấn đề tồn đọng |
 | :--- | :---: | :--- | :--- |
-| **Wake Word & Biometrics** | ✅ Hoàn thành | openWakeWord + FFT Biometrics | Khẩu lệnh "Raphael" / "Hey Jarvis", xác thực vân giọng chính chủ chống gọi trộm |
-| **VAD & STT Engine** | ✅ Hoàn thành | Silero VAD + Faster-Whisper CUDA | Nhận diện dứt câu tự động, STT tiếng Việt model `base` chạy `int8_float16` trên GPU (~450MB VRAM) |
-| **Backend LLM Integration** | ✅ Hoàn thành | FastAPI / Docker (`sttap`) / Tailscale | Kết nối backend local Docker trên cổng 8000 hoặc remote LLM, truyền luồng token (Streaming) |
-| **Voice Synthesis (TTS)** | ✅ Hoàn thành | VieNeu-TTS v3 Turbo + Edge-TTS | VieNeu-TTS v3 Turbo 48kHz (PyTorch CUDA Graph) & Edge-TTS Hoài My (<200ms), hỗ trợ Instant Voice Cloning |
-| **Voice Conversion (RVC)** | ✅ Hoàn thành | RVC v2 + Faiss Index | Chuyển đổi chất giọng Raphael (`Raphael_Sensei.pth` 40kHz) trực tiếp trong RAM/VRAM |
-| **Knowledge Cosmos Graph** | ✅ Hoàn thành | Neo4j + GraphRAG | Trực quan hóa chòm sao tri thức vũ trụ 3D/2D tương tác sau Orb Raphael |
-| **WebSocket Core Server** | ✅ Hoàn thành | Python WebSocket (`ws://127.0.0.1:8765`) | Truyền dữ liệu trạng thái, transcript, streaming text và 32-band FFT audio levels thời gian thực |
-| **Desktop Companion UI** | ✅ Hoàn thành | Electron & Tauri v2 | Chạy ngầm tàng hình (Stealth Daemon), khay hệ thống, 3 chế độ (Orb, Sidedeck, Fullscreen Overlay) |
+| **Wake Word & Biometrics** | 🚧 Đang phát triển | openWakeWord + FFT Biometrics | Đã nạp model mẫu `hey_jarvis`; cần huấn luyện model riêng "Raphael" và kiểm thử độ nhạy mic thực tế |
+| **VAD & STT Engine** | 🧪 Đang kiểm thử | Silero VAD + Faster-Whisper CUDA | Đã cấu hình Whisper `base` int8 trên GPU; cần đo đạc và kiểm thử độ trễ ngắt câu với người dùng thật |
+| **Backend LLM Integration** | 🚧 Đang phát triển | FastAPI / Docker (`sttap`) / Tailscale | Đã tạo client kết nối cổng 8000; đang chờ khởi chạy container Docker `sttap` để test luồng chat stream |
+| **Voice Synthesis (TTS)** | 🧪 Đang thử nghiệm | VieNeu-TTS v3 Turbo + Edge-TTS | Đã tích hợp VieNeu v3 Turbo nhưng phát âm chưa tự nhiên; đang thử nghiệm so sánh với Edge-TTS Hoài My |
+| **Voice Conversion (RVC)** | 🧪 Đang kiểm thử | RVC v2 + Faiss Index | Đã nạp thành công `Raphael_Sensei.pth` và index trên CUDA; cần tinh chỉnh f0/pitch để giọng bớt méo |
+| **Knowledge Cosmos Graph** | 🚧 Đang phát triển | Neo4j + GraphRAG | Đã dựng client kết nối và khung vẽ sao; cần nạp cơ sở tri thức thực tế của Tensura vào database |
+| **WebSocket Core Server** | 🧪 Đang kiểm thử | Python WebSocket (`:8765`) | Đã mở server trao đổi dữ liệu; cần kiểm thử độ ổn định khi chạy ngầm liên tục nhiều giờ |
+| **Desktop Companion UI** | 🚧 Đang phát triển | Electron (`main`) & Tauri v2 (`feat/tauri-desktop`) | Đang thử nghiệm song song: Electron (gốc) và Tauri v2 (nhánh riêng, tối ưu RAM, đang hoàn thiện UI) |
 
 ---
 
@@ -36,7 +39,7 @@ Hệ thống **Trợ lý ảo AI thời gian thực** phong cách **Đại Hiề
 | **TTS Engine (VieNeu / Edge)** | GPU / RAM | ~600 - 800 MB VRAM | Sinh âm thanh tiếng Việt vào RAM buffer |
 | **RVC Real-time** | GPU (CUDA) | ~1.2 - 1.4 GB VRAM | Biến đổi chất giọng Raphael |
 | **LLM Server (Docker / Remote)** | CPU / Docker / Cloud | 0 MB VRAM cục bộ | Giao tiếp qua `http://127.0.0.1:8000` hoặc Tailscale |
-| **TỔNG CỘNG** | — | **~2.5 GB / 4.0 GB** | Vận hành mát mẻ, an toàn, không lo tràn bộ nhớ |
+| **TỔNG CỘNG** | — | **~2.5 GB / 4.0 GB** | Vận hành an toàn trong giới hạn 4GB VRAM của RTX 2050 |
 
 ---
 
@@ -44,18 +47,17 @@ Hệ thống **Trợ lý ảo AI thời gian thực** phong cách **Đại Hiề
 
 Kho mã nguồn được tổ chức thành 2 nhánh chính phục vụ cho từng mục đích:
 
-* **`main` (Nhánh cốt lõi)**:
-  * Chứa toàn bộ **Audio Pipeline & AI Backend** (Python, CUDA, Whisper, VieNeu, RVC, Neo4j, WebSocket).
+* **`main` (Nhánh phát triển cốt lõi)**:
+  * Chứa toàn bộ **Audio Pipeline & AI Backend** (Python, CUDA, Whisper, TTS, RVC, Neo4j, WebSocket).
   * Bộ công cụ kiểm thử âm thanh và backend Docker (`scripts/`).
   * Ứng dụng Desktop Companion phiên bản **Electron** (`nang-cap-visual-great-sage/`).
-* **`feat/tauri-desktop` (Nhánh tối ưu hóa Desktop Companion)**:
+* **`feat/tauri-desktop` (Nhánh nghiên cứu di chuyển sang Tauri)**:
   * Nhánh di chuyển (migration) Desktop Companion sang **Tauri v2 + Rust + React** (`tauri-desktop/`).
-  * Giảm mức tiêu thụ RAM từ ~250MB (Electron) xuống **<30MB (Tauri)**.
-  * Hỗ trợ native Windows tray, quản lý cửa sổ không viền mượt mà và không lo lỗi crash click-through.
+  * Mục tiêu: Giảm tiêu thụ RAM từ ~250MB (Electron) xuống **<30MB (Tauri)** và xử lý các vấn đề giao diện native Windows.
 
 ---
 
-## 3. Hướng Dẫn Cài Đặt & Thiết Lập Nhanh
+## 3. Hướng Dẫn Cài Đặt Môi Trường
 
 ### Bước 1: Chuẩn bị Môi trường Python
 ```powershell
@@ -66,7 +68,7 @@ Kho mã nguồn được tổ chức thành 2 nhánh chính phục vụ cho từ
 uv pip install -r requirements.txt
 ```
 
-### Bước 2: Cấu hình Mô hình RVC của Raphael
+### Bước 2: Đặt File Mô hình RVC của Raphael
 Đảm bảo 2 file model đã nằm trong thư mục `models/rvc/`:
 * `models/rvc/Raphael_Sensei.pth`
 * `models/rvc/added_IVF160_Flat_nprobe_1_Raphael_Sensei_v2.index`
@@ -93,26 +95,23 @@ uv pip install -r requirements.txt
 
 ---
 
-## 4. Các Kịch Bản Kiểm Thử Sẵn Có
+## 4. Các Công Cụ & Kịch Bản Kiểm Thử
 
-Thư mục `scripts/` cung cấp các công cụ kiểm thử chuyên biệt:
+Dự án cung cấp sẵn các script để hỗ trợ việc kiểm thử từng thành phần riêng lẻ:
 
-1. **Kiểm thử âm thanh (VieNeu-TTS + RVC)**:
+1. **Kiểm thử âm thanh (TTS + RVC)**:
    * Chạy file: `scripts\test_voice.bat` (hoặc `scripts/test_voice_output.py`).
-   * Tự động tổng hợp câu nói mẫu, chuyển giọng qua RVC và phát trực tiếp ra loa máy tính.
+   * Tổng hợp văn bản mẫu, chạy qua RVC và xuất file kiểm tra tại `outputs/test_voice_output.wav`.
 2. **Kiểm thử kết nối Backend Docker**:
    * Khởi động Docker backend trong thư mục `sttap` (`docker compose up -d` hoặc `run.bat`).
-   * Chạy file: `scripts\test_backend.bat` để ping và thử nghiệm stream chat AI.
-3. **Kiểm tra thiết bị âm thanh**:
-   * Chạy `.\.venv\Scripts\python.exe scripts/test_audio_devices.py` để xem ID Micro và Loa.
+   * Chạy file: `scripts\test_backend.bat` để ping kiểm tra kết nối và thử luồng phản hồi chat stream.
+3. **Kiểm tra thiết bị âm thanh phần cứng**:
+   * Chạy `.\.venv\Scripts\python.exe scripts/test_audio_devices.py` để xem ID Micro và Loa thực tế.
 
 ---
 
-## 5. Khởi Động Trợ Lý Ảo
+## 5. Khởi Động & Điều Khiển Trợ Lý
 
-* **Chạy ngầm hoàn toàn (Stealth Mode)**:
-  * Chạy file `run_silent.vbs` để khởi động trợ lý ngầm trong khay hệ thống, không hiện cửa sổ console đen.
-* **Dừng trợ lý**:
-  * Chạy file `stop_assistant.bat` để ngắt an toàn toàn bộ tiến trình.
-* **Phím tắt toàn cục**:
-  * Bấm tổ hợp `Ctrl + Alt + Shift + \` để bật/tắt nhanh trợ lý bất cứ lúc nào.
+* **Khởi động chạy ngầm (Stealth Mode)**: Chạy file `run_silent.vbs`.
+* **Dừng trợ lý an toàn**: Chạy file `stop_assistant.bat`.
+* **Phím tắt gọi trợ lý toàn cục**: `Ctrl + Alt + Shift + \`.
