@@ -178,56 +178,126 @@ body {
 /* ------------------------------------------------------------------ */
 /* Great Sage Core — cosmic theme                                      */
 /* ------------------------------------------------------------------ */
+/* Great Sage / Raphael Core — Titanium Graphite Precision Theme      */
+/* ------------------------------------------------------------------ */
 :root {
-  --sage-bg: #04060d;
-  --sage-bg-soft: #070b18;
-  --sage-panel: rgba(9, 15, 28, 0.62);
-  --sage-panel-border: rgba(143, 233, 192, 0.18);
-  --sage-cyan: #dffcec;
-  --sage-cyan-deep: #8fe9c0;
-  --sage-gold: #ffe9a8;
-  --sage-purple: #b070ff;
-  --sage-crimson: #ff5050;
-  --sage-text: #e6f1ff;
-  --sage-text-dim: #93a4bd;
+  --bg-dark: #0c0d10;
+  --grey-titanium-100: #e2e4e8;
+  --grey-titanium-200: #cbcfd6;
+  --grey-titanium-300: #adb3be;
+  --grey-titanium-400: #8a919e;
+  --grey-titanium-500: #69707e;
+  --grey-titanium-700: #383d47;
+  --grey-titanium-800: #252830;
+  
+  --acrylic-bg: rgba(20, 22, 27, 0.88);
+  --acrylic-border: rgba(200, 205, 215, 0.14);
+  --acrylic-blur: blur(24px) saturate(110%);
+
+  --sage-bg: #0c0d10;
+  --sage-bg-soft: #14161b;
+  --sage-panel: rgba(20, 22, 27, 0.9);
+  --sage-panel-border: rgba(200, 205, 215, 0.16);
+  --sage-cyan: #d0d7de;
+  --sage-cyan-deep: #8a919e;
+  --sage-gold: #f3f4f6;
+  --sage-purple: #adb3be;
+  --sage-crimson: #f87171;
+  --sage-text: #f3f4f6;
+  --sage-text-dim: #8a919e;
 }
 
 /* The overlay itself is transparent so, when packaged as an Electron/Tauri
-   desktop overlay, the real windows behind it remain visible. In the browser
-   preview a faux desktop is rendered behind it to demonstrate the effect. */
+   desktop overlay, the real windows behind it remain visible. */
 .sage-root {
   color-scheme: dark;
   background: transparent;
   color: var(--sage-text);
   font-family:
-    "Segoe UI", Tahoma, Geneva, Verdana, var(--font-jp-sans), sans-serif;
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, var(--font-jp-sans), sans-serif;
 }
 
 /* soft vignette so the core/caption stay readable over any desktop */
 .sage-scrim {
   background:
-    radial-gradient(90rem 60rem at 50% 46%, rgba(3, 6, 13, 0.62) 0%, rgba(3, 6, 13, 0.34) 42%, rgba(3, 6, 13, 0) 72%);
+    radial-gradient(90rem 60rem at 50% 46%, rgba(12, 13, 16, 0.65) 0%, rgba(12, 13, 16, 0.35) 42%, rgba(12, 13, 16, 0) 72%);
 }
 
 .sage-panel {
   background: var(--sage-panel);
   border: 1px solid var(--sage-panel-border);
-  backdrop-filter: blur(14px) saturate(120%);
-  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  backdrop-filter: blur(20px) saturate(110%);
+  -webkit-backdrop-filter: blur(20px) saturate(110%);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.02) inset,
-    0 20px 60px -30px rgba(0, 0, 0, 0.9);
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 20px 60px -30px rgba(0, 0, 0, 0.85);
 }
 
+/* Hiệu ứng rung lún xúc giác khi click */
+@keyframes tactile-click {
+  0% { transform: scale(1); }
+  35% { transform: scale(0.97) translateY(1px); }
+  70% { transform: scale(0.988); }
+  100% { transform: scale(1); }
+}
+.tactile-active {
+  animation: tactile-click 0.18s cubic-bezier(0, 0, 0, 1) both;
+}
+
+/* Nhịp thở sinh học êm ái huyền bí (5s) */
+@keyframes organic-breath {
+  0%, 100% { transform: scale(1); opacity: 0.65; }
+  50% { transform: scale(1.03); opacity: 0.85; }
+}
+.ambient-breath {
+  animation: organic-breath 5s ease-in-out infinite;
+}
+
+/* Hiệu ứng trôi nổi nhẹ nhàng của Mini Orb ở góc */
+@keyframes mini-orb-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+.float-orb {
+  animation: mini-orb-float 4s ease-in-out infinite;
+}
+
+/* Chuyển động Fluent mượt mà */
+.morph-transition {
+  transition: all 260ms cubic-bezier(0, 0, 0, 1);
+}
+
+/* Nút hover kính titan */
+.btn-hover-glow {
+  transition: all 0.15s cubic-bezier(0, 0, 0, 1);
+  cursor: pointer;
+}
+.btn-hover-glow:hover {
+  background-color: rgba(56, 61, 71, 0.75) !important;
+  border-color: rgba(200, 205, 215, 0.3) !important;
+  color: #ffffff !important;
+}
+.btn-hover-glow:active {
+  transform: scale(0.96);
+}
+
+/* Thanh cuộn tinh giản */
+::-webkit-scrollbar,
 .sage-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
 }
-.sage-scroll::-webkit-scrollbar-thumb {
-  background: rgba(143, 233, 192, 0.25);
-  border-radius: 999px;
-}
+::-webkit-scrollbar-track,
 .sage-scroll::-webkit-scrollbar-track {
   background: transparent;
+}
+::-webkit-scrollbar-thumb,
+.sage-scroll::-webkit-scrollbar-thumb {
+  background: rgba(180, 185, 195, 0.18);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover,
+.sage-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(180, 185, 195, 0.35);
 }
 
 @keyframes sage-caret {
@@ -277,7 +347,7 @@ body {
   animation: sage-orb-float 4s ease-in-out infinite;
 }
 
-/* voice-output bars — shown AFTER the assistant text has appeared */
+/* voice-output bars */
 @keyframes sage-vbar {
   0%, 100% { transform: scaleY(0.3); }
   50% { transform: scaleY(1); }

@@ -17,10 +17,20 @@ WshShell.Run """" & pythonExe & """ -X utf8 """ & mainPy & """", 0, False
 ' 2. Nghi 2.5 giay cho Pipeline & WebSocket khoi tao
 WScript.Sleep 2500
 
-' 3. Chay Electron Native Desktop (WindowStyle = 0: Hoan toan an)
-electronExe = scriptDir & "\nang-cap-visual-great-sage\node_modules\electron\dist\electron.exe"
-electronMain = scriptDir & "\nang-cap-visual-great-sage\electron\main.cjs"
-WshShell.Run """" & electronExe & """ """ & electronMain & """", 0, False
+Dim tauriExe
+tauriExe = scriptDir & "\tauri-desktop\src-tauri\target\debug\tensura-raphael.exe"
+If fso.FileExists(scriptDir & "\tauri-desktop\src-tauri\target\release\tensura-raphael.exe") Then
+    tauriExe = scriptDir & "\tauri-desktop\src-tauri\target\release\tensura-raphael.exe"
+End If
+
+' 3. Chay Native Desktop (Uu tien Tauri v2 sieu nhe, fallback ve Electron)
+If fso.FileExists(tauriExe) Then
+    WshShell.Run """" & tauriExe & """", 0, False
+Else
+    electronExe = scriptDir & "\nang-cap-visual-great-sage\node_modules\electron\dist\electron.exe"
+    electronMain = scriptDir & "\nang-cap-visual-great-sage\electron\main.cjs"
+    WshShell.Run """" & electronExe & """ """ & electronMain & """", 0, False
+End If
 
 Set WshShell = Nothing
 Set fso = Nothing

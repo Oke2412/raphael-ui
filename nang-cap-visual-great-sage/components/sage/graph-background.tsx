@@ -21,19 +21,29 @@ interface Props {
   pulse: number
   /** current state color for tinting the retrieval sweep */
   accent: string
+  /** Whether the star map is visible (true in fullscreen, false in docked/sidedeck) */
+  visible?: boolean
   className?: string
 }
 
-export function GraphBackground({ pulse, accent, className }: Props) {
+export function GraphBackground({
+  pulse,
+  accent,
+  visible = true,
+  className,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const pulseRef = useRef(pulse)
   const accentRef = useRef(accent)
+  const visibleRef = useRef(visible)
   const nodesRef = useRef<Node[]>([])
   const edgesRef = useRef<Edge[]>([])
   const lastPulse = useRef(pulse)
+  const flashTimer = useRef(0)
 
   accentRef.current = accent
   pulseRef.current = pulse
+  visibleRef.current = visible
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -46,7 +56,7 @@ export function GraphBackground({ pulse, accent, className }: Props) {
     let W = 0
     let H = 0
 
-    const NODE_COUNT = 46
+    const NODE_COUNT = 48
 
     const build = () => {
       const nodes: Node[] = []
@@ -109,6 +119,7 @@ export function GraphBackground({ pulse, accent, className }: Props) {
       const nodes = nodesRef.current
       const edges = edgesRef.current
       if (!nodes.length) return
+      flashTimer.current = 75 // Flash for 75 frames if hidden
       const startIdx = Math.floor(Math.random() * nodes.length)
       const queue = [startIdx]
       const visited = new Set<number>([startIdx])
@@ -138,9 +149,20 @@ export function GraphBackground({ pulse, accent, className }: Props) {
         triggerRetrieval()
       }
 
+      // KHI Ở CHẾ ĐỘ MINI ORB HOẶC SIDEDECK: BẢN ĐỒ SAO ẨN 100% ĐỂ GIỮ MÀN HÌNH TRONG SUỐT
+      const isVisible = visibleRef.current || flashTimer.current > 0
+      if (!isVisible) {
+        ctx.clearRect(0, 0, W, H)
+        return
+      }
+
+      if (flashTimer.current > 0) {
+        flashTimer.current--
+      }
+
       const nodes = nodesRef.current
       const edges = edgesRef.current
-      const { r, g, b } = hexToRgb(accentRef.current)
+      const { r, g, b } = hexToRgb(accentRef.current || "#cbcfd6")
       const t = performance.now() / 1000
 
       ctx.clearRect(0, 0, W, H)
@@ -156,14 +178,16 @@ export function GraphBackground({ pulse, accent, className }: Props) {
 
       // edges
       ctx.lineCap = "round"
+      const baseAlphaMultiplier = visibleRef.current ? 1.0 : Math.min(1, flashTimer.current / 40)
+
       for (const e of edges) {
         const na = nodes[e.a]
         const nb = nodes[e.b]
         const dist = Math.hypot(na.x - nb.x, na.y - nb.y)
         if (dist > Math.max(W, H) * 0.28) continue
-        const base = 0.025
+        const base = 0.025 * baseAlphaMultiplier
         const litA = Math.max(na.glow, nb.glow)
-        ctx.strokeStyle = `rgba(${r},${g},${b},${base + litA * 0.45 + e.charge * 0.5})`
+        ctx.strokeStyle = `rgba(${r},${g},${b},${(base + litA * 0.45 + e.charge * 0.5) * baseAlphaMultiplier})`
         ctx.lineWidth = 0.5 + e.charge * 1.5
         ctx.beginPath()
         ctx.moveTo(na.x, na.y)
@@ -178,7 +202,7 @@ export function GraphBackground({ pulse, accent, className }: Props) {
           ctx.save()
           ctx.globalCompositeOperation = "lighter"
           const grad = ctx.createRadialGradient(px, py, 0, px, py, 10)
-          grad.addColorStop(0, `rgba(${r},${g},${b},${e.charge})`)
+          grad.addColorStop(0, `rgba(${r},${g},${b},${e.charge * baseAlphaMultiplier})`)
           grad.addColorStop(1, "rgba(0,0,0,0)")
           ctx.fillStyle = grad
           ctx.beginPath()
@@ -193,8 +217,8 @@ export function GraphBackground({ pulse, accent, className }: Props) {
 
       // nodes (dormant cosmic stars that ignite on Neo4j query)
       for (const n of nodes) {
-        const twinkle = 0.12 + 0.08 * Math.sin(t * 1.2 + n.seed)
-        const a = twinkle + n.glow * 0.85
+        const twinkle = (0.12 + 0.08 * Math.sin(t * 1.2 + n.seed)) * baseAlphaMultiplier
+        const a = (twinkle + n.glow * 0.85) * baseAlphaMultiplier
         const size = 1.2 + n.glow * 4.0
         ctx.save()
         ctx.globalCompositeOperation = "lighter"
@@ -205,7 +229,7 @@ export function GraphBackground({ pulse, accent, className }: Props) {
         ctx.beginPath()
         ctx.arc(n.x, n.y, size * 2.5, 0, Math.PI * 2)
         ctx.fill()
-        ctx.fillStyle = `rgba(255,255,255,${Math.min(1, a + 0.1)})`
+        ctx.fillStyle = `rgba(255,255,255,${Math.min(1, (a + 0.1) * baseAlphaMultiplier)})`
         ctx.beginPath()
         ctx.arc(n.x, n.y, size * 0.5, 0, Math.PI * 2)
         ctx.fill()
@@ -220,5 +244,13 @@ export function GraphBackground({ pulse, accent, className }: Props) {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className={className} aria-hidden="true" />
+  return (
+    <canvas
+      ref={canvasRef}
+      className={`${className ?? ""} ${
+        visible ? "opacity-75" : "opacity-0"
+      } transition-opacity duration-500`}
+      aria-hidden="true"
+    />
+  )
 }

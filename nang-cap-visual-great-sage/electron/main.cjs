@@ -13,6 +13,7 @@ let tray = null;
 let staticServer = null;
 let isQuitting = false;
 let currentMode = 'hidden';
+let lastDockedPosition = null;
 
 // Single-instance lock
 const gotTheLock = app.requestSingleInstanceLock();
@@ -267,24 +268,28 @@ function applyWindowMode(mode) {
   mainWindow.setSkipTaskbar(false);
 
   if (mode === 'docked') {
-    const orbSize = 190;
-    const marginX = 24;
-    const marginY = 24;
-    const x = Math.round(workArea.x + workArea.width - orbSize - marginX);
-    const y = Math.round(workArea.y + workArea.height - orbSize - marginY);
+    const orbBox = 110;
+    const marginX = 20;
+    const marginY = 20;
+    const defaultX = Math.round(workArea.x + workArea.width - orbBox - marginX);
+    const defaultY = Math.round(workArea.y + workArea.height - orbBox - marginY);
+    const x = lastDockedPosition ? lastDockedPosition.x : defaultX;
+    const y = lastDockedPosition ? lastDockedPosition.y : defaultY;
     mainWindow.setResizable(true);
-    mainWindow.setBounds({ x, y, width: orbSize, height: orbSize });
+    mainWindow.setBounds({ x, y, width: orbBox, height: orbBox });
     mainWindow.setIgnoreMouseEvents(false);
     mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
     mainWindow.show();
     mainWindow.focus();
   } else if (mode === 'sidedeck') {
-    const sideWidth = 440;
-    const x = Math.round(workArea.x + workArea.width - sideWidth);
-    const y = Math.round(workArea.y);
-    const h = Math.round(workArea.height);
+    const sideWidth = 370;
+    const sideHeight = 540;
+    const marginX = 16;
+    const marginY = 16;
+    const x = Math.round(workArea.x + workArea.width - sideWidth - marginX);
+    const y = Math.round(workArea.y + workArea.height - sideHeight - marginY);
     mainWindow.setResizable(true);
-    mainWindow.setBounds({ x, y, width: sideWidth, height: h });
+    mainWindow.setBounds({ x, y, width: sideWidth, height: sideHeight });
     mainWindow.setIgnoreMouseEvents(false);
     mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
     mainWindow.show();
@@ -313,6 +318,17 @@ ipcMain.on('set-visual-mode', (event, mode) => {
 ipcMain.on('set-ignore-mouse-events', (event, ignore, options) => {
   if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.setIgnoreMouseEvents(ignore, options);
+  }
+});
+
+ipcMain.on('move-window-by', (_event, { dx, dy }) => {
+  if (!mainWindow || mainWindow.isDestroyed()) return;
+  const [curX, curY] = mainWindow.getPosition();
+  const newX = Math.round(curX + dx);
+  const newY = Math.round(curY + dy);
+  mainWindow.setPosition(newX, newY);
+  if (currentMode === 'docked') {
+    lastDockedPosition = { x: newX, y: newY };
   }
 });
 

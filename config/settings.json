@@ -1,9 +1,9 @@
 {
   "server": {
-    "url": "http://127.0.0.1:8000/api/chat",
+    "url": "http://127.0.0.1:8000/api/chat/message",
     "api_type": "generic_stream",
     "timeout_seconds": 30,
-    "description": "Địa chỉ Server LLM từ xa (có thể đổi thành IP Tailscale như http://100.x.y.z:8000/api/chat)"
+    "description": "Địa chỉ Server LLM từ xa (hoặc Docker backend tại http://127.0.0.1:8000/api/chat/message)"
   },
   "audio": {
     "sample_rate": 16000,
@@ -35,12 +35,13 @@
   "vieneu": {
     "enabled": true,
     "model_path": "models/vieneu",
+    "voice": "Ban Mai",
     "device": "cuda"
   },
   "rvc": {
     "enabled": true,
-    "model_path": "models/rvc/raphael.pth",
-    "index_path": "models/rvc/raphael.index",
+    "model_path": "models/rvc/Raphael_Sensei.pth",
+    "index_path": "models/rvc/added_IVF160_Flat_nprobe_1_Raphael_Sensei_v2.index",
     "f0_up_key": 0,
     "f0_method": "pm",
     "index_rate": 0.75,

@@ -36,9 +36,9 @@ export function ControlPanel({
   }
 
   return (
-    <div className="flex flex-col gap-3">
-      {/* Output mode selector */}
-      <div className="flex items-center gap-1.5 rounded-xl border border-white/8 bg-black/30 p-1">
+    <div className="flex flex-col gap-2.5">
+      {/* Mode Selector (Bo góc 6px, Titanium Glass) */}
+      <div className="flex items-center gap-1 rounded-[6px] border border-white/[0.08] bg-[rgba(16,18,22,0.6)] p-0.5">
         {MODES.map((m) => {
           const active = m.value === outputMode
           const Icon = m.icon
@@ -46,27 +46,22 @@ export function ControlPanel({
             <button
               key={m.value}
               onClick={() => onSetMode(m.value)}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-1.5 text-[11px] font-medium tracking-wide transition-all"
-              style={
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-[5px] px-2 py-1 text-[11px] font-medium transition-all ${
                 active
-                  ? {
-                      background: "rgba(143,233,192,0.14)",
-                      color: "var(--sage-cyan)",
-                      boxShadow: "inset 0 0 0 1px rgba(143,233,192,0.35)",
-                    }
-                  : { color: "var(--sage-text-dim)" }
-              }
+                  ? "bg-[#383d47] text-white shadow-sm border border-white/10"
+                  : "text-[#8a919e] hover:text-[#cbcfd6] hover:bg-white/[0.04]"
+              }`}
               aria-pressed={active}
             >
-              <Icon className="size-3.5" />
+              <Icon className="size-3" />
               <span className="hidden sm:inline">{m.label}</span>
             </button>
           )
         })}
       </div>
 
-      <div className="flex items-stretch gap-3">
-        {/* Push-to-Talk */}
+      <div className="flex items-stretch gap-2">
+        {/* Push-to-Talk (Bo góc 6px, Titanium) */}
         <button
           onPointerDown={(e) => {
             e.preventDefault()
@@ -79,29 +74,23 @@ export function ControlPanel({
           onPointerLeave={() => {
             if (isListening) onStopListen()
           }}
-          className="group relative grid aspect-square w-[72px] shrink-0 place-items-center rounded-xl border transition-all select-none"
-          style={{
-            borderColor: isListening ? "var(--sage-cyan-deep)" : "rgba(255,255,255,0.1)",
-            background: isListening ? "rgba(143,233,192,0.16)" : "rgba(0,0,0,0.3)",
-            boxShadow: isListening ? "0 0 28px rgba(143,233,192,0.45)" : "none",
-          }}
+          className={`btn-hover-glow group relative grid aspect-square w-11 shrink-0 place-items-center rounded-[6px] border transition-all select-none ${
+            isListening
+              ? "border-sky-400 bg-sky-950/40 text-sky-200 shadow-[0_0_16px_rgba(56,189,248,0.4)]"
+              : "border-white/[0.12] bg-[#1a1d24] text-[#cbcfd6]"
+          }`}
           aria-label="Push to talk — nhấn giữ để nói"
           aria-pressed={isListening}
+          title="Nhấn giữ để nói (Push-to-Talk)"
         >
           {isListening && (
-            <span
-              className="absolute inset-0 rounded-xl sage-pulse-ring"
-              style={{ background: "rgba(143,233,192,0.35)" }}
-            />
+            <span className="absolute inset-0 rounded-[6px] sage-pulse-ring bg-sky-400/30" />
           )}
-          <Mic
-            className="size-6 transition-colors"
-            style={{ color: isListening ? "var(--sage-cyan)" : "var(--sage-text-dim)" }}
-          />
+          <Mic className="size-4 transition-colors" />
         </button>
 
-        {/* Text prompt */}
-        <div className="flex flex-1 items-center gap-2 rounded-xl border border-white/10 bg-black/30 px-3 focus-within:border-[color:var(--sage-cyan-deep)]">
+        {/* Text prompt capsule (Bo góc 6px) */}
+        <div className="flex flex-1 items-center gap-2 rounded-[6px] border border-white/[0.12] bg-[#121418] px-2.5 focus-within:border-white/30 focus-within:bg-[#181a20] transition-colors">
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -115,24 +104,19 @@ export function ControlPanel({
                 submit()
               }
             }}
-            placeholder="Nhập câu hỏi trực tiếp cho Great Sage…"
-            className="min-w-0 flex-1 bg-transparent py-3 text-sm text-[color:var(--sage-text)] outline-none placeholder:text-[color:var(--sage-text-dim)]"
+            placeholder="Hỏi Raphael hoặc nhập khẩu lệnh…"
+            className="min-w-0 flex-1 bg-transparent py-2 text-xs text-[#f3f4f6] placeholder:text-[#5a6270] outline-none font-sans"
           />
           <button
             onClick={submit}
             disabled={!text.trim()}
-            className="grid size-9 place-items-center rounded-lg transition-all disabled:opacity-30"
-            style={{ background: "rgba(143,233,192,0.14)", color: "var(--sage-cyan)" }}
+            className="btn-hover-glow grid size-7 place-items-center rounded-[5px] bg-[#383d47] text-white disabled:opacity-30 disabled:hover:bg-[#383d47] transition-all"
             aria-label="Gửi câu hỏi"
           >
-            <Send className="size-4" />
+            <Send className="size-3" />
           </button>
         </div>
       </div>
-
-      <p className="text-center text-[10px] tracking-wide text-[color:var(--sage-text-dim)]">
-        Nhấn giữ nút micro để nói · thả ra để gửi · hoặc gõ &amp; nhấn Enter
-      </p>
     </div>
   )
 }

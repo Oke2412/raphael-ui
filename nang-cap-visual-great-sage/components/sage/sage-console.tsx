@@ -1,63 +1,144 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import {
   Maximize2,
   Minimize2,
-  Network,
   PanelRight,
   Settings,
-  Sparkles,
-  Monitor,
-  Layers,
   X,
   Activity,
-  EyeOff,
+  Sliders,
+  Sparkles,
+  Layers,
+  Terminal,
+  ChevronDown,
+  ChevronUp,
   Power,
+  RefreshCw,
+  MessageSquare,
 } from "lucide-react"
 import { STATE_META } from "@/lib/sage-protocol"
 import { useSageSocket } from "@/lib/use-sage-socket"
 import { SageCoreCanvas } from "./sage-core-canvas"
 import { GraphBackground } from "./graph-background"
-import { NoteFrame } from "./note-frame"
-import {
-  ConnectionPill,
-  StateBadge,
-} from "./state-badge"
+import { StateBadge } from "./state-badge"
 import { ConversationPanel } from "./conversation-panel"
 import { ControlPanel } from "./control-panel"
 import { ConfigDialog } from "./config-dialog"
 
 export type VisualMode = "overlay" | "docked" | "sidedeck" | "hidden"
 
-function playWakeChime() {
+function playHapticTone(type: "click" | "transition" | "wake" = "click") {
   if (typeof window === "undefined") return
   try {
-    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+    const AudioCtx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
     const ctx = new AudioCtx()
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
-    osc.type = "sine"
-    osc.frequency.setValueAtTime(587.33, ctx.currentTime) // D5
-    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.14) // A5
-    gain.gain.setValueAtTime(0.2, ctx.currentTime)
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45)
-    osc.connect(gain)
-    gain.connect(ctx.destination)
-    osc.start()
-    osc.stop(ctx.currentTime + 0.45)
+    const now = ctx.currentTime
+
+    if (type === "click") {
+      osc.type = "sine"
+      osc.frequency.setValueAtTime(320, now)
+      osc.frequency.exponentialRampToValueAtTime(140, now + 0.05)
+      gain.gain.setValueAtTime(0.06, now)
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05)
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(now)
+      osc.stop(now + 0.05)
+    } else if (type === "transition") {
+      osc.type = "triangle"
+      osc.frequency.setValueAtTime(180, now)
+      osc.frequency.exponentialRampToValueAtTime(360, now + 0.12)
+      gain.gain.setValueAtTime(0.05, now)
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12)
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(now)
+      osc.stop(now + 0.12)
+    } else if (type === "wake") {
+      osc.type = "sine"
+      osc.frequency.setValueAtTime(587.33, now) // D5
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.14) // A5
+      gain.gain.setValueAtTime(0.15, now)
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45)
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(now)
+      osc.stop(now + 0.45)
+    }
   } catch (_) {}
 }
 
 export function SageConsole() {
   const sage = useSageSocket()
-  // Mặc định khởi chạy ngầm 100% Stealth (hidden)
+  // Mặc định khởi chạy ngầm 100% Stealth (hidden) trong Electron, hoặc overlay trên web
   const [visualMode, setVisualMode] = useState<VisualMode>("hidden")
   const [configOpen, setConfigOpen] = useState(false)
-  const [previewDesktop, setPreviewDesktop] = useState(false)
   const [isElectron, setIsElectron] = useState(false)
   const [startupEnabled, setStartupEnabled] = useState(false)
-  const accent = STATE_META[sage.state].color
+  const [showInspector, setShowInspector] = useState(false)
+  const [showSettingsDrawer, setShowSettingsDrawer] = useState(false)
+  const [missionInput, setMissionInput] = useState("")
+
+  const accent = STATE_META[sage.state]?.color ?? "#cbcfd6"
+
+  // Vị trí và logic kéo thả mini orb tự do trên màn hình
+  const [dockedCoord, setDockedCoord] = useState<{ x: number; y: number } | null>(null)
+  const isDraggingOrb = useRef(false)
+  const dragStartOrb = useRef({ x: 0, y: 0, startPos: { x: 0, y: 0 } })
+  const hasMovedOrb = useRef(false)
+
+  const handleOrbPointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0) return
+    isDraggingOrb.current = true
+    hasMovedOrb.current = false
+    const currentLeft = dockedCoord?.x ?? (typeof window !== "undefined" ? window.innerWidth - 90 : 0)
+    const currentTop = dockedCoord?.y ?? (typeof window !== "undefined" ? window.innerHeight - 90 : 0)
+    dragStartOrb.current = {
+      x: e.screenX,
+      y: e.screenY,
+      startPos: { x: currentLeft, y: currentTop },
+    }
+    try {
+      ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    } catch {}
+  }
+
+  const handleOrbPointerMove = (e: React.PointerEvent) => {
+    if (!isDraggingOrb.current) return
+    const dx = e.screenX - dragStartOrb.current.x
+    const dy = e.screenY - dragStartOrb.current.y
+    if (Math.hypot(dx, dy) > 4) {
+      hasMovedOrb.current = true
+    }
+    if (hasMovedOrb.current) {
+      if (isElectron && window.electronAPI?.moveWindowBy) {
+        window.electronAPI.moveWindowBy(dx, dy)
+        dragStartOrb.current.x = e.screenX
+        dragStartOrb.current.y = e.screenY
+      } else {
+        const newX = Math.max(10, Math.min(window.innerWidth - 85, dragStartOrb.current.startPos.x + dx))
+        const newY = Math.max(10, Math.min(window.innerHeight - 85, dragStartOrb.current.startPos.y + dy))
+        setDockedCoord({ x: newX, y: newY })
+      }
+    }
+  }
+
+  const handleOrbPointerUp = (e: React.PointerEvent) => {
+    if (!isDraggingOrb.current) return
+    isDraggingOrb.current = false
+    try {
+      ;(e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId)
+    } catch {}
+    if (!hasMovedOrb.current) {
+      changeVisualMode("sidedeck")
+    }
+  }
 
   useEffect(() => {
     if (typeof window !== "undefined" && Boolean(window.electronAPI?.isElectron)) {
@@ -69,7 +150,7 @@ export function SageConsole() {
         window.electronAPI.getStartupStatus().then((en) => setStartupEnabled(Boolean(en)))
       }
     } else {
-      // Khi mở trên trình duyệt thường (Next.js dev/browser test), hiển thị Overlay
+      // Khi mở trên trình duyệt thường (Next.js dev/browser test), hiển thị Toàn Cảnh
       setVisualMode("overlay")
     }
   }, [])
@@ -81,40 +162,52 @@ export function SageConsole() {
     }
   }
 
-  const changeVisualMode = (mode: VisualMode) => {
-    setVisualMode(mode)
-    if (typeof window !== "undefined" && window.electronAPI) {
-      window.electronAPI.setVisualMode(mode)
-    }
-  }
+  const changeVisualMode = useCallback(
+    (mode: VisualMode) => {
+      playHapticTone("transition")
+      setVisualMode(mode)
+      if (typeof window !== "undefined" && window.electronAPI) {
+        window.electronAPI.setVisualMode(mode)
+      }
+    },
+    [],
+  )
 
   // Tự động thức dậy mở Overlay toàn màn hình khi wake word được phát hiện hoặc khi micro bắt đầu lắng nghe
   useEffect(() => {
     if (sage.wakeCount > 0 && visualMode !== "overlay") {
-      playWakeChime()
+      playHapticTone("wake")
       changeVisualMode("overlay")
     }
-  }, [sage.wakeCount])
+  }, [sage.wakeCount, visualMode, changeVisualMode])
 
   useEffect(() => {
     if (sage.state === "listening" && visualMode === "hidden") {
-      playWakeChime()
+      playHapticTone("wake")
       changeVisualMode("overlay")
     }
-  }, [sage.state])
+  }, [sage.state, visualMode, changeVisualMode])
 
-  // Lắng nghe phím Escape để nhanh chóng ẩn về chế độ chạy ngầm
+  // Lắng nghe phím tắt toàn cục bên trong web: Escape (ẩn/thu nhỏ) và Ctrl+Space (chuyển mode)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.code === "Space") {
+        e.preventDefault()
+        if (visualMode === "overlay") changeVisualMode("docked")
+        else if (visualMode === "docked") changeVisualMode("sidedeck")
+        else changeVisualMode("overlay")
+      }
       if (e.key === "Escape") {
-        if (visualMode !== "hidden") {
+        if (visualMode === "overlay" || visualMode === "sidedeck") {
+          changeVisualMode("docked")
+        } else if (visualMode === "docked") {
           changeVisualMode("hidden")
         }
       }
     }
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [visualMode])
+  }, [visualMode, changeVisualMode])
 
   // Trong chế độ fullscreen overlay: truyền click-through xuyên qua các vùng trống để không chặn desktop
   useEffect(() => {
@@ -126,7 +219,9 @@ export function SageConsole() {
 
     const handleMouseMove = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
-      const interactive = target?.closest(".pointer-events-auto, button, input, textarea, a, [role='button']")
+      const interactive = target?.closest(
+        ".pointer-events-auto, button, input, textarea, a, [role='button'], canvas[data-clickable='true']",
+      )
       if (interactive) {
         window.electronAPI?.setIgnoreMouseEvents(false)
       } else {
@@ -141,6 +236,15 @@ export function SageConsole() {
     }
   }, [visualMode])
 
+  // Bắt đầu phiên làm việc từ Mission Input
+  const handleStartMission = (targetMode: VisualMode = "docked") => {
+    playHapticTone("click")
+    const text = missionInput.trim() || "Bắt đầu phiên làm việc cùng Raphael"
+    sage.sendText(text)
+    setMissionInput("")
+    changeVisualMode(targetMode)
+  }
+
   // Lấy câu nói/stream mới nhất hiển thị phụ đề nổi
   const latestAssistantEntry = [...sage.transcript].reverse().find((t) => t.role === "assistant")
   const latestUserEntry = [...sage.transcript].reverse().find((t) => t.role === "user")
@@ -152,391 +256,495 @@ export function SageConsole() {
   return (
     <div className="sage-root relative min-h-dvh overflow-hidden select-none bg-transparent">
       {/* ========================================================================= */}
-      {/* NỀN GIẢ LẬP DESKTOP (Tùy chọn khi xem trên trình duyệt chuẩn Edge/Chrome)  */}
+      {/* VŨ TRỤ SAO TRI THỨC NEO4J GRAPH: CHỈ HIỆN KHI Ở TOÀN CẢNH (OVERLAY)       */}
+      {/* KHI Ở SIDEDECK HOẶC DOCKED MINI ORB: ẨN 100% ĐỂ GIỮ MÀN HÌNH TRONG SUỐT    */}
       {/* ========================================================================= */}
-      {previewDesktop && (
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-gradient-to-br from-[#070b16] via-[#03060c] to-[#010204]">
-          {/* Cửa sổ mẫu Desktop Windows */}
-          <div className="absolute top-16 left-12 w-[620px] max-w-[90vw] h-[360px] rounded-xl border border-white/10 bg-slate-900/40 p-4 shadow-2xl backdrop-blur-sm">
-            <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
-              <span className="size-3 rounded-full bg-red-500/80" />
-              <span className="size-3 rounded-full bg-yellow-500/80" />
-              <span className="size-3 rounded-full bg-green-500/80" />
-              <span className="text-[11px] font-mono text-slate-400 ml-2">pipeline/manager.py — Visual Studio Code</span>
-            </div>
-            <div className="font-mono text-xs text-slate-400/80 space-y-1">
-              <p className="text-purple-400">class TensuraRaphaelManager:</p>
-              <p className="pl-4 text-emerald-400">"""Tensura Raphael Real-time Voice & Visual Assistant"""</p>
-              <p className="pl-4">def __init__(self):</p>
-              <p className="pl-8 text-cyan-300">self.wake_word = OpenWakeWord("raphael") # ~6ms latency</p>
-              <p className="pl-8 text-cyan-300">self.vad = SileroVAD()</p>
-              <p className="pl-8 text-cyan-300">self.stt = FasterWhisper(device="cuda")</p>
-              <p className="pl-8 text-cyan-300">self.tts = VieNeuTTS()</p>
-              <p className="pl-8 text-cyan-300">self.rvc = RVCEngine(model="raphael.pth")</p>
-              <p className="pl-8 text-cyan-300">self.neo4j = Neo4jCosmosClient()</p>
-            </div>
-          </div>
-          {/* Taskbar Windows ở cạnh dưới */}
-          <div className="absolute bottom-0 inset-x-0 h-10 border-t border-white/10 bg-slate-950/70 backdrop-blur-md flex items-center justify-between px-4">
-            <div className="flex items-center gap-3 text-xs text-slate-400">
-              <span className="font-bold text-sky-400">⊞ Windows</span>
-              <span className="px-2 py-0.5 rounded bg-white/10">VS Code</span>
-              <span className="px-2 py-0.5 rounded bg-white/10">Terminal</span>
-            </div>
-            <div className="text-xs text-slate-400 font-mono">
-              RTX 2050 · Windows 11
-            </div>
-          </div>
-        </div>
+      <GraphBackground
+        pulse={sage.graphPulse}
+        accent={accent}
+        visible={visualMode === "overlay"}
+        className="pointer-events-none fixed inset-0 z-10 size-full"
+      />
+
+      {/* ========================================================================= */}
+      {/* MICRO GLASS ICON PILL: THANH ĐIỀU KHIỂN SIÊU MỎNG, XUYÊN THẤU             */}
+      {/* CHỈ HIỆN Ở TOÀN CẢNH, TỰ ĐỘNG BIẾN MẤT KHI THU VỀ DOCKED HOẶC SIDEDECK   */}
+      {/* ========================================================================= */}
+      {visualMode === "overlay" && (
+        <nav className="fixed top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 px-2 py-1 rounded-[8px] border border-white/[0.08] bg-[rgba(16,18,22,0.35)] hover:bg-[rgba(16,18,22,0.65)] backdrop-blur-md shadow-md morph-transition pointer-events-auto">
+          {/* Nút 1: Toàn Cảnh (Active) */}
+          <button
+            onClick={() => changeVisualMode("overlay")}
+            className="btn-hover-glow p-1.5 rounded-[5px] text-white bg-white/[0.1] border border-white/[0.12]"
+            title="Toàn Cảnh Mission Control (Ctrl+Space)"
+          >
+            <Maximize2 className="size-3.5" />
+          </button>
+
+          {/* Nút 2: Mini Orb Góc */}
+          <button
+            onClick={() => changeVisualMode("docked")}
+            className="btn-hover-glow p-1.5 rounded-[5px] text-[#8a919e] hover:text-white"
+            title="Thu về Quả Cầu Mini Orb ở góc màn hình"
+          >
+            <Minimize2 className="size-3.5" />
+          </button>
+
+          {/* Nút 3: Sidedeck Panel */}
+          <button
+            onClick={() => changeVisualMode("sidedeck")}
+            className="btn-hover-glow p-1.5 rounded-[5px] text-[#8a919e] hover:text-white"
+            title="Mở Sidedeck Panel Chat"
+          >
+            <PanelRight className="size-3.5" />
+          </button>
+
+          <div className="h-3 w-px bg-white/10 mx-0.5" />
+
+          {/* Nút Cài đặt */}
+          <button
+            onClick={() => setConfigOpen(true)}
+            className="btn-hover-glow p-1.5 rounded-[5px] text-[#8a919e] hover:text-white"
+            title="Cài đặt kết nối WebSocket / Tailscale"
+          >
+            <Settings className="size-3.5" />
+          </button>
+
+          {/* Nút Ẩn Hoàn Toàn về Chạy Ngầm */}
+          <button
+            onClick={() => changeVisualMode("hidden")}
+            className="btn-hover-glow p-1.5 rounded-[5px] text-[#8a919e] hover:text-rose-300 hover:bg-rose-500/20"
+            title="Ẩn về chế độ chạy ngầm (Escape hoặc Ctrl+Alt+Shift+\)"
+          >
+            <X className="size-3.5" />
+          </button>
+        </nav>
       )}
 
       {/* ========================================================================= */}
-      {/* CHẾ ĐỘ 1: FULLSCREEN TRANSPARENT OVERLAY (Mặc định khi thức dậy)          */}
+      {/* CHẾ ĐỘ 1: FULLSCREEN MISSION CONTROL (OVERLAY)                            */}
       {/* ========================================================================= */}
       {visualMode === "overlay" && (
-        <div className="fixed inset-0 z-40 flex flex-col justify-between p-4 sm:p-6 bg-transparent pointer-events-none transition-all duration-500 animate-in fade-in">
-          {/* Vũ trụ sao tri thức Neo4j Cosmos Graph (Nằm ở lớp nền đằng sau Orb) */}
-          <GraphBackground
-            pulse={sage.graphPulse}
-            accent={accent}
-            className="pointer-events-none absolute inset-0 h-full w-full opacity-75"
-          />
-
-          {/* Góc trên bên phải: Các nút chuyển chế độ & Nút Ẩn ngầm */}
-          <header className="relative z-10 flex items-center justify-end p-2 pointer-events-auto">
-            <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 backdrop-blur-md transition-opacity hover:opacity-100 opacity-60">
-              <button
-                onClick={() => changeVisualMode("overlay")}
-                className={`grid size-7 place-items-center rounded-full transition-colors ${
-                  visualMode === "overlay"
-                    ? "bg-white/20 text-white"
-                    : "text-white/60 hover:bg-white/10 hover:text-white"
-                }`}
-                title="Toàn màn hình (Overlay)"
-              >
-                <Maximize2 className="size-3.5" />
-              </button>
-              <button
-                onClick={() => changeVisualMode("docked")}
-                className="grid size-7 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition-colors"
-                title="Thu nhỏ về góc (Mini Orb)"
-              >
-                <Minimize2 className="size-3.5" />
-              </button>
-              <button
-                onClick={() => changeVisualMode("sidedeck")}
-                className="grid size-7 place-items-center rounded-full text-white/60 hover:bg-white/10 hover:text-white transition-colors"
-                title="Thanh bên (Sidedeck Panel)"
-              >
-                <PanelRight className="size-3.5" />
-              </button>
-              <button
-                onClick={() => setConfigOpen(true)}
-                className="grid size-7 place-items-center rounded-full text-white/40 hover:bg-white/10 hover:text-white transition-colors ml-1 border-l border-white/10 pl-1"
-                title="Cài đặt kết nối"
-              >
-                <Settings className="size-3" />
-              </button>
-              <button
-                onClick={() => changeVisualMode("hidden")}
-                className="grid size-7 place-items-center rounded-full text-white/40 hover:bg-rose-500/20 hover:text-rose-300 transition-colors ml-1 border-l border-white/10 pl-1"
-                title="Ẩn hoàn toàn (Chạy ngầm - Phím tắt: Escape hoặc Ctrl+Alt+Shift+\)"
-              >
-                <X className="size-3.5" />
-              </button>
-            </div>
-          </header>
-
-          {/* Vùng Trung Tâm: Duy nhất quả cầu Raphael Orb & Phụ Đề Stream */}
-          <div className="relative z-10 flex flex-1 flex-col items-center justify-center my-auto pointer-events-auto">
-            <div className="relative flex size-[420px] sm:size-[520px] items-center justify-center">
-              <SageCoreCanvas
-                state={sage.state}
-                levels={sage.levels}
-                showCircleBorder={false}
-                className="size-full"
-              />
-              <div className="pointer-events-none absolute -top-2">
-                <StateBadge state={sage.state} />
+        <main className="fixed inset-0 z-30 flex flex-col justify-between py-6 px-4 max-w-5xl mx-auto pointer-events-none morph-transition">
+          {/* Top HUD: Neo4j nodes count + Status */}
+          <div className="flex items-center justify-between text-xs pt-4 pointer-events-auto">
+            <div className="flex items-center gap-2">
+              <div className="px-2.5 py-1 rounded-[6px] border border-white/[0.06] bg-[rgba(20,22,27,0.45)] backdrop-blur-md flex items-center gap-2 text-[#cbcfd6]">
+                <span className="inline-block size-1.5 rounded-[2px] bg-emerald-400" />
+                <span className="font-mono text-[11px]">
+                  Neo4j: {sage.graphQuery?.hits ?? 1420} Nodes
+                </span>
               </div>
+              <div className="px-2.5 py-1 rounded-[6px] border border-white/[0.06] bg-[rgba(20,22,27,0.45)] backdrop-blur-md hidden sm:flex items-center gap-1.5 text-[#8a919e] font-mono text-[11px]">
+                <span>Knowledge Cosmos</span>
+              </div>
+            </div>
+
+            <div className="text-[11px] font-mono text-[#8a919e] flex items-center gap-2 bg-[rgba(20,22,27,0.45)] px-2.5 py-1 rounded-[6px] border border-white/[0.06] backdrop-blur-md">
+              <StateBadge state={sage.state} />
+            </div>
+          </div>
+
+          {/* VÙNG TRUNG TÂM: QUẢ CẦU RAPHAEL ORB 3D + PHỤ ĐỀ */}
+          <div className="flex flex-col items-center justify-center my-auto text-center relative pointer-events-auto">
+            {/* QUẢ CẦU RAPHAEL ORB */}
+            <div
+              onClick={() => sage.sendText("Báo cáo trạng thái trợ lý Raphael")}
+              className="relative flex items-center justify-center cursor-pointer group"
+              title="Nhấn vào quả cầu để kích hoạt giọng nói & xem rung phản hồi"
+            >
+              {/* Hào quang nhịp thở titan xám khói */}
+              <div className="absolute size-72 rounded-full bg-[#383d47]/20 blur-3xl ambient-breath pointer-events-none" />
+              <div className="absolute size-52 rounded-full border border-[rgba(200,205,215,0.1)] bg-[rgba(25,28,34,0.12)] backdrop-blur-sm ambient-breath pointer-events-none" />
+
+              {/* Canvas 3D Orb Audio-Reactive */}
+              <div className="relative size-64 sm:size-72 flex items-center justify-center">
+                <SageCoreCanvas
+                  state={sage.state}
+                  levels={sage.levels}
+                  sizeType="large"
+                  showCircleBorder={false}
+                  className="size-full"
+                />
+              </div>
+            </div>
+
+            <h1 className="text-2xl sm:text-3xl font-semibold text-[#f3f4f6] tracking-tight mt-1 mb-1 font-sans">
+              Raphael Runic Core
+            </h1>
+            <p className="text-xs sm:text-sm text-[#8a919e] max-w-lg mx-auto font-sans leading-relaxed">
+              Quả cầu cộng hưởng âm thanh: hoàn toàn tĩnh lặng khi im lặng, chỉ rung khi có giọng nói phát ra.
+            </p>
+
+            {/* Quick Action Chips (Bo góc 6px) */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+              <button
+                onClick={() => sage.sendText("Thử giọng nói và kiểm tra phản hồi âm thanh của Orb")}
+                className="btn-hover-glow px-3 py-1.5 rounded-[6px] border border-[rgba(200,205,215,0.18)] bg-[rgba(32,36,44,0.7)] text-white text-xs font-medium transition-all shadow-sm flex items-center gap-1.5"
+              >
+                <span>🔊</span> Thử giọng nói & rung
+              </button>
+              <button
+                onClick={() => sage.sendText("Nâng cấp kiến trúc Neo4j GraphRAG")}
+                className="btn-hover-glow px-3 py-1.5 rounded-[6px] border border-[rgba(200,205,215,0.14)] bg-[rgba(24,27,33,0.6)] text-[#cbcfd6] text-xs font-medium transition-all shadow-sm flex items-center gap-1.5"
+              >
+                <span>⚡</span> Neo4j GraphRAG
+              </button>
+              <button
+                onClick={() => sage.sendText("Phân tích mã nguồn main.py")}
+                className="btn-hover-glow px-3 py-1.5 rounded-[6px] border border-[rgba(200,205,215,0.14)] bg-[rgba(24,27,33,0.6)] text-[#cbcfd6] text-xs font-medium transition-all shadow-sm flex items-center gap-1.5"
+              >
+                <span>📂</span> Phân tích main.py
+              </button>
             </div>
 
             {/* Khung phụ đề văn bản hiển thị câu trả lời dạng stream gối đầu */}
             {(latestAssistantEntry || latestUserEntry) && (
-              <div className="mt-2 max-w-2xl px-6 py-3.5 rounded-2xl border border-white/12 bg-black/65 backdrop-blur-xl shadow-2xl text-center transition-all animate-in fade-in slide-in-from-bottom-2">
+              <div className="mt-4 max-w-2xl px-5 py-3 rounded-[10px] border border-white/[0.12] bg-[#121419]/85 backdrop-blur-xl shadow-2xl text-center transition-all animate-in fade-in slide-in-from-bottom-2">
                 {latestUserEntry && sage.state !== "speaking" && (
-                  <p className="text-xs text-[color:var(--sage-text-dim)] mb-1">
-                    <span className="text-[color:var(--sage-cyan)] font-medium">Rimuru: </span>
+                  <p className="text-xs text-[#8a919e] mb-1 font-sans">
+                    <span className="text-[#cbcfd6] font-medium font-mono">Rimuru: </span>
                     {latestUserEntry.text}
                   </p>
                 )}
                 {latestAssistantEntry && (
-                  <p className="text-sm font-medium leading-relaxed text-[color:var(--sage-text)]">
-                    <span className="text-[color:var(--sage-gold)] font-semibold tracking-wider">&lt;&lt; BÁO CÁO &gt;&gt; </span>
+                  <p className="text-xs sm:text-sm font-medium leading-relaxed text-[#f3f4f6] font-sans">
+                    <span className="text-[#e2e4e8] font-mono font-semibold tracking-wider">
+                      &lt;&lt; BÁO CÁO &gt;&gt;{" "}
+                    </span>
                     {latestAssistantEntry.text}
                     {latestAssistantEntry.streaming && (
-                      <span className="inline-block w-1.5 h-3.5 ml-1 bg-[color:var(--sage-cyan)] animate-pulse" />
+                      <span className="inline-block w-1.5 h-3.5 ml-1 bg-sky-300 animate-pulse" />
                     )}
                   </p>
                 )}
               </div>
             )}
           </div>
-        </div>
+
+          {/* Thanh nhập mục tiêu phiên làm việc & Nút thu về Mini Orb (Bo góc 10px) */}
+          <div className="w-full max-w-2xl mx-auto pointer-events-auto">
+            <div className="relative flex items-center rounded-[10px] border border-[rgba(200,205,215,0.18)] bg-[rgba(18,20,25,0.75)] backdrop-blur-xl p-1.5 shadow-2xl">
+              <span className="pl-3 pr-2 text-[#8a919e]">
+                <Sparkles className="size-4" />
+              </span>
+              <input
+                type="text"
+                value={missionInput}
+                onChange={(e) => setMissionInput(e.target.value)}
+                placeholder="Nhập mục tiêu công việc hôm nay..."
+                className="flex-1 bg-transparent border-none text-[#f3f4f6] placeholder-[#5a6270] text-sm focus:outline-none px-2 font-sans"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleStartMission("docked")
+                }}
+              />
+
+              {/* NÚT 1: THU VỀ QUẢ CẦU MINI ORB GÓC MÀN HÌNH */}
+              <button
+                onClick={() => handleStartMission("docked")}
+                className="btn-hover-glow flex items-center gap-1.5 px-3 py-2 rounded-[6px] bg-[#383d47] hover:bg-[#4e5461] text-white font-medium text-xs tracking-wide shadow-md transition-all mr-1.5"
+              >
+                <span>🔵 Thu về Mini Orb</span>
+              </button>
+
+              {/* NÚT 2: MỞ THẲNG SIDEDECK CHAT */}
+              <button
+                onClick={() => handleStartMission("sidedeck")}
+                className="btn-hover-glow flex items-center gap-1.5 px-3 py-2 rounded-[6px] bg-[#252830] hover:bg-[#383d47] text-[#cbcfd6] border border-white/[0.08] font-medium text-xs transition-all"
+              >
+                <span>📑 Sidedeck</span>
+              </button>
+            </div>
+            <p className="text-center text-[10px] text-[#69707e] mt-2 font-mono">
+              Bấm 'Thu về Mini Orb' để quả cầu bay xuống góc màn hình, thanh điều khiển trên cùng tự động biến mất
+            </p>
+          </div>
+        </main>
       )}
 
       {/* ========================================================================= */}
-      {/* CHẾ ĐỘ 2: CORNER DOCKED MINI ORB (Chỉ còn quả cầu trôi nổi ở góc)        */}
-      {/* Khớp chính xác với hình ảnh mod Great Sage HUD người dùng cung cấp         */}
+      {/* CHẾ ĐỘ 2: CORNER DOCKED MINI ORB (Quả cầu Mini Orb trôi nổi góc màn hình)   */}
       {/* ========================================================================= */}
       {visualMode === "docked" && (
         <div
+          style={
+            !isElectron && dockedCoord
+              ? { left: `${dockedCoord.x}px`, top: `${dockedCoord.y}px`, right: "auto", bottom: "auto" }
+              : undefined
+          }
           className={
             isElectron
-              ? "size-full flex flex-col items-center justify-center p-2 z-50 group pointer-events-auto select-none transition-all duration-300 animate-in fade-in zoom-in-95"
-              : "fixed bottom-8 right-8 z-50 group pointer-events-auto transition-all duration-500 animate-in fade-in zoom-in-95"
+              ? "size-full flex flex-col items-center justify-center p-2 z-50 group pointer-events-auto select-none transition-all duration-300 animate-in fade-in"
+              : "fixed bottom-6 right-6 z-40 flex flex-col items-center group pointer-events-auto select-none"
           }
         >
-          {/* Quả cầu tròn với viền tím phát quang đặc trưng, co dãn hào quang theo âm lượng mic thực tế */}
+          {/* Quả cầu Mini Orb 3D sống động (~68px) - KÉO THẢ TỰ DO KHẮP MÀN HÌNH */}
           <div
-            onClick={() => changeVisualMode("overlay")}
-            className="relative flex size-28 cursor-pointer items-center justify-center rounded-full border-2 transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{
-              borderColor: `${accent}ee`,
-              background: `radial-gradient(circle at center, rgba(14, 20, 36, 0.75) 0%, rgba(4, 6, 12, 0.88) 100%)`,
-              boxShadow: `0 0 ${25 + sage.levels.mic_level * 50}px ${accent}${Math.min(99, Math.round(40 + sage.levels.mic_level * 59))}, inset 0 0 20px ${accent}33`,
-            }}
-            title="Raphael Mini Orb · Nhấp để bung toàn màn hình hoặc gọi 'Raphael!'"
+            onPointerDown={handleOrbPointerDown}
+            onPointerMove={handleOrbPointerMove}
+            onPointerUp={handleOrbPointerUp}
+            onPointerCancel={handleOrbPointerUp}
+            className="relative size-[68px] rounded-full flex items-center justify-center p-1 float-orb cursor-grab active:cursor-grabbing touch-none select-none"
+            title="Raphael Mini Orb · Kéo để di chuyển vị trí, nhấp để mở Sidedeck"
           >
+            {/* Vòng hào quang mờ xám titan xung quanh */}
+            <div className="absolute inset-0 rounded-full bg-[#383d47]/30 blur-lg pointer-events-none group-hover:bg-[#4e5461]/40 transition-all" />
+            <div className="absolute inset-0 rounded-full border border-[rgba(200,205,215,0.22)] bg-[rgba(16,18,22,0.85)] backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.6)]" />
+
+            {/* Canvas vẽ 3D Mini Orb */}
             <SageCoreCanvas
               state={sage.state}
               levels={sage.levels}
+              sizeType="mini"
               showCircleBorder={true}
-              className="size-24"
+              className="relative z-10 size-full pointer-events-none"
             />
 
             {/* Đèn chỉ báo trạng thái ở góc dưới quả cầu */}
             <div
-              className="absolute bottom-1 right-1 size-3 rounded-full border-2 border-[#060810]"
+              className="absolute bottom-1 right-1 size-2.5 rounded-full border border-[#0c0d10]"
               style={{
                 backgroundColor: sage.status === "connected" ? accent : "#f59e0b",
-                boxShadow: `0 0 10px ${sage.status === "connected" ? accent : "#f59e0b"}`,
+                boxShadow: `0 0 8px ${sage.status === "connected" ? accent : "#f59e0b"}`,
               }}
-              title={
-                sage.status === "connected"
-                  ? `Trạng thái: ${sage.state} (Đang lắng nghe: 'Raphael')`
-                  : "Đang kết nối WebSocket Core Pipeline..."
-              }
             />
-
-            {/* Các nút thao tác nhanh khi rê chuột vào Mini Orb */}
-            <div className="absolute -top-2 -right-2 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  changeVisualMode("overlay")
-                }}
-                className="grid size-6 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-white/25 hover:text-white"
-                title="Bung toàn màn hình (Overlay)"
-              >
-                <Maximize2 className="size-3" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  changeVisualMode("sidedeck")
-                }}
-                className="grid size-6 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-white/25 hover:text-white"
-                title="Mở Sidedeck Panel"
-              >
-                <PanelRight className="size-3" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  changeVisualMode("hidden")
-                }}
-                className="grid size-6 place-items-center rounded-full border border-white/20 bg-black/85 text-white/90 shadow-lg hover:bg-rose-500/30 hover:text-rose-300"
-                title="Ẩn hoàn toàn (Chạy ngầm)"
-              >
-                <X className="size-3" />
-              </button>
-            </div>
           </div>
 
-          {/* Nhãn trạng thái trực quan bên dưới Mini Orb */}
-          <div className="mt-1 flex items-center gap-1.5 rounded-full border border-white/10 bg-black/85 px-2.5 py-0.5 text-[9px] font-mono text-white/80 shadow-md">
-            <span
-              className={`size-1.5 rounded-full ${
-                sage.status === "connected"
-                  ? sage.levels.mic_level > 0.04
-                    ? "bg-cyan-400 animate-ping"
-                    : "bg-emerald-400"
-                  : "bg-amber-400 animate-pulse"
-              }`}
-            />
-            <span className="truncate max-w-[130px]">
-              {sage.status === "connected"
-                ? sage.levels.mic_level > 0.04
-                  ? "🎙️ Đang nhận âm..."
-                  : "Nghe: 'Raphael'"
-                : "Kết nối Pipeline..."}
-            </span>
+          {/* Micro Navigation Bar nổi ngay trên Mini Orb khi hover - CHỈ DÙNG ICON, KHÔNG CHÈN CHỮ */}
+          <div className="mt-2 flex items-center gap-1 px-1.5 py-1 rounded-[6px] border border-[rgba(200,205,215,0.18)] bg-[rgba(16,18,22,0.92)] backdrop-blur-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                changeVisualMode("sidedeck")
+              }}
+              className="btn-hover-glow p-1.5 rounded-[4px] text-[#cbcfd6] hover:text-white"
+              title="Mở Sidedeck Chat"
+            >
+              <MessageSquare className="size-3.5" />
+            </button>
+            <div className="h-2.5 w-px bg-white/10" />
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                changeVisualMode("overlay")
+              }}
+              className="btn-hover-glow p-1.5 rounded-[4px] text-[#cbcfd6] hover:text-white"
+              title="Toàn Cảnh (Mission Control)"
+            >
+              <Maximize2 className="size-3.5" />
+            </button>
+            <div className="h-2.5 w-px bg-white/10" />
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                changeVisualMode("hidden")
+              }}
+              className="btn-hover-glow p-1.5 rounded-[4px] text-rose-300 hover:bg-rose-500/20"
+              title="Ẩn ngầm (Escape)"
+            >
+              <X className="size-3.5" />
+            </button>
           </div>
         </div>
       )}
 
       {/* ========================================================================= */}
-      {/* CHẾ ĐỘ 3: GEMINI SIDEDECK PANEL (Trượt ra từ cạnh phải, Orb ngự trên đầu)  */}
+      {/* CHẾ ĐỘ 3: AMBIENT SIDEDECK DOCK (BO GÓC 10px SẮC GỌN)                       */}
       {/* ========================================================================= */}
       {visualMode === "sidedeck" && (
-        <div className={`fixed inset-0 z-50 flex ${isElectron ? "justify-stretch" : "justify-end"} bg-transparent animate-in fade-in`}>
-          {/* Nền trong suốt bên trái chỉ hiện khi chạy trên trình duyệt web thông thường */}
-          {!isElectron && (
-            <div
-              className="flex-1 cursor-pointer pointer-events-auto"
-              onClick={() => changeVisualMode("docked")}
-              title="Nhấp vào vùng trống để thu nhỏ về góc"
-            />
+        <aside
+          className={
+            isElectron
+              ? "size-full flex flex-col justify-end p-2 sm:p-3 pointer-events-auto select-none transition-all duration-300 animate-in fade-in"
+              : "fixed right-4 bottom-4 sm:bottom-6 z-40 w-full max-w-[340px] md:max-w-[360px] pointer-events-auto flex flex-col items-end morph-transition animate-in fade-in slide-in-from-bottom-4"
+          }
+        >
+          {/* FLYOUT INSPECTOR: NEO4J GRAPH METRICS (PROGRESSIVE DISCLOSURE - BO GÓC 10px) */}
+          {showInspector && (
+            <div className="w-full mb-2 rounded-[10px] border border-[rgba(200,205,215,0.18)] bg-[rgba(20,22,27,0.96)] backdrop-blur-2xl p-3 shadow-[0_12px_40px_rgba(0,0,0,0.6)] morph-transition text-xs">
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="inline-block size-2 rounded-[3px] bg-[#adb3be]" />
+                  <span className="font-semibold text-[#cbcfd6]">Neo4j Graph Inspector</span>
+                </div>
+                <button
+                  onClick={() => setShowInspector(false)}
+                  className="text-[#8a919e] hover:text-white p-1"
+                >
+                  <X className="size-3.5" />
+                </button>
+              </div>
+              <div className="space-y-1.5 font-mono text-[11px] text-[#8a919e]">
+                <div className="flex justify-between">
+                  <span>Graph Traversal:</span>
+                  <span className="text-[#cbcfd6]">
+                    {sage.graphQuery?.hits ?? 4} nodes active
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Cypher Query:</span>
+                  <span className="text-neutral-200 truncate max-w-[180px]">
+                    {sage.graphQuery?.query ?? "MATCH (n)-[r]->(m) RETURN n"}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>WebSocket Pipeline:</span>
+                  <span className="text-emerald-400">
+                    {sage.status === "connected" ? "127.0.0.1:8765" : "Demo Mode"}
+                  </span>
+                </div>
+              </div>
+            </div>
           )}
 
-          {/* Sidedeck Panel bên phải (Thiết kế Matte Architectural Minimalist, bo góc nhẹ 8px thanh thoát) */}
-          <aside className="relative pointer-events-auto flex h-dvh w-full md:w-[440px] flex-col rounded-l-lg border-l border-zinc-800/80 bg-[#090a10] shadow-2xl transition-all animate-in slide-in-from-right">
-            {/* Header Sidedeck với Quả cầu Raphael Orb ngự trị ngay phía trên */}
-            <header className="flex items-center justify-between border-b border-zinc-800/70 px-4 py-3 bg-zinc-950/40">
-              <div className="flex items-center gap-3">
-                <div
-                  className="relative size-12 cursor-pointer rounded-full border border-zinc-700/80 transition-transform hover:scale-105"
-                  style={{
-                    borderColor: `${accent}bb`,
-                    background: `radial-gradient(circle at center, rgba(14, 20, 36, 0.8) 0%, rgba(4, 6, 12, 0.9) 100%)`,
-                    boxShadow: `0 0 12px ${accent}33`,
+          {/* DRAWER CÀI ĐẶT & CHẨN ĐOÁN HỆ THỐNG (BO GÓC 10px) */}
+          {showSettingsDrawer && (
+            <div className="w-full mb-2 rounded-[10px] border border-[rgba(200,205,215,0.18)] bg-[rgba(20,22,27,0.96)] backdrop-blur-2xl p-3 shadow-[0_12px_40px_rgba(0,0,0,0.6)] morph-transition text-xs">
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 mb-2.5">
+                <div className="flex items-center gap-2">
+                  <Sliders className="size-3.5 text-[#adb3be]" />
+                  <span className="font-semibold text-[#cbcfd6]">Điều Khiển & Cài Đặt</span>
+                </div>
+                <button
+                  onClick={() => setShowSettingsDrawer(false)}
+                  className="text-[#8a919e] hover:text-white p-1"
+                >
+                  <X className="size-3.5" />
+                </button>
+              </div>
+
+              {/* Toggle Windows Startup */}
+              <div className="flex items-center justify-between py-1.5">
+                <div className="flex flex-col">
+                  <span className="text-xs text-[#cbcfd6]">Khởi động cùng Windows</span>
+                  <span className="text-[10px] text-[#69707e]">Túc trực ngầm khi mở máy</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleToggleStartup}
+                  className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 ${
+                    startupEnabled ? "bg-[#383d47]" : "bg-neutral-800"
+                  }`}
+                >
+                  <span
+                    className={`inline-block size-3.5 transform rounded-full bg-white shadow transition-transform duration-200 ${
+                      startupEnabled ? "translate-x-4" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {/* Dừng hoặc Cấu hình Tailscale */}
+              <div className="flex items-center justify-between border-t border-white/[0.06] pt-2.5 mt-2">
+                <button
+                  onClick={() => setConfigOpen(true)}
+                  className="btn-hover-glow flex items-center gap-1.5 px-2 py-1 rounded-[5px] border border-white/[0.08] text-[11px] text-[#cbcfd6]"
+                >
+                  <Settings className="size-3" />
+                  <span>Tailscale IP</span>
+                </button>
+                <button
+                  onClick={() => {
+                    if (typeof window !== "undefined" && window.electronAPI?.stopAssistant) {
+                      window.electronAPI.stopAssistant()
+                    }
                   }}
+                  className="btn-hover-glow flex items-center gap-1.5 px-2 py-1 rounded-[5px] bg-rose-950/40 border border-rose-500/20 text-[11px] text-rose-300 hover:bg-rose-900/50"
+                >
+                  <Power className="size-3" />
+                  <span>Dừng Raphael</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* MAIN COMPACT DECK CONTAINER (BO GÓC 10px) */}
+          <div className="w-full rounded-[10px] border border-[rgba(200,205,215,0.16)] bg-[rgba(20,22,27,0.88)] backdrop-blur-2xl shadow-[0_16px_50px_rgba(0,0,0,0.55)] p-3 flex flex-col gap-2.5">
+            {/* Compact Header với Mini Orb Đang Xoay */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                {/* MINI RAPHAEL ORB TRÊN HEADER */}
+                <div
+                  className="size-7 rounded-[6px] overflow-hidden border border-[rgba(200,205,215,0.25)] bg-black/40 flex items-center justify-center cursor-pointer"
                   onClick={() => changeVisualMode("overlay")}
-                  title="Nhấp để bung toàn màn hình"
+                  title="Nhấn để bung Toàn Cảnh Mission Control"
                 >
                   <SageCoreCanvas
                     state={sage.state}
                     levels={sage.levels}
-                    showCircleBorder={true}
+                    sizeType="header"
                     className="size-full"
                   />
                 </div>
-                <div>
-                  <h2 className="text-xs font-semibold tracking-[0.2em] text-slate-200">
-                    RAPHAEL SIDEDECK
-                  </h2>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <StateBadge state={sage.state} />
-                  </div>
-                </div>
+
+                <button
+                  onClick={() => setShowInspector(!showInspector)}
+                  className="btn-hover-glow flex items-center gap-1.5 px-2 py-1 rounded-[6px] bg-white/[0.04] border border-white/[0.06]"
+                  title="Bật/Tắt xem thông số đồ thị Neo4j"
+                >
+                  <span className="inline-block size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[11px] font-mono font-medium text-[#cbcfd6]">
+                    {sage.status === "connected" ? "14ms" : "Demo"}
+                  </span>
+                  <span className="text-[8px] text-[#69707e]">
+                    {showInspector ? "▴" : "▾"}
+                  </span>
+                </button>
               </div>
 
-              <div className="flex items-center gap-1.5">
+              {/* CÁC NÚT ĐIỀU HƯỚNG TÍCH HỢP TRONG SIDEDECK */}
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setShowSettingsDrawer(!showSettingsDrawer)}
+                  className="btn-hover-glow p-1 rounded-[6px] text-[#8a919e] hover:text-white"
+                  title="Mở bảng điều khiển hệ thống"
+                >
+                  <Sliders className="size-3.5" />
+                </button>
                 <button
                   onClick={() => changeVisualMode("overlay")}
-                  className="grid size-8 place-items-center rounded-md border border-zinc-800 text-slate-400 hover:bg-zinc-800 hover:text-white transition-colors"
-                  title="Bung toàn màn hình"
+                  className="btn-hover-glow p-1 rounded-[6px] text-[#8a919e] hover:text-white"
+                  title="Mở rộng Toàn Màn Hình (Overlay)"
                 >
                   <Maximize2 className="size-3.5" />
                 </button>
                 <button
                   onClick={() => changeVisualMode("docked")}
-                  className="grid size-8 place-items-center rounded-md border border-zinc-800 text-slate-400 hover:bg-zinc-800 hover:text-white transition-colors"
-                  title="Thu nhỏ xuống góc (Chỉ còn quả cầu)"
+                  className="btn-hover-glow p-1 rounded-[6px] text-[#8a919e] hover:text-white"
+                  title="Thu nhỏ về Mini Orb góc màn hình"
                 >
                   <Minimize2 className="size-3.5" />
                 </button>
                 <button
                   onClick={() => changeVisualMode("hidden")}
-                  className="grid size-8 place-items-center rounded-md border border-zinc-800 text-slate-400 hover:bg-rose-500/20 hover:text-rose-300 transition-colors"
-                  title="Ẩn hoàn toàn về chạy ngầm (Escape hoặc Ctrl+Alt+Shift+\)"
+                  className="btn-hover-glow p-1 rounded-[6px] text-[#8a919e] hover:text-rose-300"
+                  title="Ẩn ngầm (Escape)"
                 >
                   <X className="size-3.5" />
                 </button>
               </div>
-            </header>
-
-            {/* Nội dung Sidedeck: Lịch sử hội thoại, Khối Neo4j Graph & Cấu hình Stealth */}
-            <div className="flex min-h-0 flex-1 flex-col gap-3 p-4 overflow-y-auto">
-              <GraphQueryNote query={sage.graphQuery} />
-
-              {/* Thẻ Cấu hình Khởi động & Hệ thống Chạy Ngầm (Minimalist Matte Style) */}
-              <div className="rounded-md border border-zinc-800/80 bg-[#0d0f17] p-3 text-slate-300">
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-xs font-medium text-slate-200">Khởi động cùng Windows</span>
-                    <span className="text-[10px] text-slate-400">Túc trực ngầm khi mở máy tính</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleToggleStartup}
-                    className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors duration-200 ${
-                      startupEnabled ? "bg-sky-500" : "bg-zinc-700"
-                    }`}
-                    title="Bật/Tắt tự động chạy ngầm khi khởi động Windows"
-                  >
-                    <span
-                      className={`inline-block size-3.5 transform rounded-full bg-white shadow transition-transform duration-200 ${
-                        startupEnabled ? "translate-x-4" : "translate-x-1"
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                {/* Cụm Micro-Actions Hệ thống */}
-                <div className="mt-3 flex items-center justify-between border-t border-zinc-800/60 pt-2 text-[10px] font-mono text-slate-400">
-                  <div className="flex items-center gap-1.5" title="Cổng kết nối WebSocket Audio Pipeline">
-                    <Activity className="size-3 text-sky-400" />
-                    <span>ws://127.0.0.1:8765</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => changeVisualMode("hidden")}
-                      className="flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-zinc-800 hover:text-slate-200 transition-colors"
-                      title="Ẩn về chế độ chạy ngầm (Escape hoặc Ctrl+Alt+Shift+\)"
-                    >
-                      <EyeOff className="size-3" />
-                      <span>Ẩn ngầm</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (typeof window !== "undefined" && window.electronAPI?.stopAssistant) {
-                          window.electronAPI.stopAssistant()
-                        }
-                      }}
-                      className="flex items-center gap-1 rounded px-1.5 py-0.5 hover:bg-rose-950/40 hover:text-rose-300 transition-colors"
-                      title="Dừng toàn bộ tiến trình Raphael"
-                    >
-                      <Power className="size-3" />
-                      <span>Dừng</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <ConversationPanel
-                transcript={sage.transcript}
-                className="flex min-h-[300px] flex-1 flex-col overflow-hidden rounded-md border border-zinc-800/80 bg-black/60"
-              />
             </div>
 
-            {/* Footer Sidedeck: Khung chat và điều khiển micro */}
-            <footer className="border-t border-white/10 p-3 bg-black/60">
-              <ControlPanel
-                isListening={sage.isListening}
-                outputMode={sage.outputMode}
-                onStartListen={sage.startListen}
-                onStopListen={sage.stopListen}
-                onSendText={sage.sendText}
-                onSetMode={sage.setOutputMode}
-              />
-            </footer>
-          </aside>
-        </div>
+            {/* Lịch sử hội thoại (ConversationPanel) */}
+            <ConversationPanel
+              transcript={sage.transcript}
+              className="max-h-[260px] min-h-[140px]"
+            />
+
+            {/* Khung nhập liệu & Điều khiển âm thanh (ControlPanel) */}
+            <ControlPanel
+              isListening={sage.isListening}
+              outputMode={sage.outputMode}
+              onStartListen={sage.startListen}
+              onStopListen={sage.stopListen}
+              onSendText={sage.sendText}
+              onSetMode={sage.setOutputMode}
+            />
+          </div>
+        </aside>
       )}
 
-      {/* Modal Cài Đặt */}
+      {/* Modal Cài Đặt Tailscale */}
       <ConfigDialog
         open={configOpen}
         url={sage.url}
@@ -544,47 +752,5 @@ export function SageConsole() {
         onSave={sage.updateConfig}
       />
     </div>
-  )
-}
-
-/* --------------------------- sub panels --------------------------- */
-
-function GraphQueryNote({
-  query,
-}: {
-  query: ReturnType<typeof useSageSocket>["graphQuery"]
-}) {
-  return (
-    <NoteFrame title="Neo4j Cosmos Retrieval" jp="知識探索" icon={<Network className="size-4" />}>
-      {query ? (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-[11px] text-[color:var(--sage-text-dim)]">
-            <span>Neo4j Cypher Traversal</span>
-            <span className="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[color:var(--sage-cyan)]">
-              {query.hits ?? query.nodes?.length ?? 0} active stars
-            </span>
-          </div>
-          <pre className="sage-scroll max-h-20 overflow-auto whitespace-pre-wrap break-words rounded-lg border border-white/8 bg-black/60 p-2 font-mono text-[10px] leading-relaxed text-[color:var(--sage-cyan-deep)]">
-            {query.query ?? "MATCH (n)-[r]->(m) RETURN n, r, m"}
-          </pre>
-          {query.nodes && query.nodes.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {query.nodes.map((n) => (
-                <span
-                  key={n.id}
-                  className="rounded-md border border-[color:var(--sage-cyan-deep)]/40 bg-[color:var(--sage-cyan-deep)]/15 px-2 py-0.5 text-[10px] text-[color:var(--sage-cyan)] font-mono"
-                >
-                  ✦ {n.label ?? n.id}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <p className="py-2 text-center text-[11px] text-[color:var(--sage-text-dim)]">
-          Mạng lưới sao Neo4j đang ở trạng thái cân bằng. Sẽ bừng sáng khi truy vấn.
-        </p>
-      )}
-    </NoteFrame>
   )
 }

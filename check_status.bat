@@ -17,11 +17,16 @@ if %errorlevel% equ 0 (
 
 echo.
 echo [*] 2. Kiem tra tien trinh he thong:
-tasklist /FI "IMAGENAME eq electron.exe" 2>nul | findstr /I "electron.exe" >nul
+tasklist /FI "IMAGENAME eq tensura-raphael.exe" 2>nul | findstr /I "tensura-raphael.exe" >nul
 if %errorlevel% equ 0 (
-    echo     [✓] Giao dien Electron: DANG CHAY NGAM (Stealth Daemon)
+    echo     [✓] Giao dien Tauri v2 Desktop: DANG CHAY NGAM (Stealth Daemon)
 ) else (
-    echo     [X] Giao dien Electron: CHUA CHAY
+    tasklist /FI "IMAGENAME eq electron.exe" 2>nul | findstr /I "electron.exe" >nul
+    if %errorlevel% equ 0 (
+        echo     [✓] Giao dien Electron: DANG CHAY NGAM (Stealth Daemon)
+    ) else (
+        echo     [X] Giao dien Desktop (Tauri/Electron): CHUA CHAY
+    )
 )
 
 tasklist /FI "IMAGENAME eq pythonw.exe" 2>nul | findstr /I "pythonw.exe" >nul

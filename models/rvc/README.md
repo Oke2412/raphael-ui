@@ -9,8 +9,8 @@ Hãy đặt 2 file model RVC của nhân vật Raphael/Rimuru vào thư mục n�
 Nếu file của bạn có tên khác (ví dụ: `my_voice.pth`), bạn chỉ cần mở file `config/settings.json` và sửa lại dòng:
 ```json
 "rvc": {
-  "model_path": "models/rvc/my_voice.pth",
-  "index_path": "models/rvc/my_voice.index"
+  "model_path": "models/rvc/Raphael_Sensei.pth",
+  "index_path": "models/rvc/added_IVF160_Flat_nprobe_1_Raphael_Sensei_v2.index"
 }
 ```
 Sau đó khởi động lại pipeline.

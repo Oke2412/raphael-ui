@@ -13,6 +13,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   setIgnoreMouseEvents: (ignore, options) => {
     ipcRenderer.send('set-ignore-mouse-events', ignore, options);
   },
+  moveWindowBy: (dx, dy) => {
+    ipcRenderer.send('move-window-by', { dx, dy });
+  },
   quitApp: () => {
     ipcRenderer.send('quit-app');
   },

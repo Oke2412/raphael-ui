@@ -17,6 +17,7 @@ models/vieneu/
 
 # Ngoại lệ cho README
 !models/rvc/README.md
+!models/voices/README.md
 
 # Node & Web Build
 node_modules/
@@ -27,6 +28,17 @@ out/
 **/out/
 dist/
 **/dist/
+
+# Rust / Tauri Build
+**/src-tauri/target/
+**/src-tauri/gen/
+
+# Test Outputs & Generated Audio
+outputs/
+*.wav
+*.mp3
+*.tsbuildinfo
+test_vieneu_output.wav
 
 # Log & OS
 *.log

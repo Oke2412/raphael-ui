@@ -261,22 +261,33 @@ export function useSageSocket(initialUrl: string = DEFAULT_WS_URL): UseSageSocke
     }
     later(900, cycle)
 
-    // synthetic audio spectrum
+    // synthetic audio spectrum with speech cadence (strictly 0 when idle)
     const animate = () => {
       if (!demoRef.current) return
       const t = performance.now() / 1000
       setState((s) => {
-        const active = s === "listening" || s === "speaking" || s === "transcribing"
-        const base = active ? 0.55 : 0.08
+        const isSpeaking = s === "speaking"
+        const isListening = s === "listening"
+
+        if (!isSpeaking && !isListening) {
+          // HOÀN TOÀN IM LẶNG KHI IDLE HOẶC TRANSCRIBING/THINKING
+          setLevels(SILENT_LEVELS)
+          return s
+        }
+
+        // Mô phỏng nhịp điệu lời nói tự nhiên (các âm tiết phát ra ngắt quãng theo từ)
+        const cadence = Math.max(0, Math.sin(t * 11) * Math.cos(t * 4.8))
+        const activeLevel = cadence > 0.1 ? cadence * 0.75 : 0
+
         const spectrum = Array.from({ length: 32 }, (_, i) => {
-          const wobble =
-            Math.sin(t * 6 + i * 0.5) * 0.5 +
-            Math.sin(t * 2.3 + i * 0.9) * 0.5
-          return Math.max(0, base + wobble * (active ? 0.45 : 0.05))
+          if (activeLevel === 0) return 0
+          const bandFactor = Math.sin(t * 8 + i * 0.6) * 0.5 + 0.5
+          return Math.max(0, Math.min(1, activeLevel * bandFactor))
         })
+
         setLevels({
-          mic_level: s === "listening" ? base + Math.sin(t * 9) * 0.3 : 0.05,
-          speaker_level: s === "speaking" ? base + Math.sin(t * 7) * 0.3 : 0.05,
+          mic_level: isListening ? activeLevel : 0,
+          speaker_level: isSpeaking ? activeLevel : 0,
           spectrum,
         })
         return s
