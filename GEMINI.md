@@ -44,3 +44,22 @@
   3. Compile binary: `cargo build` in `tauri-desktop/src-tauri`.
   4. Test in debug console mode: Run `scripts/run_tauri_debug.bat` to see real-time logs and verify click-through and wake word.
   5. Check logs: Verify `logs/desktop.log` and `logs/pipeline.log` have 0 errors, and `logs/panic.log` is clean.
+
+---
+
+## 4. Multi-Agent & Backend Isolation Invariants
+- **Rule 5: Zero-Touch Backend Isolation**:
+  - The Backend codebase (remote server / Docker `sttap`) is STRICTLY UNTOUCHABLE.
+  - The Frontend Agent must NEVER modify backend source code.
+  - Architecture directive: **Thin Backend** (hardware sensors, raw cronjobs) + **Thick Frontend** (UI, voice pipeline, MCP tools, dynamic plugins).
+- **Rule 6: Multi-Agent Collaboration Bridge**:
+  - Two Antigravity agents operate concurrently: Frontend Agent (this workspace) and Backend Agent (remote server repo).
+  - All inter-agent technical specifications, sensor schema requests, and cronjob registrations MUST be communicated asynchronously via `bridge/agent_chat.log`.
+  - Format: `[YYYY-MM-DD HH:mm:ss][SENDER][TAG][ID] Message`.
+- **Rule 7: Verification Before Completion**:
+  - All project components are under active development.
+  - NEVER mark tasks as completed in documentation, README, or responses without actual testing and verification.
+- **Rule 8: Windows PowerShell CLI Safety**:
+  - Never execute `.ps1` script wrappers directly on Windows PowerShell due to execution policy restrictions.
+  - Always invoke Node and package managers via `cmd.exe /c "npx.cmd ..."` or `cmd.exe /c "npm.cmd ..."`.
+
