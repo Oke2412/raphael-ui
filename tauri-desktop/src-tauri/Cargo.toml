@@ -2,7 +2,7 @@
 name = "tensura-raphael"
 version = "0.1.0"
 description = "Tensura Raphael AI Assistant"
-authors = ["you"]
+authors = ["Oke2412"]
 edition = "2021"
 
 [lib]
