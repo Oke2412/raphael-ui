@@ -55,3 +55,6 @@ graphify-out/
 
 # Windows shortcut with a machine-local path
 *.lnk
+
+# Reference assets extracted from the Great Sage mod (local only)
+extracted_greatsage/

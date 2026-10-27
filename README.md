@@ -19,7 +19,7 @@ Hệ thống **Trợ lý ảo AI thời gian thực** phong cách **Đại Hiề
 | **Voice Conversion (RVC)** | 🧪 Đang kiểm thử | RVC v2 + Faiss Index | Đã nạp thành công `Raphael_Sensei.pth` và index trên CUDA; cần tinh chỉnh f0/pitch để giọng bớt méo |
 | **Knowledge Cosmos Graph** | 🚧 Đang phát triển | Neo4j + GraphRAG | Đã dựng client kết nối và khung vẽ sao; cần nạp cơ sở tri thức thực tế của Tensura vào database |
 | **WebSocket Core Server** | 🧪 Đang kiểm thử | Python WebSocket (`:8765`) | Đã mở server trao đổi dữ liệu; cần kiểm thử độ ổn định khi chạy ngầm liên tục nhiều giờ |
-| **Desktop Companion UI** | 🚧 Đang phát triển | Electron (`main`) & Tauri v2 (`feat/tauri-desktop`) | Đang thử nghiệm song song: Electron (gốc) và Tauri v2 (nhánh riêng, tối ưu RAM, đang hoàn thiện UI) |
+| **Desktop Companion UI** | 🚧 Đang phát triển | Tauri v2 + React (`tauri-desktop/`) | UI chính đã chuyển sang Tauri v2; bản Electron cũ (`nang-cap-visual-great-sage/`) được giữ tạm làm tham chiếu trong lúc hoàn thiện UI |
 
 ---
 
@@ -43,17 +43,18 @@ Hệ thống **Trợ lý ảo AI thời gian thực** phong cách **Đại Hiề
 
 ---
 
-## 2. Cấu Trúc Nhánh Git (Branching Strategy)
+## 2. Cấu Trúc Mã Nguồn
 
-Kho mã nguồn được tổ chức thành 2 nhánh chính phục vụ cho từng mục đích:
+Repo dùng một nhánh chính `main`; mọi thay đổi đi qua nhánh chủ đề ngắn hạn (`chore/`, `fix/`, `feat/`) rồi merge bằng pull request.
 
-* **`main` (Nhánh phát triển cốt lõi)**:
-  * Chứa toàn bộ **Audio Pipeline & AI Backend** (Python, CUDA, Whisper, TTS, RVC, Neo4j, WebSocket).
-  * Bộ công cụ kiểm thử âm thanh và backend Docker (`scripts/`).
-  * Ứng dụng Desktop Companion phiên bản **Electron** (`nang-cap-visual-great-sage/`).
-* **`feat/tauri-desktop` (Nhánh nghiên cứu di chuyển sang Tauri)**:
-  * Nhánh di chuyển (migration) Desktop Companion sang **Tauri v2 + Rust + React** (`tauri-desktop/`).
-  * Mục tiêu: Giảm tiêu thụ RAM từ ~250MB (Electron) xuống **<30MB (Tauri)** và xử lý các vấn đề giao diện native Windows.
+* **Backend & Audio Pipeline** (Python): `main.py`, `server/`, `pipeline/`, `config/`, `scripts/`.
+* **Desktop Companion chính** (Tauri v2 + Rust + React): `tauri-desktop/`.
+  * UI React nằm trong `src/`, backend native Windows (DWM, click-through, global shortcut) nằm trong `src-tauri/`.
+  * Mục tiêu: giảm RAM từ ~250MB (Electron) xuống **<30MB**.
+* **Legacy Electron** (`nang-cap-visual-great-sage/`): bản Next.js + Electron cũ, **giữ tạm để tham chiếu UI** cho tới khi quá trình chuyển giao hoàn tất. Không dùng cho bản phát hành mới.
+* **Dữ liệu nặng không đưa lên git**: `.venv/`, `models/`, `extracted_greatsage/`, `outputs/`, `logs/`, `node_modules/`, `dist/`, `.next/`, `src-tauri/target/`. Xem `.gitignore`.
+
+> Repo được phát triển trên Windows; `.gitattributes` chuẩn hoá EOL (`*.bat`, `*.vbs` = CRLF; mã nguồn = LF) để checkout trên Linux/macOS không làm hỏng script.
 
 ---
 
